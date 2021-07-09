@@ -1,3 +1,9 @@
+<?php
+require_once('../../Roles/Modelo/ModeloRoles.php');
+$user = new Roles();
+
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -7,8 +13,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <script src=""></script>
-    <title>tm Produccion</title>
+    <script src="app.js"></script>
+    <title>Tiempo Produccion</title>
 </head>
 
 <body>
@@ -20,29 +26,7 @@
 
                 <div class="col" style="height: 20px;"></div>
 
-                <a href="indexAdmin.html" class="btn btn-block btn-outline-dark  mb-2 text-left"><i
-                        class="fas fa-home  pr-2"></i> App
-                    Flower</a>
-                <a href="Usuarios.html" class="btn btn-block btn-outline-dark  mb-2   text-left"><i
-                        class="fad fa-user  pr-2"></i>Usuarios</a>
-                <a href="Operarios.html" class="btn btn-block btn-outline-dark  mb-2   text-left"><i
-                        class="fad fa-user-hard-hat  pr-2"></i>Operarios</a>
-                <a href="Produccion.html" class="btn btn-block btn-outline-dark mb-2 text-left "><i
-                        class="fas fa-percentage pr-2"></i>Produccion</a>
-                <a href="Empaque.html" class="btn btn-block btn-outline-dark  mb-2   text-left"><i
-                        class="fas fa-box-open  pr-2"></i>Empaque</a>
-                <a href="materialSeco.html" class="btn btn-block btn-outline-dark mb-2 text-left "><i
-                        class="fas fa-tags pr-2"></i>Material Seco</a>
-                <a href="#" class="btn btn-block btn-outline-dark  mb-2   text-left"><i
-                        class="fas fa-spray-can  pr-2"></i>Tinturados</a>
-                <a href="Picking.html" class="btn btn-block btn-outline-dark  mb-2   text-left"><i
-                        class="fad fa-person-carry  pr-2"></i>Picking</a>
-                <a href="#" class="btn btn-block btn-dark mb-2 text-left "><i
-                        class="fas fa-stopwatch pr-2"></i>Tiempo Produccion</a>
-                <a href="tmEmpaque.html" class="btn btn-block btn-outline-dark  mb-2   text-left"><i
-                        class="fas fa-stopwatch pr-2"></i>Tiempo Empaque</a>
-                <a href="tmGeneral.html" class="btn btn-block btn-outline-dark  mb-2   text-left"><i
-                        class="fas fa-stopwatch pr-2"></i>Tiempo general</a>
+                <div id="respuesta-menu"></div>
 
             </div>
 
@@ -56,7 +40,8 @@
                         <div class="navbar-brand">
                             <img src="img/flower-2-2.png" width="30" height="30" class="d-inline-block">
                             <i><small class="font-weight-bold text-muted">AppFlower user</small></i>
-                            Username()
+                             <?php echo $user->getUsername(); ?>
+                            <input type="hidden" name="perfil" id="perfil" value="<?=$_SESSION['perfil']?>"></input>
                         </div>
                         <button type="button" class="btn text-danger ml-auto" id="btn-logOut"><i
                                 class="fal fa-sign-out-alt fa-lg"></i></button>
