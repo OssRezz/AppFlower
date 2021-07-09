@@ -1,0 +1,47 @@
+
+/* body {
+    
+    max-height: 100%;
+    min-height: 100%;
+    background-image: url('../img/1.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+} */
+
+.searchBar {
+    height: 49px;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+.input-group{
+padding: 0.35rem;
+}
+
+.table-fixed thead,
+.table-fixed tfoot{
+  width: 97%;
+}
+
+.table-fixed tbody {
+    height: 230px;
+    overflow-y: auto;
+    width: 100%;
+  }
+  
+  .table-fixed thead,
+.table-fixed tbody,
+.table-fixed tfoot,
+.table-fixed tr,
+.table-fixed td,
+.table-fixed th {
+  display: block;
+}
+
+.table-fixed tbody td,
+.table-fixed thead > tr> th,
+.table-fixed tfoot > tr> td{
+  float: left;
+  border-bottom-width: 0;
+}
