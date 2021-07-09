@@ -50,6 +50,39 @@ Class Modal {
         echo "<script>$('#modal-login').modal('show')</script>";
         echo $limpiarCampos;
     }
+
+
+    public function modalOut($color){
+        echo "<div class='modal fade' id='modal-login' tabindex='-1' style='display: block;' data-keyboard='false' data-backdrop='static'>";
+        echo    "<div class='modal-dialog modal-dialog-centered'>";
+        echo        "<div class='modal-content'>";
+        echo            "<div class='modal-header'>";
+        echo                "<h5 class='modal-title text-$color'>¡AppFlower!</h5>";
+        echo            "<button type='button' class='close' id='cerrar' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
+        echo            "</div>";
+        echo            "<div class='modal-body'>";
+        echo                "<p>¿ Deseas salir de la aplicación ? <p>";
+        echo       "<div class='d-flex flex-row-reverse bd-highlight'>";
+        echo        "<div class='p-2 bd-highlight'>";
+        echo            "<div class='d-flex justify-content-end'>";
+        echo                "<button type='button' class='btn btn-outline-danger'  id='btn-sesionOut' data-dismiss='modal' aria-label='Close'>Aceptar</button>";
+        echo            "</div>";  
+        echo        "</div>";
+        echo            "<div class='p-2 bd-highlight'>";
+        echo            "<div class='d-flex justify-content-end'>";
+        echo                "<button type='button' class='btn btn-outline-primary'  id='No' data-dismiss='modal' aria-label='Close'>Cancelar</button>";
+        echo            "</div>";
+        echo        "</div>";
+        echo        "</div>";
+        echo            "</div>";
+        echo        "</div>";
+        echo    "</div>";
+        echo "</div>";
+        echo "<script>$('#modal-login').modal('show')</script>";
+        echo "<script>$('#btn-sesionOut').click(function(){location.href='../../index.php'})</script>";
+        echo "<script>$('#No').click(function(){location.reload()});</script>";
+
+    }
     
 }
     

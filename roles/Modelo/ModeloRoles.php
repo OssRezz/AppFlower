@@ -40,6 +40,11 @@ Class Roles extends Conexion{
         }
     }
 
+    public function logOut(){
+        session_destroy();
+    }
+
+
 }
 
 
