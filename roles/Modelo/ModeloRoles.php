@@ -31,7 +31,14 @@ Class Roles extends Conexion{
         return $_SESSION['perfil'];
     }
 
-
+    public function session()
+    {
+        if ($_SESSION['nombre'] != null) {
+            if ($_SESSION['perfil'] != 1 & $_SESSION['perfil'] != 2) {
+                header('Location: ../../produccion/vista/produccionVista.php');
+            }
+        }
+    }
 
 }
 
