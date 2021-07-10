@@ -45,6 +45,17 @@ Class Roles extends Conexion{
     }
 
 
+    public function listaPerfil(){
+        $listaPerfil = null;
+        $statement = $this->db->prepare("SELECT * FROM tbl_perfil");
+        $statement->execute();
+        while($consulta = $statement->fetch()){
+            $ListaPerfil[] = $consulta;
+        }
+        return $ListaPerfil;
+    }
+
+
 }
 
 
