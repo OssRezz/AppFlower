@@ -125,30 +125,37 @@ $user->session();
                                 <table class="table border">
                                     <!--Trabajador-->
                                     <tr class="">
-                                        <?php
+                                        <div id="accordion">
+                                            <?php
 
-                                        $Usuarios = $usuario->listaUsuarios();
-                                        if ($Usuarios != null) {
-                                            foreach ($Usuarios as $Usuarios) {
-                                        ?>
+                                            $Usuarios = $usuario->listaUsuarios();
+                                            if ($Usuarios != null) {
+                                                foreach ($Usuarios as $Usuarios) {
+                                            ?>
 
-                                                <!--collapseExampleOne es el id -->
-                                                <button class="btn btn-link btn-block d-flex justify-content-start border rounded-0 shadow-none px-3" data-toggle="collapse" data-target="#collapse<?php echo $Usuarios['perfil'] ?>" aria-expanded="true" aria-controls="collapse<?php echo $Usuarios['perfil'] ?>">
-                                                        <b>Nombre</b>: <?php echo $Usuarios['nombre'] ?>
-                                                </button>
-                                                <div class="collapse border border-top-0 " id="collapse<?php echo $Usuarios['perfil'] ?>">
-                                                    <ul class="list-group list-group-flush">
-                                                        <li class="list-group-item py-0"><b>Nombre </b>: <?php echo $Usuarios['nombre'] ?></li>
-                                                        <li class="list-group-item py-0"><b>Correo </b>: <?php echo $Usuarios['correo'] ?></li>
-                                                        <li class="list-group-item py-0"><b>Contraseña </b>: <?php echo $Usuarios['password'] ?></li>
-                                                        <li class="list-group-item py-0"><b>Perfil </b>: <?php echo $Usuarios['perfil'] ?></li>
-                                                    </ul>
-                                                </div>
-                                    </tr>
-                            <?php
+                                                    <!--collapseExampleOne es el id -->
+                                                    <div class="p-0">
+                                                    <button class="btn btn-link btn-block d-flex  p-0 border rounded-0 shadow-none px-3" data-toggle="collapse" data-target="#collapse<?php echo $Usuarios['contador'] ?>" aria-expanded="true" aria-controls="collapse<?php echo $Usuarios['contador'] ?>">
+                                                    <b class="bd">Nombre </b>: <p class="bd  text-dark pl-1"><?php echo $Usuarios['nombre'] ?></p>
+                                                    <a href="" class="ml-auto p-1"><i class="far fa-edit"></i></a>
+                                                    <a href="" class="d-flex justify-content-end p-2"><i class="far fa-trash-alt" style="color: red;"></i></a>
+                                                    </button>
+                                                    </div>
+                                                    <div class="collapse border border-top-0 " id="collapse<?php echo $Usuarios['contador'] ?>" data-parent="#accordion">
+                                                        <ul class="list-group list-group-flush">
+                                                            <li class="list-group-item py-0"><b>Nombre </b>: <?php echo $Usuarios['nombre'] ?></li>
+                                                            <li class="list-group-item py-0"><b>Correo </b>: <?php echo $Usuarios['correo'] ?></li>
+                                                            <li class="list-group-item py-0"><b>Contraseña </b>: <?php echo $Usuarios['password'] ?></li>
+                                                            <li class="list-group-item py-0"><b>Perfil </b>: <?php echo $Usuarios['tipoPerfil'] ?></li>
+                                                        </ul>
+                                                    </div>
+                                            <?php
+                                                }
                                             }
-                                        }
-                            ?>
+                                            ?>
+                                        </div>
+                                    </tr>
+
                                 </table>
 
                                 <nav aria-label="Page navigation example">
