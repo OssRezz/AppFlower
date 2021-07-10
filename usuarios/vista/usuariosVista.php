@@ -1,7 +1,9 @@
 <?php
 require_once('../../roles/Modelo/ModeloRoles.php');
+require '../Modelo/ModeloUsuarios.php';
 
 $user = new Roles();
+$usuario =  new Usuarios();
 $user->session();
 ?>
 
@@ -34,22 +36,18 @@ $user->session();
 
             <div class="col vh-100 border-left">
 
-
                 <div class="row mb-3 border-bottom border-top">
-
 
                     <!-- Image and text -->
                     <nav class="navbar navbar-light w-100">
                         <div class="navbar-brand">
-                            <img src="img/flower-yellow.svg" width="30" height="30" class="d-inline-block">
+                            <img src="../../img/flower-yellow.svg" width="30" height="30" class="d-inline-block">
                             <i><small class="font-weight-bold text-muted">App user</small></i>
                             <?php echo $user->getUsername(); ?>
-                            <input type="hidden" name="perfil" id="perfil" value="<?=$_SESSION['perfil']?>"></input>
+                            <input type="hidden" name="perfil" id="perfil" value="<?= $_SESSION['perfil'] ?>"></input>
                         </div>
-                        <button type="button" class="btn text-danger ml-auto" id="btn-logOut"><i
-                                class="fal fa-sign-out-alt fa-lg"></i></button>
+                        <button type="button" class="btn text-danger ml-auto" id="btn-logOut"><i class="fal fa-sign-out-alt fa-lg"></i></button>
                     </nav>
-
 
                 </div>
 
@@ -57,11 +55,7 @@ $user->session();
                 <div class="row">
 
                     <!--Primer tarjeta-->
-                    <div
-                        class="col-sm-12 col-md-12 col-lg-12 col-xl-4 mb-3 mb-sm-3 mb-md-3 mb-lg-12 mb-xl-0 pr-md-3 pr-lg-3 pr-xl-0">
-
-
-
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-4 mb-3 mb-sm-3 mb-md-3 mb-lg-12 mb-xl-0 pr-md-3 pr-lg-3 pr-xl-0">
 
 
                         <div class="card">
@@ -72,35 +66,48 @@ $user->session();
                                 <form>
                                     <div class="form-row">
                                         <div class="form-group col-12">
-                                            <label for="corrreo">Correo</label>
-                                            <input type="email" class="form-control" name="correo"
-                                                placeholder="Ingrese el correo">
+                                            <label for="correo">Correo</label>
+                                            <input type="email" class="form-control" id="correo" placeholder="Ingrese el correo">
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-12">
-                                            <label for="correo">Nombre</label>
-                                            <input type="text" class="form-control" name="correo"
-                                                placeholder="Ingrese el nombre">
+                                            <label for="nombre">Nombre</label>
+                                            <input type="text" class="form-control" id="nombre" placeholder="Ingrese el nombre">
                                         </div>
                                         <div class="form-group col-12">
                                             <label for="apellido">Apellido</label>
-                                            <input type="text" class="form-control" id="apellido"
-                                                placeholder="Ingrese los apellidos">
+                                            <input type="text" class="form-control" id="apellido" placeholder="Ingrese los apellidos">
                                         </div>
                                         <div class="form-group col-12">
                                             <label for="password">Contraseña</label>
                                             <input type="password" class="form-control" id="password" placeholder="*************">
                                         </div>
+                                        <div class="form-group col-12">
+                                            <label for="perfil">Perfil</label>
+                                            <select class="form-control" id="perfil_user">
+                                                <?php
+                                                $perfil = $user->listaPerfil();
+                                                if ($perfil != null) {
+                                                    foreach ($perfil as $perfil) {
+                                                ?>
+                                                        <option value="<?php echo $perfil['id_perfil'] ?>"><?php echo $perfil['perfil'] ?></option>
+                                                <?php
+                                                    }
+                                                }
+                                                ?>
+                                            </select>
+
+                                        </div>
                                     </div>
                                     <div class="form-row d-flex justify-content-center">
-                                        <input type="submit" class="btn btn-outline-primary  col-sm-12 col-md-6"
-                                            value="Ingresar">
+                                        <input type="button" class="btn btn-outline-primary  col-sm-12 col-md-6" id="btn-insertUser" value="Ingresar">
                                     </div>
                                 </form>
 
                             </div>
                         </div>
+
                     </div>
 
 
@@ -113,23 +120,36 @@ $user->session();
                             <div class="card-header border-bottom-0 text-primary"><i class="fas fa-th-list"></i>
                                 Usuarios registrados</div>
                             <div class="card-body p-0">
-                                <div class="table-responsive">
-                                    <table class="table table-hover">
-                                        <tr>
-                                            <th>Correo</th>
-                                            <th>Nombre</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                        <tr>
-                                            <td>OssRezz.13@gmail.com</td>
-                                            <td>James Osorio Florez</td>
-                                            <td>
-                                                <button type="button" class="btn text-primary btn-sm shadow-none"><i
-                                                        class="fas fa-edit">editar</i></button>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
+
+
+                                <table class="table border">
+                                    <!--Trabajador-->
+                                    <tr class="">
+                                        <?php
+
+                                        $Usuarios = $usuario->listaUsuarios();
+                                        if ($Usuarios != null) {
+                                            foreach ($Usuarios as $Usuarios) {
+                                        ?>
+
+                                                <!--collapseExampleOne es el id -->
+                                                <button class="btn btn-link btn-block d-flex justify-content-start border rounded-0 shadow-none px-3" data-toggle="collapse" data-target="#collapse<?php echo $Usuarios['perfil'] ?>" aria-expanded="true" aria-controls="collapse<?php echo $Usuarios['perfil'] ?>">
+                                                        <b>Nombre</b>: <?php echo $Usuarios['nombre'] ?>
+                                                </button>
+                                                <div class="collapse border border-top-0 " id="collapse<?php echo $Usuarios['perfil'] ?>">
+                                                    <ul class="list-group list-group-flush">
+                                                        <li class="list-group-item py-0"><b>Nombre </b>: <?php echo $Usuarios['nombre'] ?></li>
+                                                        <li class="list-group-item py-0"><b>Correo </b>: <?php echo $Usuarios['correo'] ?></li>
+                                                        <li class="list-group-item py-0"><b>Contraseña </b>: <?php echo $Usuarios['password'] ?></li>
+                                                        <li class="list-group-item py-0"><b>Perfil </b>: <?php echo $Usuarios['perfil'] ?></li>
+                                                    </ul>
+                                                </div>
+                                    </tr>
+                            <?php
+                                            }
+                                        }
+                            ?>
+                                </table>
 
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination justify-content-center">

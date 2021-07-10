@@ -83,6 +83,29 @@ Class Modal {
         echo "<script>$('#No').click(function(){location.reload()});</script>";
 
     }
+
+    public function modalInsert($color,$n){
+        echo "<div class='modal fade' id='modal-login' tabindex='-1'style='display: block;' data-keyboard='false' data-backdrop='static'>";
+        echo    "<div class='modal-dialog modal-dialog-centered'>";
+        echo        "<div class='modal-content'>";
+        echo            "<div class='modal-header'>";
+        echo                "<h5 class='modal-title text-$color'>¡NotApp!</h5>";
+        echo            "<button type='button' class='close' id='cerrar' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
+        echo            "</div>";
+        echo            "<div class='modal-body'>";
+        echo                "<p><strong>$n</strong>, Se ha registrado correctamente. <p>";
+        echo            "<div class='d-flex justify-content-end'>";
+        echo                "<button type='button' class='btn btn-outline-primary'  id='cerrar2' data-dismiss='modal' aria-label='Close'>Aceptar</button>";
+        echo            "</div>";
+        echo            "</div>";
+        echo        "</div>";
+        echo    "</div>";
+        echo "</div>";
+        echo "<script>$('#modal-login').modal('show')</script>";
+        echo "<script>$('#cerrar2').click(function(){location.reload()});</script>";
+        echo "<script>$('#cerrar').click(function(){location.reload()});</script>";
+
+    }
     
 }
     
