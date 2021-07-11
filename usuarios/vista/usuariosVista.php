@@ -5,6 +5,21 @@ require '../Modelo/ModeloUsuarios.php';
 $user = new Roles();
 $usuario =  new Usuarios();
 $user->session();
+
+//Setemoas el limite de paginas que tiene la tabla
+$limit = isset($_SESSION['records-limit']) ? $_SESSION['records-limit'] : 10;
+//Para conocer en que paginas estamos, Si no hay ninguno le decimos que es 1
+$page = (isset($_GET['page']) && is_numeric($_GET['page'])) ? $_GET['page'] : 1;
+//funcion para contar usuarios
+$Usuarios = $usuario->contadorUsuarios();
+
+$allRecords = $Usuarios[0]['correo'];
+$totalpaginas = ceil(round($allRecords / $limit));
+$paginationStart = ($page - 1) * $limit;
+$prev = $page - 1;
+$next = $page + 1;
+$Users = $usuario->listaUsuariosLimit($paginationStart, $limit);
+
 ?>
 
 <!DOCTYPE html>
@@ -128,29 +143,29 @@ $user->session();
                                         <div id="accordion">
                                             <?php
 
-                                            $Usuarios = $usuario->listaUsuarios();
-                                            if ($Usuarios != null) {
-                                                foreach ($Usuarios as $Usuarios) {
+                                            // $Usuarios = $usuario->listaUsuarios();
+                                            if ($Users != null) {
+                                                foreach ($Users as $Users) {
                                             ?>
 
                                                     <!--collapseExampleOne es el id -->
                                                     <div class="">
-                                                        <button class="btn btn-block d-flex align-items-center aligns p-0 border bg-light rounded-0 shadow-none px-2 text-primary" data-toggle="collapse" data-target="#collapse<?php echo $Usuarios['contador'] ?>" aria-expanded="true" aria-controls="collapse<?php echo $Usuarios['contador'] ?>">
-                                                            <p class="m-2"><?php echo $Usuarios['nombre'] ?></p>
+                                                        <button class="btn btn-block d-flex align-items-center aligns p-0 border bg-light rounded-0 shadow-none px-2 text-dark" data-toggle="collapse" data-target="#collapse<?php echo $Users['contador'] ?>" aria-expanded="true" aria-controls="collapse<?php echo $Users['contador'] ?>">
+                                                            <p class="m-2"><?php echo $Users['nombre'] ?></p>
                                                         </button>
                                                     </div>
-                                                    <div class="collapse border border-top-0 " id="collapse<?php echo $Usuarios['contador'] ?>" data-parent="#accordion">
+                                                    <div class="collapse border border-top-0 " id="collapse<?php echo $Users['contador'] ?>" data-parent="#accordion">
                                                         <ul class="list-group list-group-flush">
                                                             <li class="list-group-item py-0 d-flex justify-content-between">
-                                                                <div class=""><b>Nombre </b>: <?php echo $Usuarios['nombre'] ?></div>
+                                                                <div class=""><b>Nombre </b>: <?php echo $Users['nombre'] ?></div>
                                                                 <div class="">
                                                                     <a href="" class="pr-3"><i class="far fa-edit "></i></a>
                                                                     <a href="" class=""><i class="far fa-trash-alt " style="color: red;"></i></a>
                                                                 </div>
                                                             </li>
-                                                            <li class="list-group-item py-0"><b>Correo </b>: <?php echo $Usuarios['correo'] ?></li>
-                                                            <li class="list-group-item py-0"><b>Contraseña </b>: <?php echo $Usuarios['password'] ?></li>
-                                                            <li class="list-group-item py-0"><b>Perfil </b>: <?php echo $Usuarios['tipoPerfil'] ?></li>
+                                                            <li class="list-group-item py-0"><b>Correo </b>: <?php echo $Users['correo'] ?></li>
+                                                            <li class="list-group-item py-0"><b>Contraseña </b>: <?php echo $Users['password'] ?></li>
+                                                            <li class="list-group-item py-0"><b>Perfil </b>: <?php echo $Users['tipoPerfil'] ?></li>
                                                         </ul>
                                                     </div>
                                             <?php
@@ -162,13 +177,21 @@ $user->session();
 
                                 </table>
 
-                                <nav aria-label="Page navigation example">
+                                <!-- Pagination -->
+                                <nav aria-label="Page navigation example mt-5">
                                     <ul class="pagination justify-content-center">
-                                        <li class="page-item disabled">
-                                            <a class="page-link" href="#" tabindex="-1">Anterior</a>
+                                        <li class="page-item <?php if ($page <= 1) {echo 'disabled';} ?>">
+                                            <a class="page-link" href="<?php if ($page <= 1) {echo '#'; } else { echo "?page=" . $prev; } ?>">Previous</a>
                                         </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">Siguiente</a>
+
+                                        <?php for ($i = 1; $i <= $totalpaginas; $i++) : ?>
+                                            <li class="page-item <?php if ($page == $i) {echo 'active'; } ?>">
+                                                <a class="page-link" href="usuariosVista.php?page=<?= $i; ?>"> <?= $i; ?> </a>
+                                            </li>
+                                        <?php endfor; ?>
+
+                                        <li class="page-item <?php if ($page >= $totalpaginas) { echo 'disabled';} ?>">
+                                            <a class="page-link" href="<?php if ($page >= $totalpaginas) {echo '#';} else { echo "?page=" . $next; } ?>">Next</a>
                                         </li>
                                     </ul>
                                 </nav>
