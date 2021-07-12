@@ -1,12 +1,28 @@
 $(document).ready(function () {
+
+    //Variables que recibimos al cargar la pagina
     var perfil = $("#perfil").val();
     var title = $(document).attr('title');
+    var limit = $("#limit").val();
+    var pagina = $("#pagina").val();
+
+    //carga el menu lateral de la vista de usuarios
     $.post('../../roles/control/ctrlMenuLateral.php', {
         perfil: perfil,
         title: title
     }, function (responseText) {
         $('#respuesta-menu').html(responseText);
     });
+
+    //Carga la paginación de la vista de usuarios
+    $.post('../control/ctrlPaginacion.php', {
+        limit: limit,
+        pagina: pagina
+    }, function (responseText) {
+        $('#respuesta-paginacion').html(responseText);
+    });
+
+
 
 
     //Modal Para salir de la sesión ctrlModalOut
@@ -31,8 +47,9 @@ $(document).ready(function () {
         }
     });
 
-    
+    // inserción de vista usuarios
     $('#btn-insertUser').click(function (e) {
+        e.preventDefault();
         var correo = $('#correo').val();
         var nombre = $('#nombre').val();
         var apellido = $('#apellido').val();

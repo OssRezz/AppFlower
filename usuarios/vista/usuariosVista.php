@@ -5,6 +5,7 @@ require '../Modelo/ModeloUsuarios.php';
 $user = new Roles();
 $usuario =  new Usuarios();
 $user->session();
+
 ?>
 
 <!DOCTYPE html>
@@ -30,6 +31,7 @@ $user->session();
 
                 <div class="col" style="height: 20px;"></div>
 
+                <!--Esto nos carga el menu lateral del usuario en base al rol que de la sesion-->
                 <div id="respuesta-menu"></div>
 
             </div>
@@ -38,13 +40,14 @@ $user->session();
 
                 <div class="row mb-3 border-bottom border-top">
 
-                    <!-- Image and text -->
                     <nav class="navbar navbar-light w-100">
                         <div class="navbar-brand">
                             <img src="../../img/flower-yellow.svg" width="30" height="30" class="d-inline-block">
                             <i><small class="font-weight-bold text-muted">App user</small></i>
                             <?php echo $user->getUsername(); ?>
                             <input type="hidden" name="perfil" id="perfil" value="<?= $_SESSION['perfil'] ?>"></input>
+                            <input type="hidden" name="perfil" id="limit" value="<?= $limit = isset($_SESSION['records-limit']) ? $_SESSION['records-limit'] : 10; ?>"></input>
+                            <input type="hidden" name="perfil" id="pagina" value="<?= $pagina = (isset($_GET['page']) && is_numeric($_GET['page'])) ? $_GET['page'] : 1; ?>"></input>
                         </div>
                         <button type="button" class="btn text-danger ml-auto" id="btn-logOut"><i class="fal fa-sign-out-alt fa-lg"></i></button>
                     </nav>
@@ -127,30 +130,31 @@ $user->session();
                                     <tr class="">
                                         <div id="accordion">
                                             <?php
-
-                                            $Usuarios = $usuario->listaUsuarios();
-                                            if ($Usuarios != null) {
-                                                foreach ($Usuarios as $Usuarios) {
+                                            $paginationStart = ($pagina - 1) * $limit;
+                                            $Users = $usuario->listaUsuariosLimit($paginationStart, $limit);
+                                            // $Usuarios = $usuario->listaUsuarios();
+                                            if ($Users != null) {
+                                                foreach ($Users as $Users) {
                                             ?>
 
                                                     <!--collapseExampleOne es el id -->
                                                     <div class="">
-                                                        <button class="btn btn-block d-flex align-items-center aligns p-0 border bg-light rounded-0 shadow-none px-2 text-primary" data-toggle="collapse" data-target="#collapse<?php echo $Usuarios['contador'] ?>" aria-expanded="true" aria-controls="collapse<?php echo $Usuarios['contador'] ?>">
-                                                            <p class="m-2"><?php echo $Usuarios['nombre'] ?></p>
+                                                        <button class="btn btn-block d-flex align-items-center aligns p-0 border bg-light rounded-0 shadow-none px-2 text-dark" data-toggle="collapse" data-target="#collapse<?php echo $Users['contador'] ?>" aria-expanded="true" aria-controls="collapse<?php echo $Users['contador'] ?>">
+                                                            <p class="m-2"><?php echo $Users['nombre'] ?></p>
                                                         </button>
                                                     </div>
-                                                    <div class="collapse border border-top-0 " id="collapse<?php echo $Usuarios['contador'] ?>" data-parent="#accordion">
+                                                    <div class="collapse border border-top-0 " id="collapse<?php echo $Users['contador'] ?>" data-parent="#accordion">
                                                         <ul class="list-group list-group-flush">
                                                             <li class="list-group-item py-0 d-flex justify-content-between">
-                                                                <div class=""><b>Nombre </b>: <?php echo $Usuarios['nombre'] ?></div>
+                                                                <div class=""><b>Nombre </b>: <?php echo $Users['nombre'] ?></div>
                                                                 <div class="">
                                                                     <a href="" class="pr-3"><i class="far fa-edit "></i></a>
                                                                     <a href="" class=""><i class="far fa-trash-alt " style="color: red;"></i></a>
                                                                 </div>
                                                             </li>
-                                                            <li class="list-group-item py-0"><b>Correo </b>: <?php echo $Usuarios['correo'] ?></li>
-                                                            <li class="list-group-item py-0"><b>Contraseña </b>: <?php echo $Usuarios['password'] ?></li>
-                                                            <li class="list-group-item py-0"><b>Perfil </b>: <?php echo $Usuarios['tipoPerfil'] ?></li>
+                                                            <li class="list-group-item py-0"><b>Correo </b>: <?php echo $Users['correo'] ?></li>
+                                                            <li class="list-group-item py-0"><b>Contraseña </b>: <?php echo $Users['password'] ?></li>
+                                                            <li class="list-group-item py-0"><b>Perfil </b>: <?php echo $Users['tipoPerfil'] ?></li>
                                                         </ul>
                                                     </div>
                                             <?php
@@ -162,16 +166,9 @@ $user->session();
 
                                 </table>
 
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination justify-content-center">
-                                        <li class="page-item disabled">
-                                            <a class="page-link" href="#" tabindex="-1">Anterior</a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">Siguiente</a>
-                                        </li>
-                                    </ul>
-                                </nav>
+                                <!-- Pagination -->
+                                <div id="respuesta-paginacion"></div>
+                                
                             </div>
                         </div>
 
