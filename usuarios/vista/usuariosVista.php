@@ -180,18 +180,18 @@ $Users = $usuario->listaUsuariosLimit($paginationStart, $limit);
                                 <!-- Pagination -->
                                 <nav aria-label="Page navigation example mt-5">
                                     <ul class="pagination justify-content-center">
-                                        <li class="page-item <?php if ($page <= 1) {echo 'disabled';} ?>">
-                                            <a class="page-link" href="<?php if ($page <= 1) {echo '#'; } else { echo "?page=" . $prev; } ?>">Previous</a>
+                                        <li class="page-item <?php if ($page <= 1) {echo 'disabled';} ?> pr-1">
+                                            <a class="btn btn-outline-primary" href="<?php if ($page <= 1) {echo '#'; } else { echo "?page=" . $prev; } ?>">Anterior</a>
                                         </li>
 
                                         <?php for ($i = 1; $i <= $totalpaginas; $i++) : ?>
                                             <li class="page-item <?php if ($page == $i) {echo 'active'; } ?>">
-                                                <a class="page-link" href="usuariosVista.php?page=<?= $i; ?>"> <?= $i; ?> </a>
+                                                <a class="page-link rounded" href="usuariosVista.php?page=<?= $i; ?>"> <?= $i; ?> </a>
                                             </li>
                                         <?php endfor; ?>
 
-                                        <li class="page-item <?php if ($page >= $totalpaginas) { echo 'disabled';} ?>">
-                                            <a class="page-link" href="<?php if ($page >= $totalpaginas) {echo '#';} else { echo "?page=" . $next; } ?>">Next</a>
+                                        <li class="page-item <?php if ($page >= $totalpaginas) { echo 'disabled';} ?>  pl-1">
+                                            <a class="btn btn-outline-primary" href="<?php if ($page >= $totalpaginas) {echo '#';} else { echo "?page=" . $next; } ?>">Siguiente</a>
                                         </li>
                                     </ul>
                                 </nav>
