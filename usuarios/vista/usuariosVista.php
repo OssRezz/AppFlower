@@ -6,20 +6,6 @@ $user = new Roles();
 $usuario =  new Usuarios();
 $user->session();
 
-//Setemoas el limite de paginas que tiene la tabla
-$limit = isset($_SESSION['records-limit']) ? $_SESSION['records-limit'] : 10;
-//Para conocer en que paginas estamos, Si no hay ninguno le decimos que es 1
-$page = (isset($_GET['page']) && is_numeric($_GET['page'])) ? $_GET['page'] : 1;
-//funcion para contar usuarios
-$Usuarios = $usuario->contadorUsuarios();
-
-$allRecords = $Usuarios[0]['correo'];
-$totalpaginas = ceil(round($allRecords / $limit));
-$paginationStart = ($page - 1) * $limit;
-$prev = $page - 1;
-$next = $page + 1;
-$Users = $usuario->listaUsuariosLimit($paginationStart, $limit);
-
 ?>
 
 <!DOCTYPE html>
@@ -45,6 +31,7 @@ $Users = $usuario->listaUsuariosLimit($paginationStart, $limit);
 
                 <div class="col" style="height: 20px;"></div>
 
+                <!--Esto nos carga el menu lateral del usuario en base al rol que de la sesion-->
                 <div id="respuesta-menu"></div>
 
             </div>
@@ -53,13 +40,14 @@ $Users = $usuario->listaUsuariosLimit($paginationStart, $limit);
 
                 <div class="row mb-3 border-bottom border-top">
 
-                    <!-- Image and text -->
                     <nav class="navbar navbar-light w-100">
                         <div class="navbar-brand">
                             <img src="../../img/flower-yellow.svg" width="30" height="30" class="d-inline-block">
                             <i><small class="font-weight-bold text-muted">App user</small></i>
                             <?php echo $user->getUsername(); ?>
                             <input type="hidden" name="perfil" id="perfil" value="<?= $_SESSION['perfil'] ?>"></input>
+                            <input type="hidden" name="perfil" id="limit" value="<?= $limit = isset($_SESSION['records-limit']) ? $_SESSION['records-limit'] : 10; ?>"></input>
+                            <input type="hidden" name="perfil" id="pagina" value="<?= $pagina = (isset($_GET['page']) && is_numeric($_GET['page'])) ? $_GET['page'] : 1; ?>"></input>
                         </div>
                         <button type="button" class="btn text-danger ml-auto" id="btn-logOut"><i class="fal fa-sign-out-alt fa-lg"></i></button>
                     </nav>
@@ -142,7 +130,8 @@ $Users = $usuario->listaUsuariosLimit($paginationStart, $limit);
                                     <tr class="">
                                         <div id="accordion">
                                             <?php
-
+                                            $paginationStart = ($pagina - 1) * $limit;
+                                            $Users = $usuario->listaUsuariosLimit($paginationStart, $limit);
                                             // $Usuarios = $usuario->listaUsuarios();
                                             if ($Users != null) {
                                                 foreach ($Users as $Users) {
@@ -178,23 +167,8 @@ $Users = $usuario->listaUsuariosLimit($paginationStart, $limit);
                                 </table>
 
                                 <!-- Pagination -->
-                                <nav aria-label="Page navigation example mt-5">
-                                    <ul class="pagination justify-content-center">
-                                        <li class="page-item <?php if ($page <= 1) {echo 'disabled';} ?> pr-1">
-                                            <a class="btn btn-outline-primary" href="<?php if ($page <= 1) {echo '#'; } else { echo "?page=" . $prev; } ?>">Anterior</a>
-                                        </li>
-
-                                        <?php for ($i = 1; $i <= $totalpaginas; $i++) : ?>
-                                            <li class="page-item <?php if ($page == $i) {echo 'active'; } ?>">
-                                                <a class="page-link rounded" href="usuariosVista.php?page=<?= $i; ?>"> <?= $i; ?> </a>
-                                            </li>
-                                        <?php endfor; ?>
-
-                                        <li class="page-item <?php if ($page >= $totalpaginas) { echo 'disabled';} ?>  pl-1">
-                                            <a class="btn btn-outline-primary" href="<?php if ($page >= $totalpaginas) {echo '#';} else { echo "?page=" . $next; } ?>">Siguiente</a>
-                                        </li>
-                                    </ul>
-                                </nav>
+                                <div id="respuesta-paginacion"></div>
+                                
                             </div>
                         </div>
 
