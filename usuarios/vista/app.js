@@ -47,6 +47,7 @@ $(document).ready(function () {
         }
     });
 
+
     // inserción de vista usuarios
     $('#btn-insertUser').click(function (e) {
         e.preventDefault();
@@ -67,9 +68,11 @@ $(document).ready(function () {
 
     });
 
+
+    //Muestra la modal con la informacion del usuario
     $(document).click(function (e) {
         var accion = e.target.id;
-        if(accion === "btn-editar-usuario"){
+        if (accion === "btn-editar-usuario") {
             var correo = e.target.value;
             $.post('../control/ctrlModalActualizar.php', {
                 accion: accion,
@@ -77,7 +80,54 @@ $(document).ready(function () {
             }, function (responseText) {
                 $('#respuesta').html(responseText);
             });
-        }   
-      });
-      
+        }
+    });
+
+    //Boton actualizar usuario
+    $(document).click(function (e) {
+        var accion = e.target.id;
+        if (e.target.id === "btn-update-usuarios") {
+            var correoUser = $('#correoUser').val();
+            var nombreUser = $('#nombreUser').val();
+            var passwordUser = $('#passwordUser').val();
+            var perfilUser = $('#perfilUser').val();
+            $.post('../control/ctrlActualizarUsuario.php', {
+                accion: accion,
+                correoUser: correoUser,
+                nombreUser: nombreUser,
+                passwordUser: passwordUser,
+                perfilUser: perfilUser
+            }, function (responseText) {
+                $('#respuesta').html(responseText);
+            });
+        }
+    });
+
+    //Muestra la modal con la informacion del usuario
+    $(document).click(function (e) {
+        var accion = e.target.id;
+        if (accion === "btn-eliminar-usuario") {
+            var correo = e.target.value;
+            $.post('../control/ctrlEliminarUsuario.php', {
+                accion: accion,
+                correo: correo
+            }, function (responseText) {
+                $('#respuesta').html(responseText);
+            });
+        }
+    });
+
+    $(document).click(function (e) {
+        var accion = e.target.id;
+        if (e.target.id === "btn-delete-usuario") {
+            var correo = e.target.value;
+            $.post('../control/ctrlDeleteUsuario.php', {
+                accion: accion,
+                correo: correo
+            }, function (responseText) {
+                $('#respuesta').html(responseText);
+            });
+        }
+    });
+
 });

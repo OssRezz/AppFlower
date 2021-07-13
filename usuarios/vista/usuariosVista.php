@@ -149,7 +149,7 @@ $user->session();
                                                                 <div class=""><b>Nombre </b>: <?php echo $Users['nombre'] ?></div>
                                                                 <div class="text-center">
                                                                     <button class="btn btn-outline-primary pr-1 pl-1 py-0" id="btn-editar-usuario" value="<?php echo $Users['correo'] ?>">editar</button>
-                                                                    <button class="btn btn-outline-danger pr-1 pl-1 py-0" id="btn-eliminar-usuario" value="<?php echo $Users['correo'] ?>"><i class="far fa-trash-alt"></i></button>
+                                                                    <button class="btn btn-outline-danger pr-1 pl-1 py-0" id="btn-eliminar-usuario" value="<?php echo $Users['correo'] ?>"><i class="far fa-trash-alt" style="pointer-events: none;"></i></button>
                                                                 </div>
                                                             </li>
                                                             <li class="list-group-item py-0"><b>Correo </b>: <?php echo $Users['correo'] ?></li>
