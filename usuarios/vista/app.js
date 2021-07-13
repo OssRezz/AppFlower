@@ -66,4 +66,18 @@ $(document).ready(function () {
         });
 
     });
+
+    $(document).click(function (e) {
+        var accion = e.target.id;
+        if(accion === "btn-editar-usuario"){
+            var correo = e.target.value;
+            $.post('../control/ctrlModalActualizar.php', {
+                accion: accion,
+                correo: correo
+            }, function (responseText) {
+                $('#respuesta').html(responseText);
+            });
+        }   
+      });
+      
 });

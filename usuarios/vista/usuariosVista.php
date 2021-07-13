@@ -147,13 +147,12 @@ $user->session();
                                                         <ul class="list-group list-group-flush">
                                                             <li class="list-group-item py-0 d-flex justify-content-between">
                                                                 <div class=""><b>Nombre </b>: <?php echo $Users['nombre'] ?></div>
-                                                                <div class="">
-                                                                    <a href="" class="pr-3"><i class="far fa-edit "></i></a>
-                                                                    <a href="" class=""><i class="far fa-trash-alt " style="color: red;"></i></a>
+                                                                <div class="text-center">
+                                                                    <button class="btn btn-outline-primary pr-1 pl-1 py-0" id="btn-editar-usuario" value="<?php echo $Users['correo'] ?>">editar</button>
+                                                                    <button class="btn btn-outline-danger pr-1 pl-1 py-0" id="btn-eliminar-usuario" value="<?php echo $Users['correo'] ?>"><i class="far fa-trash-alt"></i></button>
                                                                 </div>
                                                             </li>
                                                             <li class="list-group-item py-0"><b>Correo </b>: <?php echo $Users['correo'] ?></li>
-                                                            <li class="list-group-item py-0"><b>Contraseña </b>: <?php echo $Users['password'] ?></li>
                                                             <li class="list-group-item py-0"><b>Perfil </b>: <?php echo $Users['tipoPerfil'] ?></li>
                                                         </ul>
                                                     </div>

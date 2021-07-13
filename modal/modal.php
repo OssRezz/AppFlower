@@ -106,6 +106,53 @@ Class Modal {
         echo "<script>$('#cerrar').click(function(){location.reload()});</script>";
 
     }
+
+
+    public function modalActualizarUsuario($correo, $nombre, $password, $id_perfil){
+        echo "<div class='modal fade' id='modal-login' tabindex='-1' style='display: block;' data-keyboard='false' data-backdrop='static'>";
+        echo    "<div class='modal-dialog modal-dialog-centered'>";
+        echo        "<div class='modal-content'>";
+        echo            "<div class='modal-header'>";
+        echo                "<h5 class='modal-title text-primary'>Actualizar Usuario</h5>";
+        echo            "<button type='button' class='close' id='cerrar' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
+        echo            "</div>";
+        echo            "<div class='modal-body p-2'>";
+
+        echo                 "<form class='p-1'>";
+        echo                	"<div class='form-group col'>";
+        echo                		"<label for='correoUser'>Correo</label>";
+        echo                		"<input type='email' class='form-control' id='correoUser' value='$correo'>";
+        echo                	"</div>";
+        echo                	"<div class='form-group col'>";
+        echo                		"<label for='nombreUser'>Nombre</label>";
+        echo                		"<input type='text' class='form-control' id='nombreUser' value='$nombre'>";
+        echo                	"</div>";
+        echo                	"<div class='form-group col'>";
+        echo                		"<label for='passwordUser'>Contraseña</label>";
+        echo                		"<input type='text' class='form-control' id='passwordUser' value='$password'>";
+        echo                	"</div>";
+        echo                	"<div class='form-group col mb-5 hidden'>";
+        echo                		"<input type='hidden' class='form-control' id='perfilUser' value='$id_perfil'>";
+        echo                	"</div>";
+        echo                	"<div class='form-group d-flex justify-content-center'>";
+        echo                	"<div class='form-group col-sm-12 col-md-12 col-lg-5'>";
+        echo                		"<input type='button' class='btn btn-outline-dark  btn-block' id='btn-updateUser' value='Regresar'>";
+        echo                	"</div>";
+        echo                	"<div class='form-group col-sm-12 col-md-12 col-lg-5'>";
+        echo                		"<input type='button' class='btn btn-outline-primary btn-block' id='btn-Regresar' value='Actualizar'>";
+        echo                	"</div>";
+        echo                	"</div>";
+        echo                	"<div class='form-group d-flex justify-content-center'>";
+        echo                	"</div>";
+        echo                 "</form>";
+
+        echo            "</div>";
+        echo        "</div>";
+        echo    "</div>";
+        echo "</div>";
+        echo "<script>$('#modal-login').modal('show')</script>";
+        echo "<script>$('#btn-Regresar').click(function(){location.reload()});</script>";
+    }
     
 }
     

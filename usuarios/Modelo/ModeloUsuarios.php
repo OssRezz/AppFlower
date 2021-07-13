@@ -25,10 +25,13 @@ class Usuarios extends Conexion
     }
 
     //Lista con todos los usuarios, Y un contador por cada usuario
-    public function listaUsuarios()
+    public function getUsuarioById($correo)
     {
         $listUser = null;
-        $statement = $this->db->prepare("SELECT @contador:=@contador+1 contador, u.*, P.perfil as 'tipoPerfil' FROM tbl_usuario U INNER JOIN tbl_perfil AS P ON P.id_perfil=U.perfil, (SELECT @contador:=0) r ORDER by correo desc LIMIT 10;");
+        $statement = $this->db->prepare("SELECT U.*, P.perfil AS 'tperfil' FROM `tbl_usuario` as U 
+        INNER JOIN tbl_perfil AS P ON P.id_perfil = U.perfil
+        Where correo= :correo");
+        $statement->bindParam(':correo',$correo);
         $statement->execute();
         while ($consulta = $statement->fetch()) {
             $listUser[] = $consulta;
