@@ -38,7 +38,7 @@ $user->session();
                     <!-- Image and text -->
                     <nav class="navbar navbar-light w-100">
                         <div class="navbar-brand">
-                            <img src="img/flower-blue.svg" width="30" height="30" class="d-inline-block">
+                            <img src="../../img/flower-blue.svg" width="30" height="30" class="d-inline-block">
                             <i><small class="font-weight-bold text-muted">AppFlower user</small></i>
                              <?php echo $user->getUsername(); ?>
                             <input type="hidden" name="perfil" id="perfil" value="<?=$_SESSION['perfil']?>"></input>

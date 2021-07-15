@@ -1,6 +1,10 @@
 $(document).ready(function () {
     var perfil = $("#perfil").val();
-    var title= $(document).attr('title');
+    var title = $(document).attr('title');
+    var limit = $("#limit").val();
+    var pagina = $("#pagina").val();
+
+    //Carga el menu lateral deacuerdo al usuario
     $.post('../../roles/control/ctrlMenuLateral.php', {
         perfil: perfil,
         title: title
@@ -8,7 +12,15 @@ $(document).ready(function () {
         $('#respuesta-menu').html(responseText);
     });
 
-    
+    //Carga la paginación de la vista de operarios
+    $.post('../control/ctrlPaginacion.php', {
+        limit: limit,
+        pagina: pagina
+    }, function (responseText) {
+        $('#respuesta-paginacion').html(responseText);
+    });
+
+
     //Modal Para salir de la sesión ctrlModalOut
     $("#btn-logOut").click(function (e) {
         var numero = 1;
@@ -21,7 +33,7 @@ $(document).ready(function () {
 
     //Cerrar la sesion, volver al index. ctrlSesiónDestroy
     $(document).click(function (e) {
-        var accion = e.target.id;s
+        var accion = e.target.id;
         if (accion === "btn-sesionOut") {
             $.post('../../roles/control/ctrlSesionDestroy.php', {
                 accion: accion
@@ -30,4 +42,48 @@ $(document).ready(function () {
             });
         }
     });
+
+
+    $("#btn-ingresar-operario").click(function (e) {
+        var codigo = $('#codigo').val();
+        var nombre = $('#nombre').val();
+        var apellido = $('#apellidos').val();
+        $.post('../control/ctrlIngresarOperario.php', {
+            codigo: codigo,
+            nombre: nombre,
+            apellido: apellido
+        }, function (responseText) {
+            $('#respuesta').html(responseText);
+        });
+    });
+
+
+    //Muestra la modal con la informacion del operario //update
+    $(document).click(function (e) {
+        var accion = e.target.id;
+        if (accion === "btn-editar-operario") {
+            var codigo = e.target.value;
+            $.post('../control/ctrlModalActualizar.php', {
+                accion: accion,
+                codigo: codigo
+            }, function (responseText) {
+                $('#respuesta').html(responseText);
+            });
+        }
+    });
+
+    //Responde la modal con la información del operario
+    $(document).click(function (e) {
+        var accion = e.target.id;
+        if (accion === "btn-buscar-operario") {
+            var codigo = $('#BuscarOperario').val();
+            $.post('../control/ctrlBuscarOperario.php', {
+                accion: accion,
+                codigo: codigo
+            }, function (responseText) {
+                $('#respuesta').html(responseText);
+            });
+        }
+    });
+
 });
