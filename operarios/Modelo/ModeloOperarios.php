@@ -69,6 +69,30 @@ class Operarios extends Conexion
         }
         return $listOperario;
     }
+
+
+    public function actualizarOperario($Codigo, $Nombre)
+    {
+        $statement = $this->db->prepare("UPDATE `tbl_operarios` SET `id_operario`=:codigo,`nombre`=:nombre WHERE id_operario= :codigo");
+        $statement->bindParam(':codigo', $Codigo);
+        $statement->bindParam(':nombre', $Nombre);
+        if ($statement->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function eliminarOperario($Codigo){
+        $statement = $this->db->prepare("DELETE FROM `tbl_operarios` WHERE id_operario= :codigo");
+        $statement->bindParam(':codigo', $Codigo);
+        if ($statement->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
 
 

@@ -143,7 +143,7 @@ $Operario = new Operarios();
                                                                 <div class=""><b>Nombre </b>: <?php echo $Operarios['nombre'] ?></div>
                                                                 <div class="text-center">
                                                                     <button class="btn btn-outline-primary pr-1 pl-1 py-0" id="btn-editar-operario" value="<?php echo $Operarios['id_operario'] ?>">editar</button>
-                                                                    <button class="btn btn-outline-danger pr-1 pl-1 py-0" id="btn-eliminar-usuario" value="<?php echo $Operarios['id_operario'] ?>"><i class="far fa-trash-alt" style="pointer-events: none;"></i></button>
+                                                                    <button class="btn btn-outline-danger pr-1 pl-1 py-0" id="btn-eliminar-operario" value="<?php echo $Operarios['id_operario'] ?>"><i class="far fa-trash-alt" style="pointer-events: none;"></i></button>
                                                                 </div>
                                                             </li>
                                                             <li class="list-group-item py-0"><b>Codigo </b>: <?php echo $Operarios['id_operario'] ?></li>

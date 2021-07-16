@@ -12,7 +12,7 @@ $totalUsuarios = $Usuarios[0]['correo'];
 
 
 //Vamos a tener como resultado siempre el valor entero. "1.3 = 2"
-$totalpaginas = ceil(round($totalUsuarios / $limit));
+$totalpaginas = ceil($totalUsuarios / $limit);
 
 
 $anterior = $pagina - 1;  //atras

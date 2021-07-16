@@ -86,4 +86,50 @@ $(document).ready(function () {
         }
     });
 
+
+    //Boton actualizar usuario
+    $(document).click(function (e) {
+        var accion = e.target.id;
+        if (e.target.id === "btn-update-operario") {
+            var idOperario = $('#idOperario').val();
+            var nombreOperario = $('#nombreOperario').val();
+            $.post('../control/ctrlActualizarOperario.php', {
+                accion: accion,
+                idOperario: idOperario,
+                nombreOperario: nombreOperario
+            }, function (responseText) {
+                $('#respuesta').html(responseText);
+            });
+        }
+    });
+
+
+    //Muestra la modal con la informacion del usuario
+    $(document).click(function (e) {
+        var accion = e.target.id;
+        if (accion === "btn-eliminar-operario") {
+            var codigo = e.target.value;
+            $.post('../control/ctrlModalEliminar.php', {
+                accion: accion,
+                codigo: codigo
+            }, function (responseText) {
+                $('#respuesta').html(responseText);
+            });
+        }
+    });
+
+    $(document).click(function (e) {
+        var accion = e.target.id;
+        if (e.target.id === "btn-delete-operario") {
+            var codigo = e.target.value;
+            $.post('../control/ctrlEliminarOperario.php', {
+                accion: accion,
+                codigo: codigo
+            }, function (responseText) {
+                $('#respuesta').html(responseText);
+            });
+        }
+    });
+
+
 });

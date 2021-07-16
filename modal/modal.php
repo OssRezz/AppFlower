@@ -32,16 +32,16 @@ Class Modal {
     //LimpiarCampos 0 = Limpiar, 1 = no limpiar campos
     public function modalInfo($color,$mensaje,$limpiarCampos=0){
 
-        $limpiarCampos = "<script>$('#btn-Regresar').click(function(){location.reload()});</script>";
+        $limpiarCampos = "<script>$('#cerrar').click(function(){location.reload()});</script>";
 
-        if($limpiarCampos == 1) $limpiarCampos = "<script>$('#btn-Regresar').click(function(){});</script>";
+        if($limpiarCampos == 1) $limpiarCampos = "<script>$('#cerrar').click(function(){});</script>";
 
         echo "<div class='modal fade' id='modal-login' tabindex='-1' style='display: block;' data-keyboard='false' data-backdrop='static'>";        
         echo    "<div class='modal-dialog modal-dialog-centered'>";
         echo        "<div class='modal-content modal-md'>";
         echo            "<div class='modal-header border-0 py-2'>";
         echo                "<p class='modal-title text-$color'><i class='fas fa-info'></i> Información</p>";
-        echo            "<button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
+        echo            "<button type='button' class='close' data-dismiss='modal' id='cerrar' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
         echo            "</div>";
         echo            "<div class='modal-body'>";
         echo            "<p> $mensaje <p>";
@@ -52,6 +52,7 @@ Class Modal {
         echo "<script>$('#modal-login').modal('show')</script>";
         echo $limpiarCampos;
     }
+    
 
 
     public function modalOut($color){
@@ -112,7 +113,37 @@ Class Modal {
         echo    "</div>";
         echo "</div>";
         echo "<script>$('#modal-login').modal('show')</script>";
-        echo "<script>$('#btn-delete-usuario').click(function(){location.href='usuariosVista.php'})</script>";
+        echo "<script>$('#btn-delete-usuario').click(function(){location.reload()})</script>";
+    }
+    public function modalEliminarOperario($color, $nombre,$Codigo)
+    {
+        echo "<div class='modal fade' id='modal-login' tabindex='-1' style='display: block;' data-keyboard='false' data-backdrop='static'>";
+        echo    "<div class='modal-dialog modal-dialog-centered'>";
+        echo        "<div class='modal-content'>";
+        echo            "<div class='modal-header'>";
+        echo                "<h5 class='modal-title text-$color'>Eliminar usuario</h5>";
+        echo            "<button type='button' class='close' id='cerrar' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
+        echo            "</div>";
+        echo            "<div class='modal-body'>";
+        echo                "<p>¿Eliminar al operario <b>$nombre</b>? ¿ Estas seguro ? <p>";
+        echo       "<div class='d-flex flex-row-reverse bd-highlight'>";
+        echo        "<div class='p-2 bd-highlight'>";
+        echo            "<div class='d-flex justify-content-end'>";
+        echo                "<button type='button' class='btn btn-outline-primary'  id='btn-delete-operario' data-dismiss='modal' aria-label='Close' value='$Codigo'>Eliminar</button>";
+        echo            "</div>";  
+        echo        "</div>";
+        echo            "<div class='p-2 bd-highlight'>";
+        echo            "<div class='d-flex justify-content-end'>";
+        echo                "<button type='button' class='btn btn-outline-dark' data-dismiss='modal' aria-label='Close'>Regresar</button>";
+        echo            "</div>";
+        echo        "</div>";
+        echo        "</div>";
+        echo            "</div>";
+        echo        "</div>";
+        echo    "</div>";
+        echo "</div>";
+        echo "<script>$('#modal-login').modal('show')</script>";
+        echo "<script>$('#btn-delete-operario').click(function(){location.reload()})</script>";
     }
 
     public function modalInsert($color,$n){
@@ -182,12 +213,10 @@ Class Modal {
         echo    "</div>";
         echo "</div>";
         echo "<script>$('#modal-login').modal('show')</script>";
-        echo "<script>$('#btn-update-usuarios').click(function(){location.href='usuariosVista.php'});</script>";
-
     }
 
     public function modalActualizarOperario($codigo, $nombre){
-        echo "<div class='modal fade' id='modal-login' tabindex='-1' style='display: block;' data-keyboard='false' data-backdrop='static'>";
+        echo "<div class='modal fade' id='modal-login' tabindex='-1' style='display: block;' data-keyboard='false'>";
         echo    "<div class='modal-dialog modal-dialog-centered'>";
         echo        "<div class='modal-content'>";
         echo            "<div class='modal-header'>";
@@ -207,10 +236,10 @@ Class Modal {
         echo                	"</div>";
         echo                	"<div class='form-group d-flex justify-content-center'>";
         echo                	"<div class='form-group col-5'>";
-        echo                		"<input type='button' class='btn btn-outline-dark  btn-block' data-dismiss='modal' value='Regresar'>";
+        echo                		"<input type='button' class='btn btn-outline-dark  btn-block'  value='Regresar'>";
         echo                	"</div>";
         echo                	"<div class='form-group col-5'>";
-        echo                		"<input type='button' class='btn btn-outline-primary btn-block' id='btn-update-usuarios' value='Actualizar'>";
+        echo                		"<input type='button' class='btn btn-outline-primary btn-block' id='btn-update-operario' value='Actualizar'>";
         echo                	"</div>";
         echo                	"</div>";
         echo                	"<div class='form-group d-flex justify-content-center'>";
@@ -222,7 +251,6 @@ Class Modal {
         echo    "</div>";
         echo "</div>";
         echo "<script>$('#modal-login').modal('show')</script>";
-        echo "<script>$('#btn-update-usuarios').click(function(){location.reload()});</script>";
     }
 
     
