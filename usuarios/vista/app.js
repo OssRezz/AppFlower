@@ -50,7 +50,6 @@ $(document).ready(function () {
 
     // inserción de vista usuarios
     $('#btn-insertUser').click(function (e) {
-        e.preventDefault();
         var correo = $('#correo').val();
         var nombre = $('#nombre').val();
         var apellido = $('#apellido').val();

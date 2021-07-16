@@ -1,18 +1,18 @@
 <?php
-require('../Modelo/ModeloUsuarios.php');
-$Usuario = new Usuarios();
+require '../Modelo/ModeloOperarios.php';
+$Operario = new Operarios();
 
 //recibimos las variables al cargar la pagina
 $limit = $_POST['limit'];
 $pagina = $_POST['pagina'];
 
 //La funcion contadorUsuarios nos da la cantidad total de usuarios 
-$Usuarios = $Usuario->contadorUsuarios();
-$totalUsuarios = $Usuarios[0]['correo']; 
+$Operarios = $Operario->contadorOperarios();
+$totalOperarios = $Operarios[0]['codigo']; 
 
 
 //Vamos a tener como resultado siempre el valor entero. "1.3 = 2"
-$totalpaginas = ceil($totalUsuarios / $limit);
+$totalpaginas = ceil($totalOperarios / $limit);
 
 
 $anterior = $pagina - 1;  //atras
