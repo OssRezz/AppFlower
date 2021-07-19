@@ -23,14 +23,14 @@ $user->session();
     <div class="container-fluid">
         <div id="respuesta"></div>
         <div class="row">
-            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-2 pb-2 bg-light mb-sm-4 mb-md-0">
+            <div class="col-sm-12 col-md-12 col-lg-3 col-xl-2 pb-2 bg-light mb-sm-4 mb-md-0">
 
                 <div class="col" style="height: 20px;"></div>
 
                 <div id="respuesta-menu"></div>
 
             </div>
-            <div class="col vh-100 border-left">
+            <div class="col-sm-12 col-md-12 col-lg-9 col-xl-10 vh-100 border-left">
 
 
                 <div class="row  border-bottom border-top">
