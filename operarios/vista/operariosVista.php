@@ -27,7 +27,7 @@ $Operario = new Operarios();
     <div class="container-fluid">
         <div id="respuesta"></div>
         <div class="row">
-            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-2 pb-2 bg-light mb-sm-4 mb-md-0">
+            <div class="col-sm-12 col-md-12 col-lg-3 col-xl-2 pb-2 bg-light mb-sm-4 mb-md-0">
 
                 <div class="col" style="height: 20px;"></div>
 
