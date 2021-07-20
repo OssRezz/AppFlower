@@ -116,7 +116,7 @@ $Operario = new Operarios();
 
                     <div class="card">
                             <div class="card-header border-bottom-0 text-primary"><i class="fas fa-th-list"></i>
-                                Usuarios registrados</div>
+                                Operarios registrados</div>
                             <div class="card-body p-0">
 
 
