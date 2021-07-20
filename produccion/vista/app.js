@@ -1,11 +1,22 @@
 $(document).ready(function () {
     var perfil = $("#perfil").val();
     var title = $(document).attr('title');
+    var limit = $("#limit").val();
+    var pagina = $("#pagina").val();
+
     $.post('../../roles/control/ctrlMenuLateral.php', {
         perfil: perfil,
         title: title
     }, function (responseText) {
         $('#respuesta-menu').html(responseText);
+    });
+
+    //Carga la paginación de la vista de operarios
+    $.post('../control/ctrlPaginacion.php', {
+        limit: limit,
+        pagina: pagina
+    }, function (responseText) {
+        $('#respuesta-paginacion').html(responseText);
     });
 
     $("#labor").change(function () {
@@ -15,13 +26,13 @@ $(document).ready(function () {
             $("#recetasLabel").hide();
             $("#tallos").show();
             $("#tallosLabel").show();
-            $('#horasLabor').removeClass('form-group col-sm-12 col-xl-12').addClass( "form-group col-sm-12 col-md-6" );
+            $('#horasLabor').removeClass('form-group col-sm-12 col-xl-12').addClass("form-group col-sm-12 col-md-6");
         } else {
             $("#recetas").show();
             $("#recetasLabel").show();
             $("#tallos").hide();
             $("#tallosLabel").hide();
-            $('#horasLabor').attr('class','form-group col-sm-12 col-xl-12');
+            $('#horasLabor').attr('class', 'form-group col-sm-12 col-xl-12');
 
         }
     });
@@ -46,6 +57,30 @@ $(document).ready(function () {
                 $('#respuesta').html(responseText);
             });
         }
+    });
+
+    //Enviar los datos de la vista al control de la inserción 
+    $("#ingresar-produccion").click(function (e) {
+        var operario = $("#operario").val();
+        var labor = $("#labor").val();
+        var posicion = $("#posicion").val();
+        var fecha = $("#fecha").val();
+        var semana = $("#semana").val();
+        var tallos = $("#tallos").val();
+        var hora = $("#hora").val();
+        var recetas = $("#recetas").val();
+        $.post('../control/ctrlIngresarProduccion.php', {
+            operario: operario,
+            labor: labor,
+            posicion: posicion,
+            fecha: fecha,
+            semana: semana,
+            tallos: tallos,
+            hora: hora,
+            recetas: recetas
+        }, function (responseText) {
+            $('#respuesta').html(responseText);
+        });
     });
 
 

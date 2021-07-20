@@ -20,7 +20,63 @@ class Produccion extends Conexion
         return $listaLabor;
     }
 
-}
+    public function insertarProduccion($Operario, $Labor, $Posicion, $Fecha, $Semana, $Tallos, $Hora, $recetas)
+    {
+        $statement = $this->db->prepare("INSERT INTO `tbl_produccion`(`operario`, `labor`, `posicion`, `fecha`, `semana`, `tallos`, `hora`, `recetas`)
+          VALUES (:Operario,:Labor,:Posicion,:Fecha,:Semana,:Tallos,:Hora,:recetas)");
+        $statement->bindParam(':Operario', $Operario);
+        $statement->bindParam(':Labor', $Labor);
+        $statement->bindParam(':Posicion', $Posicion);
+        $statement->bindParam(':Fecha', $Fecha);
+        $statement->bindParam(':Semana', $Semana);
+        $statement->bindParam(':Tallos', $Tallos);
+        $statement->bindParam(':Hora', $Hora);
+        $statement->bindParam(':recetas', $recetas);
+        if ($statement->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
+    //Lista con el total de los Operarios
+    public function listaProduccion()
+    {
+        $listaProduccion = null;
+        $statement = $this->db->prepare("SELECT P.id_produccion, P.operario, P.labor, P.fecha, O.nombre, CONCAT(L.labor, ' ', P.posicion) AS 'Labor',
+         Week(fecha) AS 'Semana',P.hora, P.tallos,P.recetas, ROUND(P.tallos/P.hora,0) AS 'Promedio' FROM `tbl_produccion` as P
+          INNER JOIN tbl_operarios AS O ON O.id_operario=P.operario INNER JOIN labor_produccion AS L ON L.id_labor=P.labor ORDER BY `Labor` ASC;");
+        $statement->execute();
+        while ($consulta = $statement->fetch()) {
+            $listaProduccion[] = $consulta;
+        }
+        return $listaProduccion;
+    }
+
+
+    public function contadorProduccion()
+    {
+        $listaProduccion = null;
+        $statement = $this->db->prepare("SELECT count(id_produccion) as 'id' FROM `tbl_produccion`;");
+        $statement->execute();
+        while ($consulta = $statement->fetch()) {
+            $listaProduccion[] = $consulta;
+        }
+        return $listaProduccion;
+    }
+
+    public function listaProduccionLimit($paginationStart, $limit)
+    {
+        $listaProduccion = null;
+        $statement = $this->db->prepare("SELECT P.id_produccion, P.operario, P.labor, P.fecha, O.nombre, CONCAT(L.labor, ' ', P.posicion) AS 'Labor',
+        Week(fecha) AS 'Semana',P.hora, P.tallos,P.recetas, ROUND(P.tallos/P.hora,0) AS 'Promedio' FROM `tbl_produccion` as P
+         INNER JOIN tbl_operarios AS O ON O.id_operario=P.operario INNER JOIN labor_produccion AS L ON L.id_labor=P.labor ORDER BY `id_produccion` desc LIMIT $paginationStart, $limit");
+        $statement->execute();
+        while ($consulta = $statement->fetch()) {
+            $listaProduccion[] = $consulta;
+        }
+        return $listaProduccion;
+    }
+}
 
 ?>

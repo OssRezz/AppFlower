@@ -9,15 +9,16 @@ Class Modal {
         echo    "<div class='modal-dialog modal-dialog-centered'>";
         echo        "<div class='modal-content modal-md'>";
         echo            "<div class='modal-header border-0 py-2'>";
-        echo                "<p class='modal-title text-$color'><i class='fas fa-info'></i> Información</p>";
+        echo                "<h6 class='modal-title text-$color'><i class='fad fa-flower-tulip'></i> AppFlower</h6>";
         echo            "<button type='button' class='close' id='cerrar' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
         echo            "</div>";
         echo            "<div class='modal-body'>";
-        echo            "<p> Welcome, to AppFlower. <p>";
+        echo            "<p>Bienvenido a la aplicacion: <b>$n</b>.<p>";
+        echo            "<p class='text-center text-muted'>Flores Isabelita S.A.S<p>";
         echo            "</div>";
         echo                    "<div class='form-group d-flex justify-content-center'>";
         echo                    "<div class='form-group col-8'>";
-        echo                        "<input type='button' class='btn btn-outline-primary btn-block' id='continuar' value='Continuar'>";
+        echo                        "<input type='button' class='btn btn-sm btn-outline-primary btn-block' id='continuar' value='Ingresar'>";
         echo                    "</div>";
         echo                    "</div>";
         echo        "</div>";
@@ -60,7 +61,7 @@ Class Modal {
         echo    "<div class='modal-dialog modal-dialog-centered'>";
         echo        "<div class='modal-content'>";
         echo            "<div class='modal-header'>";
-        echo                "<h5 class='modal-title text-$color'>Cerrar sesión</h5>";
+        echo                "<h6 class='modal-title text-$color'><i class='far fa-info-circle'></i> Cerrar sesión</h6>";
         echo            "<button type='button' class='close' id='cerrar' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
         echo            "</div>";
         echo            "<div class='modal-body'>";
@@ -91,7 +92,7 @@ Class Modal {
         echo    "<div class='modal-dialog modal-dialog-centered'>";
         echo        "<div class='modal-content'>";
         echo            "<div class='modal-header'>";
-        echo                "<h5 class='modal-title text-$color'>Eliminar usuario</h5>";
+        echo                "<h6 class='modal-title text-$color'><i class='far fa-trash-alt'></i> Eliminar usuario</h6>";
         echo            "<button type='button' class='close' id='cerrar' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
         echo            "</div>";
         echo            "<div class='modal-body'>";
@@ -121,7 +122,7 @@ Class Modal {
         echo    "<div class='modal-dialog modal-dialog-centered'>";
         echo        "<div class='modal-content'>";
         echo            "<div class='modal-header'>";
-        echo                "<h5 class='modal-title text-$color'>Eliminar usuario</h5>";
+        echo                "<h6 class='modal-title text-$color'><i class='far fa-trash-alt'></i> Eliminar usuario</h6>";
         echo            "<button type='button' class='close' id='cerrar' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
         echo            "</div>";
         echo            "<div class='modal-body'>";
@@ -151,11 +152,11 @@ Class Modal {
         echo    "<div class='modal-dialog modal-dialog-centered'>";
         echo        "<div class='modal-content'>";
         echo            "<div class='modal-header'>";
-        echo                "<h5 class='modal-title text-$color'>Registro exitoso</h5>";
+        echo                "<h6 class='modal-title text-$color'><i class='far fa-check-circle'></i> Registro exitoso</h6>";
         echo            "<button type='button' class='close' id='cerrar' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
         echo            "</div>";
         echo            "<div class='modal-body'>";
-        echo                "<p><strong>$n</strong>, Se ha registrado correctamente. <p>";
+        echo                "<p>La información se almacenó en la base de datos.<p>";
         echo            "<div class='d-flex justify-content-end'>";
         echo                "<button type='button' class='btn btn-outline-primary'  id='aceptar' data-dismiss='modal' aria-label='Close'>Aceptar</button>";
         echo            "</div>";
@@ -175,7 +176,7 @@ Class Modal {
         echo    "<div class='modal-dialog modal-dialog-centered'>";
         echo        "<div class='modal-content'>";
         echo            "<div class='modal-header'>";
-        echo                "<h5 class='modal-title text-primary'>Actualizar usuario</h5>";
+        echo                "<h6 class='modal-title text-primary'><i class='far fa-edit'></i> Actualizar usuario</h6>";
         echo            "<button type='button' class='close' id='cerrar' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
         echo            "</div>";
         echo            "<div class='modal-body p-2'>";
@@ -220,7 +221,7 @@ Class Modal {
         echo    "<div class='modal-dialog modal-dialog-centered'>";
         echo        "<div class='modal-content'>";
         echo            "<div class='modal-header'>";
-        echo                "<h5 class='modal-title text-primary'>Actualizar usuario</h5>";
+        echo                "<h6 class='modal-title text-primary'><i class='far fa-edit'></i> Actualizar usuario</h6>";
         echo            "<button type='button' class='close' id='cerrar' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
         echo            "</div>";
         echo            "<div class='modal-body p-2'>";
