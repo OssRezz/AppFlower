@@ -38,6 +38,8 @@ $(document).ready(function () {
         }
     });
 
+
+
     //Modal Para salir de la sesión ctrlModalOut
     $("#btn-logOut").click(function (e) {
         var numero = 1;
@@ -99,8 +101,38 @@ $(document).ready(function () {
         }
     });
 
+    //Muestra la modal con la informacion del usuario
+    $(document).click(function (e) {
+        var accion = e.target.id;
+        if (accion === "btn-editar-produccion") {
+            var idProduccion = e.target.value;
+            $.post('../control/ctrlModalActualizar.php', {
+                accion: accion,
+                idProduccion: idProduccion
+            }, function (responseText) {
+                $('#respuesta').html(responseText);
+            });
+        }
+    });
 
-    
+    $(document).click(function (e) {
+        $("#laborProduccion").change(function () {
+            var value = $(this).val();
+            if (value != 1) {
+                $("#recetasProduccion").hide();
+                $("#recetasLabelProduccion").hide();
+                $("#tallosProduccion").show();
+                $("#tallosLabelProduccion").show();
+                $('#horasLaborProduccion').removeClass('form-group col-sm-12 col-xl-12').addClass("form-group col-sm-12 col-md-6");
+            } else {
+                $("#recetasProduccion").show();
+                $("#recetasLabelProduccion").show();
+                $("#tallosProduccion").hide();
+                $("#tallosLabelProduccion").hide();
+                $('#horasLaborProduccion').attr('class', 'form-group col-sm-12 col-xl-12');
+            }
+        });
 
+    });
 
 });

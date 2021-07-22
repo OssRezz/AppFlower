@@ -7,11 +7,8 @@ $Labor =  new Produccion();
 $Produccion = new Produccion();
 $date = date('Y-m-d');
 $week = date('\S\e\m\a\n\a\ W, Y');
-
-
-
+$semana = date('Y\-\WW');
 ?>
-
 
 
 <!DOCTYPE html>
@@ -27,12 +24,6 @@ $week = date('\S\e\m\a\n\a\ W, Y');
     <link rel="stylesheet" href="../../css/style.css">
     <title>Produccion</title>
 </head>
-<style>
-    .lp{
-        padding: 1px 13px 1px 16px;
-        
-    }
-</style>
 <body>
 
     <div class="container-fluid">
@@ -138,7 +129,7 @@ $week = date('\S\e\m\a\n\a\ W, Y');
                                         </div>
                                         <div class="form-group col-sm-12 col-md-6">
                                             <label for="semana">Semana</label>
-                                            <input type="week" class="form-control" name="semana" id="semana">
+                                            <input type="week" class="form-control" name="semana" id="semana" value="<?php echo $semana ?>">
                                         </div>
                                     </div>
                                     <div class="form-row">
@@ -196,6 +187,8 @@ $week = date('\S\e\m\a\n\a\ W, Y');
                                                             <div class="row">
                                                                 <div class="col-6 d-flex">
                                                                     <?php
+
+                                                                    //Cada labor tiene un icono definido
                                                                     switch ($listProduccion['labor']) {
                                                                         case '1':
                                                                             $laborIcon = "fas fa-network-wired";
@@ -208,12 +201,20 @@ $week = date('\S\e\m\a\n\a\ W, Y');
                                                                             $laborIcon = "fas fa-leaf";
                                                                             break;
                                                                     }
+
+                                                                    //Si el operario supera el rendimiento promedio...Cambiara el color del fondo
+                                                                    if ($listProduccion['Promedio'] > $listProduccion['rendimiento']) {
+                                                                        $iconRendimiento = "badge badge-primary"; 
+                                                                    } else {
+                                                                        $iconRendimiento = "badge badge-secondary"; 
+                                                                    }
+
                                                                     ?>
                                                                     <div class="m-2"><i class="<?php echo $laborIcon ?> text-muted pr-1" style=""></i><?php echo $listProduccion['Labor'] ?></div>
                                                                 </div>
                                                                 <div class="col d-flex justify-content-end px-0">
                                                                     <div class="m-2 mr-4"><small class="">ID:</i><?php echo $listProduccion['operario'] ?></small></div>
-                                                                    <div class="m-2 mr-4"><small><span class="badge badge-success" style="width: 45px;"><?php echo $listProduccion['Promedio'] ?>%</span></small></div>
+                                                                    <div class="m-2 mr-4"><small><span class="<?php echo $iconRendimiento ?>" style="width: 45px;"><?php echo $listProduccion['Promedio'] ?>%</span></small></div>
                                                                 </div>
                                                             </div>
                                                         </button>
@@ -232,6 +233,7 @@ $week = date('\S\e\m\a\n\a\ W, Y');
                                                             <li class="list-group-item lp"><b>Semana </b>: <?php echo $listProduccion['Semana'] ?></li>
                                                             <li class="list-group-item lp"><b>Tiempo </b>: <?php echo $listProduccion['hora'] ?></li>
                                                             <li class="list-group-item lp"><b>Tallos </b>: <?php echo $listProduccion['tallos'] ?></li>
+                                                            <li class="list-group-item lp"><b>Promedio </b>: <?php echo $listProduccion['Promedio'] ?></li>
                                                             <li class="list-group-item lp"><b>Recetas </b>: <?php
                                                                                                                 if ($listProduccion['labor'] != "1") {
                                                                                                                     echo "N/A";
