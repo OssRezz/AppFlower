@@ -1,6 +1,7 @@
 $(document).ready(function () {
     var perfil = $("#perfil").val();
     var title = $(document).attr('title');
+    var page = $(document).attr('page');
     var limit = $("#limit").val();
     var pagina = $("#pagina").val();
 
@@ -82,6 +83,24 @@ $(document).ready(function () {
             $('#respuesta').html(responseText);
         });
     });
+
+
+    //Responde la modal con la información de la produccion
+    $(document).click(function (e) {
+        var accion = e.target.id;
+        if (accion === "btn-buscar-produccion") {
+            var codigo = $('#BuscarProduccion').val();
+            $.post('../control/ctrlBuscarProduccion.php', {
+                accion: accion,
+                codigo: codigo
+            }, function (responseText) {
+                $('#respuesta').html(responseText);
+            });
+        }
+    });
+
+
+    
 
 
 });

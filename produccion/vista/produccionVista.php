@@ -27,7 +27,12 @@ $week = date('\S\e\m\a\n\a\ W, Y');
     <link rel="stylesheet" href="../../css/style.css">
     <title>Produccion</title>
 </head>
-
+<style>
+    .lp{
+        padding: 1px 13px 1px 16px;
+        
+    }
+</style>
 <body>
 
     <div class="container-fluid">
@@ -65,8 +70,23 @@ $week = date('\S\e\m\a\n\a\ W, Y');
 
                 <div class="row">
 
+
                     <!--Primer tarjeta-->
                     <div class="col-sm-12  col-md-12 col-lg-12 col-xl-4 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-0 pr-lg-3 pr-xl-0">
+
+                        <!--Search Component-->
+                        <div class="card mb-3">
+                            <div class="searchBar text-primary">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="BuscarProduccion" placeholder="Ingresa el codigo del operario" required>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-primary" type="submit" id="btn-buscar-produccion">
+                                            <i class="fa fa-search" style="pointer-events: none;"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="card mb-3">
                             <div class="card-header text-primary"><i class="fas fa-plus-circle "></i> Formulario de
@@ -145,19 +165,7 @@ $week = date('\S\e\m\a\n\a\ W, Y');
                         </div>
 
 
-                        <!--Search Component-->
-                        <div class="card">
-                            <div class="searchBar text-primary">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Ingresa el codigo del operario">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-primary" type="button">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
 
                     </div>
 
@@ -170,7 +178,7 @@ $week = date('\S\e\m\a\n\a\ W, Y');
                                 Rendimientos registrados</div>
                             <div class="card-body p-0">
 
-                                <table class="table border table-hover">
+                                <table class="table border  table-hover">
                                     <!--Trabajador-->
                                     <tr class="">
                                         <div id="accordion">
@@ -184,33 +192,55 @@ $week = date('\S\e\m\a\n\a\ W, Y');
 
                                                     <!--collapseExampleOne es el id -->
                                                     <div class="">
-                                                        <button class="btn btn-block d-flex align-items-center aligns p-0 border bg-light rounded-0 shadow-none px-2 text-dark" data-toggle="collapse" data-target="#collapse<?php echo $listProduccion['id_produccion'] ?>" aria-expanded="true" aria-controls="collapse<?php echo $listProduccion['id_produccion'] ?>">
-                                                            <p class="m-2"><?php echo $listProduccion['nombre'] ?></p>
+                                                        <button class="btn btn-block  p-0 border bg-light rounded-0 shadow-none px-2 text-dark" data-toggle="collapse" data-target="#collapse<?php echo $listProduccion['id_produccion'] ?>" aria-expanded="true" aria-controls="collapse<?php echo $listProduccion['id_produccion'] ?>">
+                                                            <div class="row">
+                                                                <div class="col-6 d-flex">
+                                                                    <?php
+                                                                    switch ($listProduccion['labor']) {
+                                                                        case '1':
+                                                                            $laborIcon = "fas fa-network-wired";
+                                                                            break;
+
+                                                                        case '2':
+                                                                            $laborIcon = "fas fa-cogs";
+                                                                            break;
+                                                                        case '3':
+                                                                            $laborIcon = "fas fa-leaf";
+                                                                            break;
+                                                                    }
+                                                                    ?>
+                                                                    <div class="m-2"><i class="<?php echo $laborIcon ?> text-muted pr-1" style=""></i><?php echo $listProduccion['Labor'] ?></div>
+                                                                </div>
+                                                                <div class="col d-flex justify-content-end px-0">
+                                                                    <div class="m-2 mr-4"><small class="">ID:</i><?php echo $listProduccion['operario'] ?></small></div>
+                                                                    <div class="m-2 mr-4"><small><span class="badge badge-success" style="width: 45px;"><?php echo $listProduccion['Promedio'] ?>%</span></small></div>
+                                                                </div>
+                                                            </div>
                                                         </button>
                                                     </div>
                                                     <div class="collapse border border-top-0 " id="collapse<?php echo $listProduccion['id_produccion'] ?>" data-parent="#accordion">
                                                         <ul class="list-group list-group-flush">
-                                                            <li class="list-group-item py-0 d-flex justify-content-between">
+                                                            <li class="list-group-item lp d-flex justify-content-between">
                                                                 <div class=""><b>Labor </b>: <?php echo $listProduccion['Labor'] ?></div>
                                                                 <div class="text-center">
-                                                                    <button class="btn btn-outline-primary pr-1 pl-1 py-0" id="btn-editar-usuario" value="<?php echo $listProduccion['id_produccion'] ?>">editar</button>
-                                                                    <button class="btn btn-outline-danger pr-1 pl-1 py-0" id="btn-eliminar-usuario" value="<?php echo $listProduccion['id_produccion'] ?>"><i class="far fa-trash-alt" style="pointer-events: none;"></i></button>
+                                                                    <button class="btn  btn-sm  btn-outline-primary border-0" id="btn-editar-produccion" value="<?php echo $listProduccion['id_produccion'] ?>">Editar</button>
                                                                 </div>
                                                             </li>
-                                                            <li class="list-group-item py-0"><b>Codigo </b>: <?php echo $listProduccion['operario'] ?></li>
-                                                            <li class="list-group-item py-0"><b>Nombre </b>: <?php echo $listProduccion['nombre'] ?></li>
-                                                            <li class="list-group-item py-0"><b>Fecha </b>: <?php echo $listProduccion['fecha'] ?></li>
-                                                            <li class="list-group-item py-0"><b>Semana </b>: <?php echo $listProduccion['Semana'] ?></li>
-                                                            <li class="list-group-item py-0"><b>Tiempo </b>: <?php echo $listProduccion['hora'] ?></li>
-                                                            <li class="list-group-item py-0"><b>Tallos </b>: <?php echo $listProduccion['tallos'] ?></li>
-                                                            <li class="list-group-item py-0"><b>Recetas </b>: <?php
+                                                            <li class="list-group-item lp"><b>Codigo </b>: <?php echo $listProduccion['operario'] ?></li>
+                                                            <li class="list-group-item lp"><b>Nombre </b>: <?php echo $listProduccion['nombre'] ?></li>
+                                                            <li class="list-group-item lp"><b>Fecha </b>: <?php echo $listProduccion['fecha'] ?></li>
+                                                            <li class="list-group-item lp"><b>Semana </b>: <?php echo $listProduccion['Semana'] ?></li>
+                                                            <li class="list-group-item lp"><b>Tiempo </b>: <?php echo $listProduccion['hora'] ?></li>
+                                                            <li class="list-group-item lp"><b>Tallos </b>: <?php echo $listProduccion['tallos'] ?></li>
+                                                            <li class="list-group-item lp"><b>Recetas </b>: <?php
                                                                                                                 if ($listProduccion['labor'] != "1") {
                                                                                                                     echo "N/A";
                                                                                                                 } else {
                                                                                                                     echo $listProduccion['recetas'];
                                                                                                                 }
-                                                                                                                ?></li>
-                                                            <li class="list-group-item py-0"><b>Numero de recetas </b>: <?php
+                                                                                                                ?>
+                                                            </li>
+                                                            <li class="list-group-item lp"><b>Numero de recetas </b>: <?php
                                                                                                                         $recetas = $listProduccion['recetas'];
                                                                                                                         $Separador = str_replace("+", ',', $recetas);
                                                                                                                         $numeroRecetas = preg_split("/\,/", $Separador);
@@ -219,7 +249,8 @@ $week = date('\S\e\m\a\n\a\ W, Y');
                                                                                                                         } else {
                                                                                                                             echo count($numeroRecetas);
                                                                                                                         }
-                                                                                                                        ?></li>
+                                                                                                                        ?>
+                                                            </li>
                                                         </ul>
                                                     </div>
                                             <?php
@@ -232,7 +263,7 @@ $week = date('\S\e\m\a\n\a\ W, Y');
                                 </table>
 
                                 <!-- Pagination -->
-                                <div id="respuesta-paginacion"></div>
+                                <div class="col d-flex justify-content-end" id="respuesta-paginacion"></div>
 
                             </div>
                         </div>

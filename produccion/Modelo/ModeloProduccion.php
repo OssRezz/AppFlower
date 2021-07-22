@@ -77,6 +77,21 @@ class Produccion extends Conexion
         }
         return $listaProduccion;
     }
+
+    public function listarProduccionTable($codigo)
+    {
+        $listaProduccion = null;
+        $statement = $this->db->prepare("SELECT P.id_produccion, P.operario, P.labor, P.fecha, O.nombre, CONCAT(L.labor, ' ', P.posicion) AS 'Labor',
+        Week(fecha) AS 'Semana',P.hora, P.tallos,P.recetas, ROUND(P.tallos/P.hora,0) AS 'Promedio' FROM `tbl_produccion` as P
+         INNER JOIN tbl_operarios AS O ON O.id_operario=P.operario INNER JOIN labor_produccion AS L ON L.id_labor=P.labor Where P.operario LIKE '%' :codigo '%' OR O.nombre LIKE '%' :codigo '%' ORDER BY fecha desc LIMIT 5;");
+        $statement->bindParam(':codigo', $codigo);
+        $statement->execute();
+        while ($consulta = $statement->fetch()) {
+            $listaProduccion[] = $consulta;
+        }
+        return $listaProduccion;
+    }
+
 }
 
 ?>
