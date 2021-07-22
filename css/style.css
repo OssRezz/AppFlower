@@ -19,29 +19,7 @@
 padding: 0.35rem;
 }
 
-.table-fixed thead,
-.table-fixed tfoot{
-  width: 97%;
-}
-
-.table-fixed tbody {
-    height: 230px;
-    overflow-y: auto;
-    width: 100%;
-  }
+.lp{
+  padding: 1px 13px 1px 16px;
   
-  .table-fixed thead,
-.table-fixed tbody,
-.table-fixed tfoot,
-.table-fixed tr,
-.table-fixed td,
-.table-fixed th {
-  display: block;
-}
-
-.table-fixed tbody td,
-.table-fixed thead > tr> th,
-.table-fixed tfoot > tr> td{
-  float: left;
-  border-bottom-width: 0;
 }

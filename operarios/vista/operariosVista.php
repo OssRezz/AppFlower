@@ -64,7 +64,22 @@ $Operario = new Operarios();
                     <!--Primer tarjeta-->
                     <div class="col-sm-12  col-lg-12 col-xl-4   mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-0 pr-md-3 pr-lg-3 pr-xl-0">
 
-                        <div class="card mb-3">
+                        <!--Search Component-->
+                        <div class="card  mb-3">
+                            <div class="searchBar text-primary">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="BuscarOperario"
+                                        placeholder="Ingresa el codigo del operario" required>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-primary" type="submit" id="btn-buscar-operario">
+                                            <i class="fa fa-search" style="pointer-events: none;"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
                             <div class="card-header text-primary"><i class="fas fa-plus-circle "></i> Formulario de operarios</div>
 
                             <div class="card-body">
@@ -93,20 +108,7 @@ $Operario = new Operarios();
                             </div>
                         </div>
 
-                        <!--Search Component-->
-                        <div class="card">
-                            <div class="searchBar text-primary">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="BuscarOperario"
-                                        placeholder="Ingresa el codigo del operario" required>
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-primary" type="submit" id="btn-buscar-operario">
-                                            <i class="fa fa-search" style="pointer-events: none;"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
 
                     </div>
 
@@ -133,20 +135,20 @@ $Operario = new Operarios();
 
                                                     <!--collapseExampleOne es el id -->
                                                     <div class="">
-                                                        <button class="btn btn-block d-flex align-items-center aligns p-0 border bg-light rounded-0 shadow-none px-2 text-dark" data-toggle="collapse" data-target="#collapse<?php echo $Operarios['contador'] ?>" aria-expanded="true" aria-controls="collapse<?php echo $Operarios['contador'] ?>">
-                                                            <p class="m-2"><?php echo $Operarios['nombre'] ?></p>
+                                                        <button class="btn btn-block d-flex align-items-center  p-0 border bg-light rounded-0 shadow-none px-2 text-dark" data-toggle="collapse" data-target="#collapse<?php echo $Operarios['contador'] ?>" aria-expanded="true" aria-controls="collapse<?php echo $Operarios['contador'] ?>">
+                                                            <p class="m-2"><i class="fad fa-user-hard-hat text-muted pr-1"></i><?php echo $Operarios['nombre'] ?></p>
                                                         </button>
                                                     </div>
                                                     <div class="collapse border border-top-0 " id="collapse<?php echo $Operarios['contador'] ?>" data-parent="#accordion">
                                                         <ul class="list-group list-group-flush">
-                                                            <li class="list-group-item py-0 d-flex justify-content-between">
+                                                            <li class="list-group-item lp d-flex justify-content-between">
                                                                 <div class=""><b>Nombre </b>: <?php echo $Operarios['nombre'] ?></div>
                                                                 <div class="text-center">
-                                                                    <button class="btn btn-outline-primary pr-1 pl-1 py-0" id="btn-editar-operario" value="<?php echo $Operarios['id_operario'] ?>">editar</button>
-                                                                    <button class="btn btn-outline-danger pr-1 pl-1 py-0" id="btn-eliminar-operario" value="<?php echo $Operarios['id_operario'] ?>"><i class="far fa-trash-alt" style="pointer-events: none;"></i></button>
+                                                                    <button class="btn  btn-sm  btn-outline-primary border-0" id="btn-editar-operario" value="<?php echo $Operarios['id_operario'] ?>">Editar</button>
+                                                                    <button class="btn btn-sm btn-outline-danger  border-0  lp" id="btn-eliminar-operario" value="<?php echo $Operarios['id_operario'] ?>"><i class="far fa-trash-alt" style="pointer-events: none;"></i></button>
                                                                 </div>
                                                             </li>
-                                                            <li class="list-group-item py-0"><b>Codigo </b>: <?php echo $Operarios['id_operario'] ?></li>
+                                                            <li class="list-group-item lp"><b>Codigo </b>: <?php echo $Operarios['id_operario'] ?></li>
                                                         </ul>
                                                     </div>
                                             <?php
@@ -159,7 +161,7 @@ $Operario = new Operarios();
                                 </table>
 
                                 <!-- Pagination -->
-                                <div id="respuesta-paginacion"></div>
+                                <div class="col d-flex justify-content-end" id="respuesta-paginacion"></div>
                                 
                             </div>
                         </div>

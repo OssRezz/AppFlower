@@ -6,7 +6,7 @@ $numero = $_POST['numero'];
 
 
 if($numero == 1){
-    $modal->modalOut("danger");
+    $modal->modalOut("primary");
     //$Usuario->logOut();
 }
 

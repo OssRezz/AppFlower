@@ -135,25 +135,26 @@ $user->session();
                                             // $Usuarios = $usuario->listaUsuarios();
                                             if ($Users != null) {
                                                 foreach ($Users as $Users) {
+
                                             ?>
 
                                                     <!--collapseExampleOne es el id -->
                                                     <div class="">
                                                         <button class="btn btn-block d-flex align-items-center aligns p-0 border bg-light rounded-0 shadow-none px-2 text-dark" data-toggle="collapse" data-target="#collapse<?php echo $Users['contador'] ?>" aria-expanded="true" aria-controls="collapse<?php echo $Users['contador'] ?>">
-                                                            <p class="m-2"><?php echo $Users['nombre'] ?></p>
+                                                            <p class="m-2"><i class="fad fa-user text-muted pr-1"></i><?php echo $Users['nombre'] ?></p>
                                                         </button>
                                                     </div>
                                                     <div class="collapse border border-top-0 " id="collapse<?php echo $Users['contador'] ?>" data-parent="#accordion">
                                                         <ul class="list-group list-group-flush">
-                                                            <li class="list-group-item py-0 d-flex justify-content-between">
+                                                            <li class="list-group-item lp d-flex justify-content-between">
                                                                 <div class=""><b>Nombre </b>: <?php echo $Users['nombre'] ?></div>
                                                                 <div class="text-center">
-                                                                    <button class="btn btn-outline-primary pr-1 pl-1 py-0" id="btn-editar-usuario" value="<?php echo $Users['correo'] ?>">editar</button>
-                                                                    <button class="btn btn-outline-danger pr-1 pl-1 py-0" id="btn-eliminar-usuario" value="<?php echo $Users['correo'] ?>"><i class="far fa-trash-alt" style="pointer-events: none;"></i></button>
+                                                                    <button class="btn btn-sm btn-outline-primary border-0" id="btn-editar-usuario" value="<?php echo $Users['correo'] ?>">Editar</button>
+                                                                    <button class="btn btn-sm btn-outline-danger  border-0" id="btn-eliminar-usuario" value="<?php echo $Users['correo'] ?>"><i class="far fa-trash-alt" style="pointer-events: none;"></i></button>
                                                                 </div>
                                                             </li>
-                                                            <li class="list-group-item py-0"><b>Correo </b>: <?php echo $Users['correo'] ?></li>
-                                                            <li class="list-group-item py-0"><b>Perfil </b>: <?php echo $Users['tipoPerfil'] ?></li>
+                                                            <li class="list-group-item lp"><b>Correo </b>: <?php echo $Users['correo'] ?></li>
+                                                            <li class="list-group-item lp"><b>Perfil </b>: <?php echo $Users['tipoPerfil'] ?></li>
                                                         </ul>
                                                     </div>
                                             <?php
@@ -166,8 +167,8 @@ $user->session();
                                 </table>
 
                                 <!-- Pagination -->
-                                <div id="respuesta-paginacion"></div>
-                                
+                                <div class="col d-flex justify-content-end" id="respuesta-paginacion"></div>
+
                             </div>
                         </div>
 
