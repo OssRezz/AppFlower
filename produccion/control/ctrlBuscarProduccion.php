@@ -6,15 +6,15 @@ require '../Modelo/ModeloProduccion.php';
 $Produccion = new Produccion();
 $Modal =  new Modal();
 
-$idProduccion = $_POST['idProduccion'];
+$codigo = $_POST['idProduccion'];
 $accion = $_POST['accion'];
 
 
 
 
-if ($accion == "btn-buscar-produccion" && empty($idProduccion) != 1) {
+if ($accion == "btn-buscar-produccion" && empty($codigo) != 1) {
 
-    $produccion = $Produccion->listarProduccionUpdate($idProduccion);
+    $produccion = $Produccion->listarProduccionTable($codigo);
     if ($produccion != null) {
 
         echo "<div class='modal fade table-sm' id='modal-login' tabindex='-1' style='display: block;' data-keyboard='false'>";

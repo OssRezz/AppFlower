@@ -91,10 +91,10 @@ $(document).ready(function () {
     $(document).click(function (e) {
         var accion = e.target.id;
         if (accion === "btn-buscar-produccion") {
-            var codigo = $('#BuscarProduccion').val();
+            var idProduccion = $('#BuscarProduccion').val();
             $.post('../control/ctrlBuscarProduccion.php', {
                 accion: accion,
-                codigo: codigo
+                idProduccion: idProduccion
             }, function (responseText) {
                 $('#respuesta').html(responseText);
             });
