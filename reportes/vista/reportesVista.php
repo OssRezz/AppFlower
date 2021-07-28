@@ -23,23 +23,22 @@ $user->session();
     <div class="container-fluid">
         <div id="respuesta"></div>
         <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-3 col-xl-2 pb-2 bg-light mb-sm-4 mb-md-0">
+            <div class="col-sm-12 col-md-12 col-lg-3 col-xl-2 bg-light mb-sm-4 mb-md-0 lateralMenu">
 
                 <div class="col" style="height: 20px;"></div>
 
                 <div id="respuesta-menu"></div>
 
             </div>
-            <div class="col-sm-12 col-md-12 col-lg-9 col-xl-10 vh-100 border-left">
+            <div class="col vh-100 border-left">
 
 
                 <div class="row  border-bottom border-top">
 
                     <!-- Image and text -->
-                    <nav class="navbar navbar-light w-100">
+                    <nav class="navbar navbar-light w-100 pl-1">
                         <div class="navbar-brand">
-                            <img src="../../img/flower-blue.svg" width="30" height="30" class="d-inline-block">
-                            <i><small class="font-weight-bold text-muted">AppFlower user</small></i>
+                        <button type="button" id="hamburguer-menu" class="btn text-dark"><i class="far fa-bars fa-lg"></i></button>
                              <?php echo $user->getUsername(); ?>
                             <input type="hidden" name="perfil" id="perfil" value="<?=$_SESSION['perfil']?>"></input>
                         </div>
@@ -343,6 +342,7 @@ $user->session();
     </div>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
+    <script src="../app/script.js"></script>
 </body>
 
 </html>

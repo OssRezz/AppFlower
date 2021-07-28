@@ -24,12 +24,13 @@ $semana = date('Y\-\WW');
     <link rel="stylesheet" href="../../css/style.css">
     <title>Produccion</title>
 </head>
+
 <body>
 
     <div class="container-fluid">
         <div id="respuesta"></div>
         <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-3 col-xl-2 bg-light mb-sm-4 mb-md-0">
+            <div class="col-sm-12 col-md-12 col-lg-3 col-xl-2 bg-light mb-sm-4 mb-md-0 lateralMenu">
 
                 <div class="col" style="height: 20px;"></div>
 
@@ -37,16 +38,15 @@ $semana = date('Y\-\WW');
 
             </div>
 
-            <div class="col-sm-12 col-md-12 col-lg-9 col-xl-10 vh-100 border-left">
+            <div class="col vh-100 border-left">
 
 
                 <div class="row mb-3 border-bottom border-top">
 
                     <!-- Image and text -->
-                    <nav class="navbar navbar-light w-100">
+                    <nav class="navbar navbar-light w-100  pl-1">
                         <div class="navbar-brand">
-                            <img src="../../img/sunflower.svg" width="30" height="30" class="d-inline-block">
-                            <i><small class="font-weight-bold text-muted">AppFlower user</small></i>
+                            <button type="button" id="hamburguer-menu" class="btn text-dark"><i class="far fa-bars fa-lg"></i></button>
                             <?php echo $user->getUsername(); ?>
                             <input type="hidden" name="perfil" id="perfil" value="<?= $_SESSION['perfil'] ?>"></input>
                             <input type="hidden" name="perfil" id="limit" value="<?= $limit = isset($_SESSION['records-limit']) ? $_SESSION['records-limit'] : 10; ?>"></input>
@@ -204,9 +204,9 @@ $semana = date('Y\-\WW');
 
                                                                     //Si el operario supera el rendimiento promedio...Cambiara el color del fondo
                                                                     if ($listProduccion['Promedio'] > $listProduccion['rendimiento']) {
-                                                                        $iconRendimiento = "badge badge-primary"; 
+                                                                        $iconRendimiento = "badge badge-primary";
                                                                     } else {
-                                                                        $iconRendimiento = "badge badge-secondary"; 
+                                                                        $iconRendimiento = "badge badge-secondary";
                                                                     }
 
                                                                     ?>
@@ -235,12 +235,12 @@ $semana = date('Y\-\WW');
                                                             <li class="list-group-item lp"><b>Tallos </b>: <?php echo $listProduccion['tallos'] ?></li>
                                                             <li class="list-group-item lp"><b>Promedio </b>: <?php echo $listProduccion['Promedio'] ?></li>
                                                             <li class="list-group-item lp"><b>Recetas </b>: <?php
-                                                                                                                if ($listProduccion['labor'] != "1") {
-                                                                                                                    echo "N/A";
-                                                                                                                } else {
-                                                                                                                    echo $listProduccion['recetas'];
-                                                                                                                }
-                                                                                                                ?>
+                                                                                                            if ($listProduccion['labor'] != "1") {
+                                                                                                                echo "N/A";
+                                                                                                            } else {
+                                                                                                                echo $listProduccion['recetas'];
+                                                                                                            }
+                                                                                                            ?>
                                                             </li>
                                                             <li class="list-group-item lp"><b>Numero de recetas </b>: <?php
                                                                                                                         $recetas = $listProduccion['recetas'];
@@ -278,6 +278,7 @@ $semana = date('Y\-\WW');
     </div>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
+    <script src="../app/script.js"></script>
 </body>
 
 </html>
