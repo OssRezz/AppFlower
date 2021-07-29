@@ -20,7 +20,7 @@ $Perfil = rtrim($perfil, " ");
 try {
     if (empty($Correo) != 1 && empty($Password) != 1 && empty($Nombre) != 1  && empty($Perfil) != 1) {
         if ($Usuario->insertarUsuario($Correo, $Nombre, $Password, $Perfil)) {
-            $modal->modalInsert("success", $Nombre);
+            $modal->modalInsert("success");
         } else {
             $modal->modalInfo("danger", "Error en la base de datos");
         }

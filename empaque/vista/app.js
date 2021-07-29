@@ -1,6 +1,9 @@
 $(document).ready(function () {
-    var perfil = $("#perfil").val();
-    var title= $(document).attr('title');
+    const perfil = $("#perfil").val();
+    const title = $(document).attr('title');
+    const limit = $("#limit").val();
+    const pagina = $("#pagina").val();
+
     $.post('../../roles/control/ctrlMenuLateral.php', {
         perfil: perfil,
         title: title
@@ -8,9 +11,18 @@ $(document).ready(function () {
         $('#respuesta-menu').html(responseText);
     });
 
+    //Carga la paginación de la vista de operarios
+    $.post('../control/ctrlPaginacion.php', {
+        limit: limit,
+        pagina: pagina
+    }, function (responseText) {
+        $('#respuesta-paginacion').html(responseText);
+    });
+
+
     //Modal Para salir de la sesión ctrlModalOut
     $("#btn-logOut").click(function (e) {
-        var numero = 1;
+        const numero = 1;
         $.post('../../roles/control/ctrlModalOut.php', {
             numero: numero
         }, function (responseText) {
@@ -20,7 +32,7 @@ $(document).ready(function () {
 
     //Cerrar la sesion, volver al index. ctrlSesiónDestroy
     $(document).click(function (e) {
-        var accion = e.target.id;
+        const accion = e.target.id;
         if (accion === "btn-sesionOut") {
             $.post('../../roles/control/ctrlSesionDestroy.php', {
                 accion: accion
@@ -29,4 +41,84 @@ $(document).ready(function () {
             });
         }
     });
+
+    //Enviar los datos de la vista al control de la inserción 
+    $("#btn-ingresar-Empaque").click(() => {
+        const posicion = $("#posicion").val();
+        const labor = $("#labor").val();
+        const operario = $("#operario").val();
+        const fecha = $("#fecha").val();
+        const semana = $("#semana").val();
+        const hora = $("#hora").val();
+        const cajas = $("#cajas").val();
+        $.post('../control/ctrlIngresarEmpaque.php', {
+            operario: operario,
+            labor: labor,
+            posicion: posicion,
+            fecha: fecha,
+            semana: semana,
+            hora: hora,
+            cajas: cajas
+        }, function (responseText) {
+            $('#respuesta').html(responseText);
+        });
+    });
+
+    //Muestra la modal con la informacion del operario
+    $(document).click(function (e) {
+        const accion = e.target.id;
+        if (accion === "btn-editar-empaque") {
+            const idEmpaque = e.target.value;
+            $.post('../control/ctrlModalActualizar.php', {
+                accion: accion,
+                idEmpaque: idEmpaque
+            }, function (responseText) {
+                $('#respuesta').html(responseText);
+            });
+        }
+    });
+
+    //Boton actualizar usuario
+    $(document).click(function (e) {
+        const accion = e.target.id;
+        if (e.target.id === "btn-update-empaque") {
+            const idEmpaque = $('#idEmpaque').val();
+            const operarioEmpaque = $('#operarioEmpaque').val();
+            const fechaEmpaque = $('#fechaEmpaque').val();
+            const semanaEmpaque = $('#semanaEmpaque').val();
+            const posicionEmpaque = $('#posicionEmpaque').val();
+            const laborEmpaque = $('#laborEmpaque').val();
+            const cajasEmpaque = $('#cajasEmpaque').val();
+            const horaEmpaque = $('#horaEmpaque').val();
+            $.post('../control/ctrlActualizarEmpaque.php', {
+                accion: accion,
+                idEmpaque: idEmpaque,
+                operarioEmpaque: operarioEmpaque,
+                fechaEmpaque: fechaEmpaque,
+                semanaEmpaque: semanaEmpaque,
+                posicionEmpaque: posicionEmpaque,
+                laborEmpaque: laborEmpaque,
+                cajasEmpaque: cajasEmpaque,
+                horaEmpaque: horaEmpaque
+            }, function (responseText) {
+                $('#respuesta').html(responseText);
+            });
+        }
+    });
+
+    //Responde la modal con la información de la produccion
+    $(document).click( (e) => {
+        const accion = e.target.id;
+        if (accion === "btn-buscar-empaque") {
+            const idEmpaque = $('#buscarEmpaque').val();
+            $.post('../control/ctrlBuscarEmpaque.php', {
+                accion: accion,
+                idEmpaque: idEmpaque
+            }, (responseText) => {
+                $('#respuesta').html(responseText);
+            });
+        }
+    });
+
+
 });

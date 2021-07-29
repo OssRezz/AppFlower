@@ -1,7 +1,12 @@
 <?php
 require_once('../../Roles/Modelo/ModeloRoles.php');
-
+require '../Modelo/ModeloEmpaque.php';
 $user = new Roles();
+$empaque = new Empaque();
+$date = date('Y-m-d');
+// $week = date('\S\e\m\a\n\a\ W, Y');
+$semana = date('Y\-\WW');
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -12,7 +17,7 @@ $user = new Roles();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../../css/style.css">
     <script src="app.js"></script>
     <title>Empaque</title>
 </head>
@@ -22,29 +27,29 @@ $user = new Roles();
     <div class="container-fluid">
         <div id="respuesta"></div>
         <div class="row ">
-            <div class="col-sm-12 col-md-12 col-lg-3 col-xl-2 pb-2 bg-light mb-sm-4 mb-md-0 rounded-bottom">
+            <div class="col-sm-12 col-md-12 col-lg-3 col-xl-2 pb-2 bg-light mb-sm-4 mb-md-0 lateralMenu">
 
                 <div class="col" style="height: 20px;"></div>
-                
+
                 <div id="respuesta-menu"></div>
 
             </div>
 
-            <div class="col-sm-12 col-md-12 col-lg-9 col-xl-10 vh-100 border-left">
+            <div class="col vh-100 border-left">
 
 
                 <div class="row mb-3 border-bottom border-top">
 
                     <!-- Image and text -->
-                    <nav class="navbar navbar-light w-100">
+                    <nav class="navbar navbar-light w-100 pl-1">
                         <div class="navbar-brand">
-                            <img src="img/flower-empaque.svg" width="30" height="30" class="d-inline-block">
-                            <i><small class="font-weight-bold text-muted">AppFlower user</small></i>
+                            <button type="button" id="hamburguer-menu" class="btn text-dark"><i class="far fa-bars fa-lg"></i></button>
                             <?php echo $user->getUsername(); ?>
-                            <input type="hidden" name="perfil" id="perfil" value="<?=$_SESSION['perfil']?>"></input>
+                            <input type="hidden" name="perfil" id="perfil" value="<?= $_SESSION['perfil'] ?>"></input>
+                            <input type="hidden" name="perfil" id="limit" value="<?= $limit = isset($_SESSION['records-limit']) ? $_SESSION['records-limit'] : 10; ?>"></input>
+                            <input type="hidden" name="perfil" id="pagina" value="<?= $pagina = (isset($_GET['page']) && is_numeric($_GET['page'])) ? $_GET['page'] : 1; ?>"></input>
                         </div>
-                        <button type="button" class="btn text-danger ml-auto" id="btn-logOut"><i
-                                class="fal fa-sign-out-alt fa-lg"></i></button>
+                        <button type="button" class="btn text-danger ml-auto" id="btn-logOut"><i class="fal fa-sign-out-alt fa-lg"></i></button>
                     </nav>
 
                 </div>
@@ -54,14 +59,23 @@ $user = new Roles();
                 <div class="row">
 
                     <!--Primer tarjeta-->
-                    <div
-                        class="col-sm-12  col-md-12 col-lg-12 col-xl-4 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-0 pr-lg-3 pr-xl-0">
+                    <div class="col-sm-12  col-md-12 col-lg-12 col-xl-4 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-0 pr-lg-3 pr-xl-0">
 
-
-
-
-
+                        <!--Search Component-->
                         <div class="card mb-3">
+                            <div class="searchBar text-primary">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="buscarEmpaque" placeholder="Ingresa el codigo del operario" required>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-primary" type="submit" id="btn-buscar-empaque">
+                                            <i class="fa fa-search" style="pointer-events: none;"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
                             <div class="card-header text-primary"><i class="fas fa-plus-circle "></i> Formulario de
                                 empaque</div>
 
@@ -70,81 +84,65 @@ $user = new Roles();
                                 <form>
                                     <div class="form-row">
                                         <div class="form-group col-sm-12 col-md-6">
-                                            <label for="Labor">Posicion</label>
-                                            <select name="Labor" class="form-control">
-                                                <option value="1" selected>Celula-1</option>
-                                                <option value="2">Celula-2</option>
-                                                <option value="3">Celula-3</option>
-                                                <option value="4">Celula-4</option>
-                                                <option value="4">PostCosecha</option>
+                                            <label for="posicion">Posicion</label>
+                                            <select name="posicion" id="posicion" class="form-control">
+                                                <option value="Celula-1" selected>Celula-1</option>
+                                                <option value="Celula-2">Celula-2</option>
+                                                <option value="Celula-3">Celula-3</option>
+                                                <option value="Celula-4">Celula-4</option>
+                                                <option value="Postcosecha">Postcosecha</option>
                                             </select>
                                         </div>
                                         <div class="form-group col-sm-12 col-md-6">
-                                            <label for="Labor">Labor</label>
-                                            <select name="Labor" class="form-control">
-                                                <option value="1" selected>Surtidor</option>
-                                                <option value="1">Empaque</option>
-                                                <option value="1">Zunchador</option>
-                                                <option value="1">Etiqueta</option>
-                                                <option value="1">PostCosecha</option>
+                                            <label for="labor">Labor</label>
+                                            <select name="labor" id="labor" class="form-control">
+                                                <option disabled selected>Seleccione una labor</option>
+                                                <?php
+                                                $Empaque = $empaque->listaLaborEmpaque();
+                                                if ($Empaque != null) {
+                                                    foreach ($Empaque as $Empaque) {
+                                                ?>
+                                                        <option value="<?php echo $Empaque['id_labor'] ?>"><?php echo $Empaque['labor'] ?></option>
+                                                <?php
+                                                    }
+                                                }
+                                                ?>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-sm-12 col-md-12">
-                                            <label for="fecha">Codigo</label>
-                                            <input type="text" class="form-control" name="fecha"
-                                                placeholder="Ingrese el codigo del operario">
+                                            <label for="operario">Codigo</label>
+                                            <input type="text" class="form-control" name="operario" id="operario" placeholder="Ingrese el codigo del operario">
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-sm-12 col-md-6">
-                                            <label for="correo">Fecha</label>
-                                            <input type="date" class="form-control" name="correo"
-                                                placeholder="Ingrese su correo" name="trip-start">
+                                            <label for="fecha">Fecha</label>
+                                            <input type="date" class="form-control" name="fecha" id="fecha" value="<?php echo $date; ?>">
                                         </div>
                                         <div class="form-group col-sm-12 col-md-6">
-                                            <label for="cedula">Semana</label>
-                                            <input type="week" class="form-control" name="cedula">
+                                            <label for="semana">Semana</label>
+                                            <input type="week" class="form-control" name="semana" id="semana" value="<?php echo $semana ?>">
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-sm-12 col-md-6">
-                                            <label for="fecha">Horas Trabajadas</label>
-                                            <input type="text" class="form-control" name="fecha"
-                                                placeholder="Tiempo laborado">
+                                            <label for="hora">Horas Trabajadas</label>
+                                            <input type="text" class="form-control" name="hora" id="hora" placeholder="Tiempo laborado">
                                         </div>
                                         <div class="form-group col-sm-12 col-md-6">
-                                            <label for="fecha">Cajas</label>
-                                            <input type="text" class="form-control" name="fecha"
-                                                placeholder="Cantidad del operario">
+                                            <label for="cajas">Cajas</label>
+                                            <input type="text" class="form-control" name="cajas" id="cajas" placeholder="Cantidad del operario">
                                         </div>
                                     </div>
                                     <div class="form-row d-flex justify-content-center">
-                                        <input type="submit" class="btn btn-outline-primary  col-sm-12 col-md-6"
-                                            value="Ingresar">
+                                        <input type="button" class="btn btn-outline-primary  col-sm-12 col-md-6" id="btn-ingresar-Empaque" value="Ingresar">
                                     </div>
                                 </form>
                             </div>
 
                         </div>
-
-                        <!--Search Component-->
-                        <div class="card">
-                            <div class="searchBar text-primary">
-                                <div class="input-group">
-                                    <input type="text" class="form-control"
-                                        placeholder="Ingresa el codigo del operario">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-primary" type="button">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
 
                     </div>
 
@@ -157,306 +155,100 @@ $user = new Roles();
                                 Rendimientos registrados</div>
                             <div class="card-body p-0">
 
-                                <div class="table-responsive">
-                                    <table class="table  table-sm table-hover text-center">
-                                        <thead>
-                                            <tr>
-                                                <th>Fecha</th>
-                                                <th>Semana</th>
-                                                <th>Posicion</th>
-                                                <th>Labor</th>
-                                                <th>Codigo</th>
-                                                <th>Nombre</th>
-                                                <th>Horas</th>
-                                                <th>Fulles</th>
-                                                <th>Promedio</th>
-                                                <th>Accón</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
+                                <table class="table border  table-hover">
+                                    <!--Trabajador-->
+                                    <tr class="">
+                                        <div id="accordion">
+                                            <?php
+                                            $paginationStart = ($pagina - 1) * $limit;
+                                            $Empaque = $empaque->listaEmpaqueLimit($paginationStart, $limit);
+                                            // $Usuarios = $usuario->listaUsuarios();
+                                            if ($Empaque != null) {
+                                                foreach ($Empaque as $Empaque) {
+                                            ?>
 
-                                                <td>06/11/2021</td>
-                                                <td>Semana 28, 2021</td>
-                                                <td>Celula-1</td>
-                                                <td>Empaque</td>
-                                                <td>254789</td>
-                                                <td>James Osorio Florez</td>
-                                                <td>6.5</td>
-                                                <td>300</td>
-                                                <td>102</td>
-                                                <td>
-                                                    <button type="button" class="btn text-primary btn-sm shadow-none"><i
-                                                            class="fas fa-edit">editar</i></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>06/11/2021</td>
-                                                <td>Semana 28, 2021</td>
-                                                <td>Celula-1</td>
-                                                <td>Empaque</td>
-                                                <td>254789</td>
-                                                <td>James Osorio Florez</td>
-                                                <td>6.5</td>
-                                                <td>300</td>
-                                                <td>102</td>
-                                                <td>
-                                                    <button type="button" class="btn text-primary btn-sm shadow-none"><i
-                                                            class="fas fa-edit">editar</i></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>06/11/2021</td>
-                                                <td>Semana 28, 2021</td>
-                                                <td>Celula-1</td>
-                                                <td>Empaque</td>
-                                                <td>254789</td>
-                                                <td>James Osorio Florez</td>
-                                                <td>6.5</td>
-                                                <td>300</td>
-                                                <td>102</td>
-                                                <td>
-                                                    <button type="button" class="btn text-primary btn-sm shadow-none"><i
-                                                            class="fas fa-edit">editar</i></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>06/11/2021</td>
-                                                <td>Semana 28, 2021</td>
-                                                <td>Celula-1</td>
-                                                <td>Empaque</td>
-                                                <td>254789</td>
-                                                <td>James Osorio Florez</td>
-                                                <td>6.5</td>
-                                                <td>300</td>
-                                                <td>102</td>
-                                                <td>
-                                                    <button type="button" class="btn text-primary btn-sm shadow-none"><i
-                                                            class="fas fa-edit">editar</i></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>06/11/2021</td>
-                                                <td>Semana 28, 2021</td>
-                                                <td>Celula-1</td>
-                                                <td>Empaque</td>
-                                                <td>254789</td>
-                                                <td>James Osorio Florez</td>
-                                                <td>6.5</td>
-                                                <td>300</td>
-                                                <td>102</td>
-                                                <td>
-                                                    <button type="button" class="btn text-primary btn-sm shadow-none"><i
-                                                            class="fas fa-edit">editar</i></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>06/11/2021</td>
-                                                <td>Semana 28, 2021</td>
-                                                <td>Celula-1</td>
-                                                <td>Empaque</td>
-                                                <td>254789</td>
-                                                <td>James Osorio Florez</td>
-                                                <td>6.5</td>
-                                                <td>300</td>
-                                                <td>102</td>
-                                                <td>
-                                                    <button type="button" class="btn text-primary btn-sm shadow-none"><i
-                                                            class="fas fa-edit">editar</i></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>06/11/2021</td>
-                                                <td>Semana 28, 2021</td>
-                                                <td>Celula-1</td>
-                                                <td>Empaque</td>
-                                                <td>254789</td>
-                                                <td>James Osorio Florez</td>
-                                                <td>6.5</td>
-                                                <td>300</td>
-                                                <td>102</td>
-                                                <td>
-                                                    <button type="button" class="btn text-primary btn-sm shadow-none"><i
-                                                            class="fas fa-edit">editar</i></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>06/11/2021</td>
-                                                <td>Semana 28, 2021</td>
-                                                <td>Celula-1</td>
-                                                <td>Empaque</td>
-                                                <td>254789</td>
-                                                <td>James Osorio Florez</td>
-                                                <td>6.5</td>
-                                                <td>300</td>
-                                                <td>102</td>
-                                                <td>
-                                                    <button type="button" class="btn text-primary btn-sm shadow-none"><i
-                                                            class="fas fa-edit">editar</i></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>06/11/2021</td>
-                                                <td>Semana 28, 2021</td>
-                                                <td>Celula-1</td>
-                                                <td>Empaque</td>
-                                                <td>254789</td>
-                                                <td>James Osorio Florez</td>
-                                                <td>6.5</td>
-                                                <td>300</td>
-                                                <td>102</td>
-                                                <td>
-                                                    <button type="button" class="btn text-primary btn-sm shadow-none"><i
-                                                            class="fas fa-edit">editar</i></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>06/11/2021</td>
-                                                <td>Semana 28, 2021</td>
-                                                <td>Celula-1</td>
-                                                <td>Empaque</td>
-                                                <td>254789</td>
-                                                <td>James Osorio Florez</td>
-                                                <td>6.5</td>
-                                                <td>300</td>
-                                                <td>102</td>
-                                                <td>
-                                                    <button type="button" class="btn text-primary btn-sm shadow-none"><i
-                                                            class="fas fa-edit">editar</i></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>06/11/2021</td>
-                                                <td>Semana 28, 2021</td>
-                                                <td>Celula-1</td>
-                                                <td>Empaque</td>
-                                                <td>254789</td>
-                                                <td>James Osorio Florez</td>
-                                                <td>6.5</td>
-                                                <td>300</td>
-                                                <td>102</td>
-                                                <td>
-                                                    <button type="button" class="btn text-primary btn-sm shadow-none"><i
-                                                            class="fas fa-edit">editar</i></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>06/11/2021</td>
-                                                <td>Semana 28, 2021</td>
-                                                <td>Celula-1</td>
-                                                <td>Empaque</td>
-                                                <td>254789</td>
-                                                <td>James Osorio Florez</td>
-                                                <td>6.5</td>
-                                                <td>300</td>
-                                                <td>102</td>
-                                                <td>
-                                                    <button type="button" class="btn text-primary btn-sm shadow-none"><i
-                                                            class="fas fa-edit">editar</i></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>06/11/2021</td>
-                                                <td>Semana 28, 2021</td>
-                                                <td>Celula-1</td>
-                                                <td>Empaque</td>
-                                                <td>254789</td>
-                                                <td>James Osorio Florez</td>
-                                                <td>6.5</td>
-                                                <td>300</td>
-                                                <td>102</td>
-                                                <td>
-                                                    <button type="button" class="btn text-primary btn-sm shadow-none"><i
-                                                            class="fas fa-edit">editar</i></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>06/11/2021</td>
-                                                <td>Semana 28, 2021</td>
-                                                <td>Celula-1</td>
-                                                <td>Empaque</td>
-                                                <td>254789</td>
-                                                <td>James Osorio Florez</td>
-                                                <td>6.5</td>
-                                                <td>300</td>
-                                                <td>102</td>
-                                                <td>
-                                                    <button type="button" class="btn text-primary btn-sm shadow-none"><i
-                                                            class="fas fa-edit">editar</i></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>06/11/2021</td>
-                                                <td>Semana 28, 2021</td>
-                                                <td>Celula-1</td>
-                                                <td>Empaque</td>
-                                                <td>254789</td>
-                                                <td>James Osorio Florez</td>
-                                                <td>6.5</td>
-                                                <td>300</td>
-                                                <td>102</td>
-                                                <td>
-                                                    <button type="button" class="btn text-primary btn-sm shadow-none"><i
-                                                            class="fas fa-edit">editar</i></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>06/11/2021</td>
-                                                <td>Semana 28, 2021</td>
-                                                <td>Celula-1</td>
-                                                <td>Empaque</td>
-                                                <td>254789</td>
-                                                <td>James Osorio Florez</td>
-                                                <td>6.5</td>
-                                                <td>300</td>
-                                                <td>102</td>
-                                                <td>
-                                                    <button type="button" class="btn text-primary btn-sm shadow-none"><i
-                                                            class="fas fa-edit">editar</i></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>06/11/2021</td>
-                                                <td>Semana 28, 2021</td>
-                                                <td>Celula-1</td>
-                                                <td>Empaque</td>
-                                                <td>254789</td>
-                                                <td>James Osorio Florez</td>
-                                                <td>6.5</td>
-                                                <td>300</td>
-                                                <td>102</td>
-                                                <td>
-                                                    <button type="button" class="btn text-primary btn-sm shadow-none"><i
-                                                            class="fas fa-edit">editar</i></button>
-                                                </td>
-                                            </tr>
-                                            
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination justify-content-center">
-                                        <li class="page-item disabled">
-                                            <a class="page-link" href="#" tabindex="-1">Anterior</a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">Siguiente</a>
-                                        </li>
-                                    </ul>
-                                </nav>
+                                                    <!--collapseExampleOne es el id -->
+                                                    <div class="">
+                                                        <button class="btn btn-block  p-0 border bg-light rounded-0 shadow-none px-2 text-dark" data-toggle="collapse" data-target="#collapse<?php echo $Empaque['id_empaque'] ?>" aria-expanded="true" aria-controls="collapse<?php echo $Empaque['id_empaque'] ?>">
+                                                            <div class="row">
+                                                                <div class="col-6 d-flex">
+                                                                    <?php
+
+                                                                    //Cada labor tiene un icono definido
+                                                                    switch ($Empaque['id_labor']) {
+                                                                        case '1':
+                                                                            $laborIcon = "fas fa-box-open";
+                                                                            break;
+                                                                        case '2':
+                                                                            $laborIcon = "fas fa-dolly-flatbed";
+                                                                            break;
+                                                                        case '3':
+                                                                            $laborIcon = "fas fa-tape";
+                                                                            break;
+                                                                        case '4':
+                                                                            $laborIcon = "fas fa-hand-holding-seedling";
+                                                                            break;
+                                                                    }
+
+                                                                    //Si el operario supera el rendimiento promedio...Cambiara el color del fondo
+                                                                    if ($Empaque['Promedio'] > $Empaque['rendimiento']) {
+                                                                        $iconRendimiento = "badge badge-primary";
+                                                                    } else {
+                                                                        $iconRendimiento = "badge badge-secondary";
+                                                                    }
+
+                                                                    ?>
+                                                                    <div class="m-2"><i class="<?php echo $laborIcon ?> text-muted pr-1" style=""></i><?php echo $Empaque['labor'] ?></div>
+                                                                </div>
+                                                                <div class="col d-flex justify-content-end px-0">
+                                                                    <div class="m-2 mr-4"><small class="">ID:</i><?php echo $Empaque['operario'] ?></small></div>
+                                                                    <div class="m-2 mr-4"><small><span class="<?php echo $iconRendimiento ?>" style="width: 45px;"><?php echo $Empaque['Promedio'] ?>%</span></small></div>
+                                                                </div>
+                                                            </div>
+                                                        </button>
+                                                    </div>
+                                                    <div class="collapse border border-top-0 " id="collapse<?php echo $Empaque['id_empaque'] ?>" data-parent="#accordion">
+                                                        <ul class="list-group list-group-flush">
+                                                            <li class="list-group-item lp d-flex justify-content-between">
+                                                                <div class=""><b>Labor </b>: <?php echo $Empaque['posicion'] ?></div>
+                                                                <div class="text-center">
+                                                                    <button class="btn  btn-sm  btn-outline-primary border-0" id="btn-editar-empaque" value="<?php echo $Empaque['id_empaque'] ?>">Editar</button>
+                                                                </div>
+                                                            </li>
+                                                            <li class="list-group-item lp"><b>Codigo </b>: <?php echo $Empaque['operario'] ?></li>
+                                                            <li class="list-group-item lp"><b>Nombre </b>: <?php echo $Empaque['nombre'] ?></li>
+                                                            <li class="list-group-item lp"><b>Fecha </b>: <?php echo $Empaque['fecha'] ?></li>
+                                                            <li class="list-group-item lp"><b>Semana </b>: <?php echo $Empaque['Semana'] ?></li>
+                                                            <li class="list-group-item lp"><b>Tiempo </b>: <?php echo $Empaque['hora'] ?></li>
+                                                            <li class="list-group-item lp"><b>Cajas </b>: <?php echo $Empaque['cajas'] ?></li>
+                                                            <li class="list-group-item lp"><b>Promedio </b>: <?php echo $Empaque['Promedio'] ?></li>
+                                                        </ul>
+                                                    </div>
+                                            <?php
+                                                }
+                                            }
+                                            ?>
+                                        </div>
+                                    </tr>
+
+                                </table>
+
+                                <!-- Pagination -->
+                                <div class="col d-flex justify-content-end" id="respuesta-paginacion"></div>
 
                             </div>
                         </div>
-
                     </div>
 
                 </div>
 
             </div>
+
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
+    <script src="../app/script.js"></script>
 </body>
 
 </html>

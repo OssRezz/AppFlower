@@ -32,7 +32,7 @@ if (empty($Operario) != 1 && empty($Labor) != 1 && empty($Posicion) != 1  && emp
         $Tallos = array_sum($produccion_arreglo);
 
         if ($produccion->insertarProduccion($Operario, $Labor, $Posicion, $Fecha, $Semana, $Tallos, $Hora, $recetas)) {
-            $modal->modalInsert("success", $Operario);
+            $modal->modalInsert("success");
         } else {
             $modal->modalInfo("danger", "Error en la base de datos");
         }
@@ -43,7 +43,7 @@ if (empty($Operario) != 1 && empty($Labor) != 1 && empty($Posicion) != 1  && emp
         $recetas = null;
 
         if ($produccion->insertarProduccion($Operario, $Labor, $Posicion, $Fecha, $Semana, $Tallos, $Hora, $recetas)) {
-            $modal->modalInsert("success", $Operario);
+            $modal->modalInsert("success");
         } else {
             $modal->modalInfo("danger", "Error en la base de datos");
         }

@@ -17,7 +17,7 @@ try {
 
     if (empty($Codigo) != 1 && empty($Nombre) != 1) {
         if ($Operario->ingresarOperarios($Codigo, $Nombre)) {
-            $modal->modalInsert("success", $Nombre);
+            $modal->modalInsert("success");
         } else {
             $modal->modalInfo("danger", "Error en la base de datos");
         }

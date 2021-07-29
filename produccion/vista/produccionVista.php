@@ -6,7 +6,7 @@ $user = new Roles();
 $Labor =  new Produccion();
 $Produccion = new Produccion();
 $date = date('Y-m-d');
-$week = date('\S\e\m\a\n\a\ W, Y');
+// $week = date('\S\e\m\a\n\a\ W, Y');
 $semana = date('Y\-\WW');
 ?>
 
