@@ -363,7 +363,7 @@ class Modal
 
     public function modalActualizarEmpaque($idEmpaque,$fecha,$Semana,$nombre, $operario,$posicion,$idLabor,$laborNombre, $labores,$hora,$cajas)
     {
-        echo "<div class='modal fade' id='modal-empaque' tabindex='-1' style='display: block;' data-keyboard='false' data-backdrop='static'>";
+        echo "<div class='modal fade' id='modal-empaque' tabindex='-1' style='display: block;' data-keyboard='false'>";
         echo    "<div class='modal-dialog modal-dialog-centered modal-lg'>";
         echo        "<div class='modal-content'>";
         echo            "<div class='modal-header'>";
@@ -429,7 +429,7 @@ class Modal
 
         echo                    "<div class='form-group col-sm-12 col-md-12 d-flex justify-content-center mb-3'>";
         echo                        "<div class='form-group col-sm-12 col-md-5 mb-0'>";
-        echo                            "<input type='button' class='btn btn-outline-dark  btn-block' data-dismiss='modal' value='Regresar'>";
+        echo                            "<input type='button' class='btn btn-outline-dark  btn-block' data-dismiss='modal' id='regresar' value='Regresar'>";
         echo                        "</div>";
         echo                        "<div class='form-group col-sm-12 col-md-5 mb-0'>";
         echo                            "<input type='button' class='btn btn-outline-primary btn-block' id='btn-update-empaque' value='Actualizar'>";
@@ -443,9 +443,11 @@ class Modal
         echo    "</div>";
         echo "</div>";
         echo "<script>$('#modal-empaque').modal('show')</script>";
+        echo "<script>$('#cerrar').click(function(){location.reload()});</script>";
+        echo "<script>$('#regresar').click(function(){location.reload()});</script>";
+
     }
     
 }
-
 
 ?>
