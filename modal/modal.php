@@ -462,43 +462,43 @@ class Modal
         echo                 "<form class='p-1'>";
         echo                    "<div class='form-row'>";
         echo                    "<div class='form-group col-sm-12 col-md-6'>";
-        echo                        "<label for='idEmpaque'>Fecha</label>";
-        echo                        "<input type='hidden' class='form-control' id='idEmpaque' value='$id_seco'>";
-        echo                        "<input type='date' class='form-control' id='fechaEmpaque' value='$fecha'>";
+        echo                        "<label for='idSeco'>Fecha</label>";
+        echo                        "<input type='hidden' class='form-control' id='idSeco' value='$id_seco'>";
+        echo                        "<input type='date' class='form-control' id='fechaMaterial' value='$fecha'>";
         echo                    "</div>";
         echo                    "<div class='form-group col-sm-12 col-md-6'>";
-        echo                        "<label for='semanaEmpaque'>Semana</label>";
-        echo                        "<input type='week' class='form-control' id='semanaEmpaque' value='$Semana'>";
+        echo                        "<label for='semanaMaterial'>Semana</label>";
+        echo                        "<input type='week' class='form-control' id='semanaMaterial' value='$Semana'>";
         echo                    "</div>";
         echo                    "<div class='form-group col-sm-12 col-md-6'>";
-        echo                        "<label for='nombreEmpaque'>Nombre</label>";
-        echo                        "<input type='text' class='form-control' id='nombreEmpaque' value='$nombre' disabled>";
+        echo                        "<label for='nombreMaterial'>Nombre</label>";
+        echo                        "<input type='text' class='form-control' id='nombreMaterial' value='$nombre' disabled>";
         echo                    "</div>";
         echo                    "<div class='form-group col-sm-12 col-md-6'>";
-        echo                        "<label for='operarioEmpaque'>Codigo</label>";
-        echo                        "<input type='number' class='form-control' id='operarioEmpaque' value='$operario'>";
+        echo                        "<label for='operarioMaterial'>Codigo</label>";
+        echo                        "<input type='number' class='form-control' id='operarioMaterial' value='$operario'>";
         echo                    "</div>";
 
         echo                    "<div class='form-group col-sm-12 col-md-12'>";
-        echo                        "<label for='laborEmpaque'>Labor</label>";
-        echo                        "<select name='laborEmpaque' id='laborEmpaque' class='form-control'>";
+        echo                        "<label for='laborMaterial'>Labor</label>";
+        echo                        "<select name='laborMaterial' id='laborMaterial' class='form-control'>";
         echo                        "<option value='$idLabor' selected>$laborNombre</option>";
                                     foreach ($labores as $labores) {
                                             $id_labor =  $labores['id_labor'];
-                                            $laborEmpaque =  $labores['labor'];
-        echo                               "<option value='$id_labor'>$laborEmpaque</option>";
+                                            $laborMaterial =  $labores['labor'];
+        echo                               "<option value='$id_labor'>$laborMaterial</option>";
                                     }
         echo                        "</select>";
         echo                    "</div>";
 
         echo                    "<div class='form-group col-sm-12 col-md-6'>";
-        echo                                "<label for='horaEmpaque'>Horas Trabajadas</label>";
-        echo                                "<input type='number' class='form-control' id='horaEmpaque' value='$hora'>";
+        echo                                "<label for='horaMaterial'>Horas Trabajadas</label>";
+        echo                                "<input type='number' class='form-control' id='horaMaterial' value='$hora'>";
         echo                    "</div>";
 
         echo                    "<div class='form-group col-sm-12 col-md-6 mb-4'>";
-        echo                                "<label for='cajasEmpaque' id='tallosLabelProduccion'>Cajas</label>";
-        echo                                "<input type='number' class='form-control' id='cajasEmpaque' value='$cantidad'>";
+        echo                                "<label for='cajasMaterial' id='tallosLabelProduccion'>Cajas</label>";
+        echo                                "<input type='number' class='form-control' id='cantidadMaterial' value='$cantidad'>";
         echo                    "</div>";
 
 
@@ -507,7 +507,7 @@ class Modal
         echo                            "<input type='button' class='btn btn-outline-dark  btn-block' data-dismiss='modal' id='regresar' value='Regresar'>";
         echo                        "</div>";
         echo                        "<div class='form-group col-sm-12 col-md-5 mb-0'>";
-        echo                            "<input type='button' class='btn btn-outline-primary btn-block' id='btn-update-empaque' value='Actualizar'>";
+        echo                            "<input type='button' class='btn btn-outline-primary btn-block' id='btn-update-material' value='Actualizar'>";
         echo                        "</div>";
         echo                    "</div>";
         echo                    "</div>";

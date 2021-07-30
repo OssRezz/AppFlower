@@ -91,7 +91,31 @@ $(document).ready(function () {
         }
     });
 
-
+    //Boton actualizar usuario
+    $(document).click((e) => {
+        const accion = e.target.id;
+        if (e.target.id === "btn-update-material") {
+            const idSeco = $('#idSeco').val();
+            const operarioMaterial = $('#operarioMaterial').val();
+            const fechaMaterial = $('#fechaMaterial').val();
+            const semanaMaterial = $('#semanaMaterial').val();
+            const laborMaterial = $('#laborMaterial').val();
+            const cantidadMaterial = $('#cantidadMaterial').val();
+            const horaMaterial = $('#horaMaterial').val();
+            $.post('../control/ctrlActualizarMaterial.php', {
+                accion: accion,
+                idSeco: idSeco,
+                operarioMaterial: operarioMaterial,
+                fechaMaterial: fechaMaterial,
+                semanaMaterial: semanaMaterial,
+                laborMaterial: laborMaterial,
+                cantidadMaterial: cantidadMaterial,
+                horaMaterial: horaMaterial
+            }, (responseText) => {
+                $('#respuesta').html(responseText);
+            });
+        }
+    });
 
 
 });
