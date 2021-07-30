@@ -68,6 +68,23 @@ class materialSeco extends Conexion
         }
     }
 
+    public function actualizarMaterialSeco($idSeco,$Operario, $Labor, $Semana, $Fecha,  $Cantidad, $Hora)
+    {
+        $statement = $this->db->prepare("UPDATE `tbl_materialseco` SET `id_seco`=:id_seco,`operario`=:operario,`labor`=:labor,`semana`=:semana,`fecha`=:fecha,`cantidad`=:cantidad,`hora`=:hora WHERE id_seco= :id_seco");
+        $statement->bindParam(':id_seco', $idSeco);
+        $statement->bindParam(':operario', $Operario);
+        $statement->bindParam(':labor', $Labor);
+        $statement->bindParam(':semana', $Semana);
+        $statement->bindParam(':fecha', $Fecha);
+        $statement->bindParam(':cantidad', $Cantidad);
+        $statement->bindParam(':hora', $Hora);
+        if ($statement->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function listarMateriaTable($codigo)
     {
         $listaMaterial = null;

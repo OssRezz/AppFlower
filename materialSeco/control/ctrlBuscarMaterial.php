@@ -57,7 +57,7 @@ if ($accion === "btn-buscar-material" && empty($codigo) != 1) {
             echo                             "<li class='list-group-item lp d-flex justify-content-between'>";
             echo                                 "<div><b>Labor </b>: $laborNombre </div>";
             echo                                     "<div class='text-center'>";
-            echo                                         "<button class='btn btn-sm btn-outline-primary border-0 lp' id='btn-editar-empaque' value='$id_seco'>Editar</button>";
+            echo                                         "<button class='btn btn-sm btn-outline-primary border-0 lp' id='btn-editar-materialSeco' value='$id_seco'>Editar</button>";
             echo                                     "</div>";
             echo                             "</li>";
             echo                              "<li class='list-group-item lp'><b>Codigo </b>: $operario</li>";
@@ -65,7 +65,7 @@ if ($accion === "btn-buscar-material" && empty($codigo) != 1) {
             echo                              "<li class='list-group-item lp'><b>Fecha </b>: $fecha</li>";
             echo                              "<li class='list-group-item lp'><b>Semana </b>:  $Semana</li>";
             echo                              "<li class='list-group-item lp'><b>Tiempo </b>: $hora</li>";
-            echo                              "<li class='list-group-item lp'><b>Tallos </b>:  $cantidad</li>";
+            echo                              "<li class='list-group-item lp'><b>Cantidad </b>:  $cantidad</li>";
             echo                              "<li class='list-group-item lp'><b>Rendimiento </b>:  $promedio</li>";
             echo                           "</ul>";
             echo                           "</div>";
