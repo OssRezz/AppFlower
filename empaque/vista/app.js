@@ -64,7 +64,7 @@ $(document).ready(function () {
         });
     });
 
-    //Muestra la modal con la informacion del operario
+    //Muestra la modal con la informacion de los empaques
     $(document).click(function (e) {
         const accion = e.target.id;
         if (accion === "btn-editar-empaque") {
@@ -79,7 +79,7 @@ $(document).ready(function () {
     });
 
     //Boton actualizar usuario
-    $(document).click(function (e) {
+    $(document).click( (e) => {
         const accion = e.target.id;
         if (e.target.id === "btn-update-empaque") {
             const idEmpaque = $('#idEmpaque').val();
@@ -100,7 +100,7 @@ $(document).ready(function () {
                 laborEmpaque: laborEmpaque,
                 cajasEmpaque: cajasEmpaque,
                 horaEmpaque: horaEmpaque
-            }, function (responseText) {
+            },  (responseText) => {
                 $('#respuesta').html(responseText);
             });
         }
