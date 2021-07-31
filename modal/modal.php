@@ -595,6 +595,80 @@ class Modal
         echo "<script>$('#cerrar').click(function(){location.reload()});</script>";
         echo "<script>$('#regresar').click(function(){location.reload()});</script>";
     }
+
+    public function modalActualiarPicking($id_Picking,$fecha,$Semana,$nombre, $operario,$idLabor,$laborNombre, $labores,$horas,$tallos)
+    {
+        echo "<div class='modal fade' id='modal-picking' tabindex='-1' style='display: block;' data-keyboard='false' data-backdrop='static'>";
+        echo    "<div class='modal-dialog modal-dialog-centered modal-lg'>";
+        echo        "<div class='modal-content'>";
+        echo            "<div class='modal-header'>";
+        echo                "<h6 class='modal-title text-primary'><i class='far fa-edit'></i> Actualizar picking</h6>";
+        echo            "<button type='button' class='close' id='cerrar' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
+        echo            "</div>";
+        echo            "<div class='modal-body p-2'>";
+
+        echo                 "<form class='p-1'>";
+        echo                    "<div class='form-row'>";
+        echo                    "<div class='form-group col-sm-12 col-md-6'>";
+        echo                        "<label for='idPicking'>Fecha</label>";
+        echo                        "<input type='hidden' class='form-control' id='idPicking' value='$id_Picking'>";
+        echo                        "<input type='date' class='form-control' id='fechaPicking' value='$fecha'>";
+        echo                    "</div>";
+        echo                    "<div class='form-group col-sm-12 col-md-6'>";
+        echo                        "<label for='semanaPicking'>Semana</label>";
+        echo                        "<input type='week' class='form-control' id='semanaPicking' value='$Semana'>";
+        echo                    "</div>";
+        echo                    "<div class='form-group col-sm-12 col-md-6'>";
+        echo                        "<label for='nombrePicking'>Nombre</label>";
+        echo                        "<input type='text' class='form-control' id='nombrePicking' value='$nombre' disabled>";
+        echo                    "</div>";
+        echo                    "<div class='form-group col-sm-12 col-md-6'>";
+        echo                        "<label for='operarioPicking'>Codigo</label>";
+        echo                        "<input type='number' class='form-control' id='operarioPicking' value='$operario'>";
+        echo                    "</div>";
+
+        echo                    "<div class='form-group col-sm-12 col-md-12'>";
+        echo                        "<label for='laborPicking'>Labor</label>";
+        echo                        "<select name='laborPicking' id='laborPicking' class='form-control'>";
+        echo                        "<option value='$idLabor' selected>$laborNombre</option>";
+                                    foreach ($labores as $labores) {
+                                            $id_labor =  $labores['id_labor'];
+                                            $laborPicking =  $labores['labor'];
+        echo                               "<option value='$id_labor'>$laborPicking</option>";
+                                    }
+        echo                        "</select>";
+        echo                    "</div>";
+
+        echo                    "<div class='form-group col-sm-12 col-md-6'>";
+        echo                                "<label for='horaPicking'>Horas Trabajadas</label>";
+        echo                                "<input type='number' class='form-control' id='horasPicking' value='$horas'>";
+        echo                    "</div>";
+
+        echo                    "<div class='form-group col-sm-12 col-md-6 mb-4'>";
+        echo                                "<label for='cajasPicking' id='tallosLabelProduccion'>Tallos</label>";
+        echo                                "<input type='number' class='form-control' id='tallosPicking' value='$tallos'>";
+        echo                    "</div>";
+
+
+        echo                    "<div class='form-group col-sm-12 col-md-12 d-flex justify-content-center mb-3'>";
+        echo                        "<div class='form-group col-sm-12 col-md-5 mb-0'>";
+        echo                            "<input type='button' class='btn btn-outline-dark  btn-block' data-dismiss='modal' id='regresar' value='Regresar'>";
+        echo                        "</div>";
+        echo                        "<div class='form-group col-sm-12 col-md-5 mb-0'>";
+        echo                            "<input type='button' class='btn btn-outline-primary btn-block' id='btn-update-picking' value='Actualizar'>";
+        echo                        "</div>";
+        echo                    "</div>";
+        echo                    "</div>";
+        echo                 "</form>";
+
+        echo            "</div>";
+        echo        "</div>";
+        echo    "</div>";
+        echo "</div>";
+        echo "<script>$('#modal-picking').modal('show')</script>";
+        echo "<script>$('#cerrar').click(function(){location.reload()});</script>";
+        echo "<script>$('#regresar').click(function(){location.reload()});</script>";
+    }
     
 }
 
