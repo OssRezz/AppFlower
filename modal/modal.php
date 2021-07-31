@@ -367,7 +367,7 @@ class Modal
         echo    "<div class='modal-dialog modal-dialog-centered modal-lg'>";
         echo        "<div class='modal-content'>";
         echo            "<div class='modal-header'>";
-        echo                "<h6 class='modal-title text-primary'><i class='far fa-edit'></i> Actualizar producción</h6>";
+        echo                "<h6 class='modal-title text-primary'><i class='far fa-edit'></i> Actualizar empaque</h6>";
         echo            "<button type='button' class='close' id='cerrar' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
         echo            "</div>";
         echo            "<div class='modal-body p-2'>";
@@ -454,7 +454,7 @@ class Modal
         echo    "<div class='modal-dialog modal-dialog-centered modal-lg'>";
         echo        "<div class='modal-content'>";
         echo            "<div class='modal-header'>";
-        echo                "<h6 class='modal-title text-primary'><i class='far fa-edit'></i> Actualizar producción</h6>";
+        echo                "<h6 class='modal-title text-primary'><i class='far fa-edit'></i> Actualizar material seco</h6>";
         echo            "<button type='button' class='close' id='cerrar' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
         echo            "</div>";
         echo            "<div class='modal-body p-2'>";
@@ -518,6 +518,80 @@ class Modal
         echo    "</div>";
         echo "</div>";
         echo "<script>$('#modal-material').modal('show')</script>";
+        echo "<script>$('#cerrar').click(function(){location.reload()});</script>";
+        echo "<script>$('#regresar').click(function(){location.reload()});</script>";
+    }
+
+    public function modalActualiarTinturado($id_tinturado,$fecha,$Semana,$nombre, $operario,$idLabor,$laborNombre, $labores,$horas,$tallos)
+    {
+        echo "<div class='modal fade' id='modal-tinturado' tabindex='-1' style='display: block;' data-keyboard='false' data-backdrop='static'>";
+        echo    "<div class='modal-dialog modal-dialog-centered modal-lg'>";
+        echo        "<div class='modal-content'>";
+        echo            "<div class='modal-header'>";
+        echo                "<h6 class='modal-title text-primary'><i class='far fa-edit'></i> Actualizar tinturados</h6>";
+        echo            "<button type='button' class='close' id='cerrar' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
+        echo            "</div>";
+        echo            "<div class='modal-body p-2'>";
+
+        echo                 "<form class='p-1'>";
+        echo                    "<div class='form-row'>";
+        echo                    "<div class='form-group col-sm-12 col-md-6'>";
+        echo                        "<label for='idTinturado'>Fecha</label>";
+        echo                        "<input type='hidden' class='form-control' id='idTinturado' value='$id_tinturado'>";
+        echo                        "<input type='date' class='form-control' id='fechaTinturado' value='$fecha'>";
+        echo                    "</div>";
+        echo                    "<div class='form-group col-sm-12 col-md-6'>";
+        echo                        "<label for='semanaTinturado'>Semana</label>";
+        echo                        "<input type='week' class='form-control' id='semanaTinturado' value='$Semana'>";
+        echo                    "</div>";
+        echo                    "<div class='form-group col-sm-12 col-md-6'>";
+        echo                        "<label for='nombreTinturado'>Nombre</label>";
+        echo                        "<input type='text' class='form-control' id='nombreTinturado' value='$nombre' disabled>";
+        echo                    "</div>";
+        echo                    "<div class='form-group col-sm-12 col-md-6'>";
+        echo                        "<label for='operarioTinturado'>Codigo</label>";
+        echo                        "<input type='number' class='form-control' id='operarioTinturado' value='$operario'>";
+        echo                    "</div>";
+
+        echo                    "<div class='form-group col-sm-12 col-md-12'>";
+        echo                        "<label for='laborTinturado'>Labor</label>";
+        echo                        "<select name='laborTinturado' id='laborTinturado' class='form-control'>";
+        echo                        "<option value='$idLabor' selected>$laborNombre</option>";
+                                    foreach ($labores as $labores) {
+                                            $id_labor =  $labores['id_labor'];
+                                            $laborTinturado =  $labores['labor'];
+        echo                               "<option value='$id_labor'>$laborTinturado</option>";
+                                    }
+        echo                        "</select>";
+        echo                    "</div>";
+
+        echo                    "<div class='form-group col-sm-12 col-md-6'>";
+        echo                                "<label for='horaTinturado'>Horas Trabajadas</label>";
+        echo                                "<input type='number' class='form-control' id='horasTinturado' value='$horas'>";
+        echo                    "</div>";
+
+        echo                    "<div class='form-group col-sm-12 col-md-6 mb-4'>";
+        echo                                "<label for='cajasTinturado' id='tallosLabelProduccion'>Tallos</label>";
+        echo                                "<input type='number' class='form-control' id='tallosTinturado' value='$tallos'>";
+        echo                    "</div>";
+
+
+        echo                    "<div class='form-group col-sm-12 col-md-12 d-flex justify-content-center mb-3'>";
+        echo                        "<div class='form-group col-sm-12 col-md-5 mb-0'>";
+        echo                            "<input type='button' class='btn btn-outline-dark  btn-block' data-dismiss='modal' id='regresar' value='Regresar'>";
+        echo                        "</div>";
+        echo                        "<div class='form-group col-sm-12 col-md-5 mb-0'>";
+        echo                            "<input type='button' class='btn btn-outline-primary btn-block' id='btn-update-tinturado' value='Actualizar'>";
+        echo                        "</div>";
+        echo                    "</div>";
+        echo                    "</div>";
+        echo                 "</form>";
+
+        echo            "</div>";
+        echo        "</div>";
+        echo    "</div>";
+        echo "</div>";
+        echo "<script>$('#modal-tinturado').modal('show')</script>";
         echo "<script>$('#cerrar').click(function(){location.reload()});</script>";
         echo "<script>$('#regresar').click(function(){location.reload()});</script>";
     }

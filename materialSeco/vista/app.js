@@ -12,7 +12,7 @@ $(document).ready(function () {
         $('#respuesta-menu').html(responseText);
     });
 
-    //Carga la paginación de la vista de operarios
+    //Carga la paginación de la vista de material
     $.post('../control/ctrlPaginacion.php', {
         limit: limit,
         pagina: pagina

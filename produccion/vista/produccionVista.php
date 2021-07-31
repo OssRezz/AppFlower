@@ -80,7 +80,7 @@ $semana = date('Y\-\WW');
                             </div>
                         </div>
 
-                        <div class="card mb-3">
+                        <div class="card">
                             <div class="card-header text-primary"><i class="fas fa-plus-circle "></i> Formulario de
                                 producción</div>
 
