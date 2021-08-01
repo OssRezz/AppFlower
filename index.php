@@ -1,3 +1,8 @@
+<?php
+$date = date('Y-m-d');
+$semana = date('Y\-\WW');
+?>
+
 <!DOCTYPE html>
 <html>
 
