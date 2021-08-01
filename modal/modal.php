@@ -758,7 +758,7 @@ class Modal
         echo "<script>$('#regresar').click(function(){location.reload()});</script>";
     }
 
-    public function modalActualiarTmEmpaque($id_tmproduccioon, $fecha, $Semana, $nombre, $operario, $nombreCausa, $causa, $causas,$celula, $horas,$minutos)
+    public function modalActualiarTmEmpaque($id_tmproduccioon, $fecha, $Semana, $nombre, $operario, $nombreCausa, $causa, $causas, $celula, $horas, $minutos)
     {
         echo "<div class='modal fade' id='modal-tmEmpaque' tabindex='-1' style='display: block;' data-keyboard='false' data-backdrop='static'>";
         echo    "<div class='modal-dialog modal-dialog-centered modal-lg'>";
@@ -796,7 +796,7 @@ class Modal
         foreach ($causas as $causas) {
             $id_causa =  $causas['id_causa'];
             $laborCausa =  $causas['causa'];
-        echo                                "<option value='$id_causa'>$laborCausa</option>";
+            echo                                "<option value='$id_causa'>$laborCausa</option>";
         }
         echo                        "</select>";
         echo                    "</div>";
@@ -842,4 +842,87 @@ class Modal
         echo "<script>$('#cerrar').click(function(){location.reload()});</script>";
         echo "<script>$('#regresar').click(function(){location.reload()});</script>";
     }
+
+    public function modalActualiarTmGeneral($id_general, $fecha, $Semana, $nombre, $operario, $laborNombre, $idLabor, $labores, $nombreCausa, $causa, $causas, $tiempo)
+    {
+        echo "<div class='modal fade' id='modal-tmGeneral' tabindex='-1' style='display: block;' data-keyboard='false' data-backdrop='static'>";
+        echo    "<div class='modal-dialog modal-dialog-centered modal-lg'>";
+        echo        "<div class='modal-content'>";
+        echo            "<div class='modal-header'>";
+        echo                "<h6 class='modal-title text-primary'><i class='far fa-edit'></i> Actualizar tiempo muerto</h6>";
+        echo            "<button type='button' class='close' id='cerrar' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
+        echo            "</div>";
+        echo            "<div class='modal-body p-2'>";
+
+        echo                 "<form class='p-1'>";
+        echo                    "<div class='form-row'>";
+        echo                    "<div class='form-group col-sm-12 col-md-6'>";
+        echo                        "<label for='idTmGeneral'>Fecha</label>";
+        echo                        "<input type='hidden' class='form-control' id='idTmGeneral' value='$id_general'>";
+        echo                        "<input type='date' class='form-control' id='fechaTmGeneral' value='$fecha'>";
+        echo                    "</div>";
+        echo                    "<div class='form-group col-sm-12 col-md-6'>";
+        echo                        "<label for='semanaTmGeneral'>Semana</label>";
+        echo                        "<input type='week' class='form-control' id='semanaTmGeneral' value='$Semana'>";
+        echo                    "</div>";
+        echo                    "<div class='form-group col-sm-12 col-md-6'>";
+        echo                        "<label for='nombreTmGeneral'>Nombre</label>";
+        echo                        "<input type='text' class='form-control' id='nombreTmGeneral' value='$nombre' disabled>";
+        echo                    "</div>";
+        echo                    "<div class='form-group col-sm-12 col-md-6'>";
+        echo                        "<label for='operarioTmGeneral'>Codigo</label>";
+        echo                        "<input type='number' class='form-control' id='operarioTmGeneral' value='$operario'>";
+        echo                    "</div>";
+
+        echo                    "<div class='form-group col-sm-12 col-md-12'>";
+        echo                        "<label for='laborTmGeneral'>Labor</label>";
+        echo                        "<select name='laborTmGeneral' id='laborTmGeneral' class='form-control'>";
+        echo                        "<option value='$idLabor' selected>$laborNombre</option>";
+        foreach ($labores as $labores) {
+            $id_labor =  $labores['id_labor'];
+            $laborTmGeneral =  $labores['labor'];
+            echo                               "<option value='$id_labor'>$laborTmGeneral</option>";
+        }
+        echo                        "</select>";
+        echo                    "</div>";
+
+        echo                    "<div class='form-group col-sm-12 col-md-12'>";
+        echo                        "<label for='causaTmGeneral'>Labor</label>";
+        echo                        "<select name='causaTmGeneral' id='causaTmGeneral' class='form-control'>";
+        echo                        "<option value='$causa' selected>$nombreCausa</option>";
+        foreach ($causas as $causas) {
+            $id_causa =  $causas['id_causa'];
+            $CausaNombre =  $causas['causa'];
+            echo                               "<option value='$id_causa'>$CausaNombre</option>";
+        }
+        echo                        "</select>";
+        echo                    "</div>";
+
+        echo                    "<div class='form-group col-sm-12 col-md-12 mb-4'>";
+        echo                                "<label for='tiempoTmGeneral'>Horas Trabajadas</label>";
+        echo                                "<input type='number' class='form-control' id='tiempoTmGeneral' value='$tiempo'>";
+        echo                    "</div>";
+
+        echo                    "<div class='form-group col-sm-12 col-md-12 d-flex justify-content-center mb-3'>";
+        echo                        "<div class='form-group col-sm-12 col-md-5 mb-0'>";
+        echo                            "<input type='button' class='btn btn-outline-dark  btn-block' data-dismiss='modal' id='regresar' value='Regresar'>";
+        echo                        "</div>";
+        echo                        "<div class='form-group col-sm-12 col-md-5 mb-0'>";
+        echo                            "<input type='button' class='btn btn-outline-primary btn-block' id='btn-update-tmGeneral' value='Actualizar'>";
+        echo                        "</div>";
+        echo                    "</div>";
+        echo                    "</div>";
+        echo                 "</form>";
+
+        echo            "</div>";
+        echo        "</div>";
+        echo    "</div>";
+        echo "</div>";
+        echo "<script>$('#modal-tmGeneral').modal('show')</script>";
+        echo "<script>$('#cerrar').click(function(){location.reload()});</script>";
+        echo "<script>$('#regresar').click(function(){location.reload()});</script>";
+    }
 }
+
+
+?>
