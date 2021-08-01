@@ -1,9 +1,9 @@
 $(document).ready(function () {
-    var perfil = $("#perfil").val();
-    var title = $(document).attr('title');
-    var page = $(document).attr('page');
-    var limit = $("#limit").val();
-    var pagina = $("#pagina").val();
+    const perfil = $("#perfil").val();
+    const title = $(document).attr('title');
+    const page = $(document).attr('page');
+    const limit = $("#limit").val();
+    const pagina = $("#pagina").val();
 
     $.post('../../roles/control/ctrlMenuLateral.php', {
         perfil: perfil,
@@ -21,7 +21,7 @@ $(document).ready(function () {
     });
 
     $("#labor").change(function () {
-        var value = $(this).val();
+        const value = $(this).val();
         if (value != 1) {
             $("#recetas").hide();
             $("#recetasLabel").hide();
@@ -42,7 +42,7 @@ $(document).ready(function () {
 
     //Modal Para salir de la sesión ctrlModalOut
     $("#btn-logOut").click(function (e) {
-        var numero = 1;
+        const numero = 1;
         $.post('../../roles/control/ctrlModalOut.php', {
             numero: numero
         }, function (responseText) {
@@ -52,7 +52,7 @@ $(document).ready(function () {
 
     //Cerrar la sesion, volver al index. ctrlSesiónDestroy
     $(document).click(function (e) {
-        var accion = e.target.id;
+        const accion = e.target.id;
         if (accion === "btn-sesionOut") {
             $.post('../../roles/control/ctrlSesionDestroy.php', {
                 accion: accion
@@ -64,14 +64,14 @@ $(document).ready(function () {
 
     //Enviar los datos de la vista al control de la inserción 
     $("#ingresar-produccion").click(function (e) {
-        var operario = $("#operario").val();
-        var labor = $("#labor").val();
-        var posicion = $("#posicion").val();
-        var fecha = $("#fecha").val();
-        var semana = $("#semana").val();
-        var tallos = $("#tallos").val();
-        var hora = $("#hora").val();
-        var recetas = $("#recetas").val();
+        const operario = $("#operario").val();
+        const labor = $("#labor").val();
+        const posicion = $("#posicion").val();
+        const fecha = $("#fecha").val();
+        const semana = $("#semana").val();
+        const tallos = $("#tallos").val();
+        const hora = $("#hora").val();
+        const recetas = $("#recetas").val();
         $.post('../control/ctrlIngresarProduccion.php', {
             operario: operario,
             labor: labor,
@@ -89,9 +89,9 @@ $(document).ready(function () {
 
     //Responde la modal con la información de la produccion
     $(document).click(function (e) {
-        var accion = e.target.id;
+        const accion = e.target.id;
         if (accion === "btn-buscar-produccion") {
-            var idProduccion = $('#BuscarProduccion').val();
+            const idProduccion = $('#BuscarProduccion').val();
             $.post('../control/ctrlBuscarProduccion.php', {
                 accion: accion,
                 idProduccion: idProduccion
@@ -103,9 +103,9 @@ $(document).ready(function () {
 
     //Muestra la modal con la informacion del usuario
     $(document).click(function (e) {
-        var accion = e.target.id;
+        const accion = e.target.id;
         if (accion === "btn-editar-produccion") {
-            var idProduccion = e.target.value;
+            const idProduccion = e.target.value;
             $.post('../control/ctrlModalActualizar.php', {
                 accion: accion,
                 idProduccion: idProduccion
@@ -117,7 +117,7 @@ $(document).ready(function () {
 
     $(document).click(function (e) {
         $("#laborProduccion").change(function () {
-            var value = $(this).val();
+            const value = $(this).val();
             if (value != 1) {
                 $("#recetasProduccion").hide();
                 $("#recetasLabelProduccion").hide();

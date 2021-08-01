@@ -670,6 +670,94 @@ class Modal
         echo "<script>$('#regresar').click(function(){location.reload()});</script>";
     }
     
-}
+    public function modalActualiarTmProduccion($id_tmproduccioon,$fecha,$Semana,$nombre, $operario, $laborNombre,$idLabor, $labores,$posicion,$nombreCausa,$causa,$causas,$tiempo)
+    {
+        echo "<div class='modal fade' id='modal-tmProduccion' tabindex='-1' style='display: block;' data-keyboard='false' data-backdrop='static'>";
+        echo    "<div class='modal-dialog modal-dialog-centered modal-lg'>";
+        echo        "<div class='modal-content'>";
+        echo            "<div class='modal-header'>";
+        echo                "<h6 class='modal-title text-primary'><i class='far fa-edit'></i> Actualizar tiempo muerto</h6>";
+        echo            "<button type='button' class='close' id='cerrar' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
+        echo            "</div>";
+        echo            "<div class='modal-body p-2'>";
 
-?>
+        echo                 "<form class='p-1'>";
+        echo                    "<div class='form-row'>";
+        echo                    "<div class='form-group col-sm-12 col-md-6'>";
+        echo                        "<label for='idTmProduccion'>Fecha</label>";
+        echo                        "<input type='hidden' class='form-control' id='idTmProduccion' value='$id_tmproduccioon'>";
+        echo                        "<input type='date' class='form-control' id='fechaTmProduccion' value='$fecha'>";
+        echo                    "</div>";
+        echo                    "<div class='form-group col-sm-12 col-md-6'>";
+        echo                        "<label for='semanaTmProduccion'>Semana</label>";
+        echo                        "<input type='week' class='form-control' id='semanaTmProduccion' value='$Semana'>";
+        echo                    "</div>";
+        echo                    "<div class='form-group col-sm-12 col-md-6'>";
+        echo                        "<label for='nombreTmProduccion'>Nombre</label>";
+        echo                        "<input type='text' class='form-control' id='nombreTmProduccion' value='$nombre' disabled>";
+        echo                    "</div>";
+        echo                    "<div class='form-group col-sm-12 col-md-6'>";
+        echo                        "<label for='operarioTmProduccion'>Codigo</label>";
+        echo                        "<input type='number' class='form-control' id='operarioTmProduccion' value='$operario'>";
+        echo                    "</div>";
+
+        echo                    "<div class='form-group col-sm-12 col-md-6'>";
+        echo                        "<label for='laborTmProduccion'>Labor</label>";
+        echo                        "<select name='laborTmProduccion' id='laborTmProduccion' class='form-control'>";
+        echo                        "<option value='$idLabor' selected>$laborNombre</option>";
+                                    foreach ($labores as $labores) {
+                                            $id_labor =  $labores['id_labor'];
+                                            $laborTmProduccion =  $labores['labor'];
+        echo                               "<option value='$id_labor'>$laborTmProduccion</option>";
+                                    }
+        echo                        "</select>";
+        echo                    "</div>";
+
+        echo                    "<div class='form-group col-sm-12 col-md-6'>";
+        echo                        "<label for='posicionTmProduccion'>Posicion</label>";
+        echo                        "<select name='posicionTmProduccion' id='posicionTmProduccion' class='form-control'>";
+        echo                        "<option value='$posicion' selected>$posicion</option>";
+        for ($i = 1; $i < 17; $i++) {
+        echo                        "<option value='$i'>$i</option>";
+        }
+        echo                        "</select>";
+        echo                    "</div>";
+
+        echo                    "<div class='form-group col-sm-12 col-md-12'>";
+        echo                        "<label for='causaTmProduccion'>Labor</label>";
+        echo                        "<select name='causaTmProduccion' id='causaTmProduccion' class='form-control'>";
+        echo                        "<option value='$causa' selected>$nombreCausa</option>";
+                                    foreach ($causas as $causas) {
+                                            $id_causa =  $causas['id_causa'];
+                                            $laborCausa =  $causas['causa'];
+        echo                               "<option value='$id_causa'>$laborCausa</option>";
+                                    }
+        echo                        "</select>";
+        echo                    "</div>";
+
+        echo                    "<div class='form-group col-sm-12 col-md-12 mb-4'>";
+        echo                                "<label for='tiempoTmProduccion'>Horas Trabajadas</label>";
+        echo                                "<input type='number' class='form-control' id='tiempoTmProduccion' value='$tiempo'>";
+        echo                    "</div>";
+
+        echo                    "<div class='form-group col-sm-12 col-md-12 d-flex justify-content-center mb-3'>";
+        echo                        "<div class='form-group col-sm-12 col-md-5 mb-0'>";
+        echo                            "<input type='button' class='btn btn-outline-dark  btn-block' data-dismiss='modal' id='regresar' value='Regresar'>";
+        echo                        "</div>";
+        echo                        "<div class='form-group col-sm-12 col-md-5 mb-0'>";
+        echo                            "<input type='button' class='btn btn-outline-primary btn-block' id='btn-update-tmProduccion' value='Actualizar'>";
+        echo                        "</div>";
+        echo                    "</div>";
+        echo                    "</div>";
+        echo                 "</form>";
+
+        echo            "</div>";
+        echo        "</div>";
+        echo    "</div>";
+        echo "</div>";
+        echo "<script>$('#modal-tmProduccion').modal('show')</script>";
+        echo "<script>$('#cerrar').click(function(){location.reload()});</script>";
+        echo "<script>$('#regresar').click(function(){location.reload()});</script>";
+    }
+    
+}

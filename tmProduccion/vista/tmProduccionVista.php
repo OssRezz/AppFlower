@@ -1,7 +1,11 @@
 <?php
 require_once('../../Roles/Modelo/ModeloRoles.php');
+require '../Modelo/ModeloTmProduccion.php';
 $user = new Roles();
+$TmProduccion = new tmProduccion();
 
+$date = date('Y-m-d');
+$semana = date('Y\-\WW');
 ?>
 
 <!DOCTYPE html>
@@ -15,6 +19,7 @@ $user = new Roles();
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="app.js"></script>
+    <link rel="stylesheet" href="../../css/style.css">
     <title>Tiempo Produccion</title>
 </head>
 
@@ -23,7 +28,7 @@ $user = new Roles();
     <div class="container-fluid">
         <div id="respuesta"></div>
         <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-3 col-xl-2 pb-2 bg-light mb-sm-4 mb-md-0">
+            <div class="col-sm-12 col-md-12 col-lg-3 col-xl-2 pb-2 bg-light mb-sm-4 mb-md-0 lateralMenu">
 
                 <div class="col" style="height: 20px;"></div>
 
@@ -31,21 +36,21 @@ $user = new Roles();
 
             </div>
 
-            <div class="col-sm-12 col-md-12 col-lg-9 col-xl-10 vh-100 border-left">
+            <div class="col  vh-100 border-left">
 
 
                 <div class="row mb-3 border-bottom border-top">
 
                     <!-- Image and text -->
-                    <nav class="navbar navbar-light w-100">
+                    <nav class="navbar navbar-light w-100 pl-1">
                         <div class="navbar-brand">
-                            <img src="img/flower-2-2.png" width="30" height="30" class="d-inline-block">
-                            <i><small class="font-weight-bold text-muted">AppFlower user</small></i>
-                             <?php echo $user->getUsername(); ?>
-                            <input type="hidden" name="perfil" id="perfil" value="<?=$_SESSION['perfil']?>"></input>
+                            <button type="button" id="hamburguer-menu" class="btn text-dark"><i class="far fa-bars fa-lg"></i></button>
+                            <?php echo $user->getUsername(); ?>
+                            <input type="hidden" name="perfil" id="perfil" value="<?= $_SESSION['perfil'] ?>"></input>
+                            <input type="hidden" id="limit" value="<?= $limit = isset($_SESSION['records-limit']) ? $_SESSION['records-limit'] : 10; ?>"></input>
+                            <input type="hidden" id="pagina" value="<?= $pagina = (isset($_GET['page']) && is_numeric($_GET['page'])) ? $_GET['page'] : 1; ?>"></input>
                         </div>
-                        <button type="button" class="btn text-danger ml-auto" id="btn-logOut"><i
-                                class="fal fa-sign-out-alt fa-lg"></i></button>
+                        <button type="button" class="btn text-danger ml-auto" id="btn-logOut"><i class="fal fa-sign-out-alt fa-lg"></i></button>
                     </nav>
 
                 </div>
@@ -55,8 +60,22 @@ $user = new Roles();
                 <div class="row">
 
                     <!--Primer tarjeta-->
-                    <div
-                        class="col-sm-12  col-md-12 col-lg-12 col-xl-4 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-0 pr-lg-3 pr-xl-0">
+                    <div class="col-sm-12  col-md-12 col-lg-12 col-xl-4 mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-0 pr-lg-3 pr-xl-0">
+
+                        <!--Search Component-->
+                        <div class="card mb-3">
+                            <div class="searchBar text-primary">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="BuscartmProduccion" placeholder="Ingresa el codigo del operario" required>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-primary" type="submit" id="btn-buscar-tmProduccion">
+                                            <i class="fa fa-search" style="pointer-events: none;"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
 
                         <div class="card">
                             <div class="card-header text-primary"><i class="fas fa-plus-circle "></i> Formulario de
@@ -66,53 +85,75 @@ $user = new Roles();
 
                                 <form>
                                     <div class="form-row">
+                                        <div class="form-group col-sm-12 col-md-12">
+                                            <label for="operario">Codigo</label>
+                                            <input type="text" class="form-control" name="operario" id="operario" placeholder="Ingrese el codigo del operario">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
                                         <div class="form-group col-sm-12 col-md-6">
-                                            <label for="Labor">Labor</label>
-                                            <select name="Labor" class="form-control">
-                                                <option value="1" selected>Celula</option>
-                                                <option value="2">Maquina</option>
-                                                <option value="3">Maquina TaT</option>
-                                                <option value="4">Preparación</option>
+                                            <label for="labor">Labor</label>
+                                            <select name="labor" class="form-control" id="labor">
+                                                <?php
+                                                $laborProduccion = $TmProduccion->listarLaborProduccion();
+                                                if ($laborProduccion != null) {
+                                                    foreach ($laborProduccion as $laborProduccion) {
+                                                ?>
+                                                        <option value="<?php echo $laborProduccion['id_labor']; ?>"><?php echo $laborProduccion['labor']; ?></option>
+                                                <?php
+                                                    }
+                                                }
+                                                ?>
                                             </select>
                                         </div>
                                         <div class="form-group col-sm-12 col-md-6">
-                                            <label for="id_materia">Posicion</label>
-                                            <select name="id_materia" class="form-control">
-                                                <option value="1" selected>1</option>
-                                                <option value="2">2</option>
+                                            <label for="posicion">Posicion</label>
+                                            <select name="posicion" class="form-control" id="posicion">
+                                                <?php
+                                                for ($i = 1; $i < 17; $i++) {
+                                                ?>
+                                                    <option value="<?php echo $i  ?>"><?php echo $i  ?></option>
+                                                <?php
+                                                }
+                                                ?>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-sm-12 col-md-6">
-                                            <label for="correo">Fecha</label>
-                                            <input type="date" class="form-control" name="correo"
-                                                placeholder="Ingrese su correo" name="trip-start">
+                                            <label for="fecha">Fecha</label>
+                                            <input type="date" class="form-control" name="fecha" id="fecha" value="<?php echo $date ?>">
                                         </div>
                                         <div class="form-group col-sm-12 col-md-6">
-                                            <label for="cedula">Semana</label>
-                                            <input type="week" class="form-control" name="cedula"
-                                                placeholder="Ingrese su cedula">
+                                            <label for="seamana">Semana</label>
+                                            <input type="week" class="form-control" name="semana" id="semana" value="<?php echo $semana ?>">
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-sm-12 col-md-12">
-                                            <label for="Labor">Causa</label>
-                                            <select name="Labor" class="form-control">
-                                                <option value="1" selected>A.Picking</option>
-                                                <option value="2">B.Material</option>
+                                            <label for="causa">Causa</label>
+                                            <select name="causa" class="form-control" id="causa">
+                                                <?php
+                                                $causaProduccion = $TmProduccion->listarCausaProduccion();
+                                                if ($causaProduccion != null) {
+                                                    foreach ($causaProduccion as $causaProduccion) {
+                                                ?>
+                                                        <option value="<?php echo $causaProduccion['id_causa']; ?>"><?php echo $causaProduccion['causa']; ?></option>
+                                                <?php
+                                                    }
+                                                }
+                                                ?>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-sm-12 col-md-12">
-                                            <label for="fecha">Tiempo</label>
-                                            <input type="text" class="form-control" name="fecha">
+                                            <label for="tiempo">Tiempo</label>
+                                            <input type="number" class="form-control" name="tiempo" id="tiempo" placeholder="Tiempo muerto del operario">
                                         </div>
                                     </div>
                                     <div class="form-row d-flex justify-content-center">
-                                        <input type="submit" class="btn btn-outline-primary  col-sm-12 col-md-6"
-                                            value="Ingresar">
+                                        <input type="button" class="btn btn-outline-primary  col-sm-12 col-md-6" value="Ingresar" id="btn-ingresar-tmProduccion">
                                     </div>
                                 </form>
                             </div>
@@ -129,36 +170,59 @@ $user = new Roles();
                             <div class="card-header border-bottom-0 text-primary"><i class="fas fa-th-list"></i>
                                 Tiempos muertos registrados</div>
                             <div class="card-body p-0">
-                                <div class="table-responsive">
-                                    <table class="table table-hover text-center">
-                                        <tr>
-                                            <th>Fecha</th>
-                                            <th>Semana</th>
-                                            <th>Posicion</th>
-                                            <th>Labor</th>
-                                            <th>Codigo</th>
-                                            <th>Nombre</th>
-                                            <th>Horas</th>
-                                            <th>Fulles</th>
-                                            <th>Promedio</th>
-                                        </tr>
-                                        <tr>
-                                            <td>06/11/2021</td>
-                                            <td>Semana 28, 2021</td>
-                                            <td>Celula-1</td>
-                                            <td>Empaque</td>
-                                            <td>254789</td>
-                                            <td>James Osorio Florez</td>
-                                            <td>6.5</td>
-                                            <td>300</td>
-                                            <td>102</td>
-                                            <td>
-                                                <button type="button" class="btn text-primary btn-sm shadow-none"><i
-                                                        class="fas fa-edit">editar</i></button>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
+
+
+                                <table class="table border  table-hover">
+                                    <!--Trabajador-->
+                                    <tr class="">
+                                        <div id="accordion">
+                                            <?php
+                                            $paginationStart = ($pagina - 1) * $limit;
+                                            $tmProduccion = $TmProduccion->listatmProduccionLimit($paginationStart, $limit);
+                                            if ($tmProduccion != null) {
+                                                foreach ($tmProduccion as $tmProduccion) {
+                                            ?>
+
+                                                    <!--collapseExampleOne es el id -->
+                                                    <div class="">
+                                                        <button class="btn btn-block  p-0 border bg-light rounded-0 shadow-none px-2 text-dark" data-toggle="collapse" data-target="#collapse<?php echo $tmProduccion['id_tmproduccion'] ?>" aria-expanded="true" aria-controls="collapse<?php echo $tmProduccion['id_tmproduccion'] ?>">
+                                                            <div class='row text-center'>
+                                                                <div class='col-8 d-flex justify-content-start'>
+                                                                    <div class='m-2'><i class='fas fa-stopwatch text-muted pr-1'></i> <?php echo $tmProduccion['nombre'] ?></div>
+                                                                </div>
+                                                                <div class='col d-flex justify-content-end'>
+                                                                    <div class="m-2 mr-4"><small><span class="badge badge-secondary" style="width: 45px;"><?php echo $tmProduccion['tiempo'] ?></span></small></div>
+                                                                </div>
+                                                            </div>
+                                                        </button>
+                                                    </div>
+                                                    <div class="collapse border border-top-0 " id="collapse<?php echo $tmProduccion['id_tmproduccion'] ?>" data-parent="#accordion">
+                                                        <ul class="list-group list-group-flush">
+                                                            <li class="list-group-item lp d-flex justify-content-between">
+                                                                <div class=""><b>Labor </b>: <?php echo $tmProduccion['Labor'] ?></div>
+                                                                <div class="text-center">
+                                                                    <button class="btn  btn-sm  btn-outline-primary border-0" id="btn-editar-tmProduccion" value="<?php echo $tmProduccion['id_tmproduccion'] ?>">Editar</button>
+                                                                </div>
+                                                            </li>
+                                                            <li class="list-group-item lp"><b>Codigo </b>: <?php echo $tmProduccion['operario'] ?></li>
+                                                            <li class="list-group-item lp"><b>Nombre </b>: <?php echo $tmProduccion['nombre'] ?></li>
+                                                            <li class="list-group-item lp"><b>Fecha </b>: <?php echo $tmProduccion['fecha'] ?></li>
+                                                            <li class="list-group-item lp"><b>Semana </b>: <?php echo $tmProduccion['Semana'] ?></li>
+                                                            <li class="list-group-item lp"><b>Tiempo </b>: <?php echo $tmProduccion['tiempo'] ?></li>
+                                                            <li class="list-group-item lp"><b>Causa </b>: <?php echo $tmProduccion['nombreCausa'] ?></li>
+                                                        </ul>
+                                                    </div>
+                                            <?php
+                                                }
+                                            }
+                                            ?>
+                                        </div>
+                                    </tr>
+
+                                </table>
+                                <!-- Pagination -->
+                                <div class="col d-flex justify-content-end" id="respuesta-paginacion"></div>
+
                             </div>
                         </div>
 
@@ -171,6 +235,7 @@ $user = new Roles();
     </div>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
+    <script src="../app/script.js"></script>
 </body>
 
 </html>
