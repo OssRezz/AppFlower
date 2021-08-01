@@ -146,7 +146,7 @@ $semana = date('Y\-\WW');
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="form-row">
+                                    <div class="form-row mb-1">
                                         <div class="form-group col-sm-12 col-md-12">
                                             <label for="tiempo">Tiempo</label>
                                             <input type="number" class="form-control" name="tiempo" id="tiempo" placeholder="Tiempo muerto del operario">

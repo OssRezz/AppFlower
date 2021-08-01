@@ -87,10 +87,10 @@ $semana = date('Y\-\WW');
                                         <div class="form-group col-sm-12 col-md-6">
                                             <label for="posicion">Posicion</label>
                                             <select name="posicion" id="posicion" class="form-control">
-                                                <option value="Celula-1" selected>Celula-1</option>
-                                                <option value="Celula-2">Celula-2</option>
-                                                <option value="Celula-3">Celula-3</option>
-                                                <option value="Celula-4">Celula-4</option>
+                                                <option value="Celula-1" selected>Celula 1</option>
+                                                <option value="Celula-2">Celula 2</option>
+                                                <option value="Celula-3">Celula 3</option>
+                                                <option value="Celula-4">Celula 4</option>
                                                 <option value="Postcosecha">Postcosecha</option>
                                             </select>
                                         </div>
@@ -127,7 +127,7 @@ $semana = date('Y\-\WW');
                                             <input type="week" class="form-control" name="semana" id="semana" value="<?php echo $semana ?>">
                                         </div>
                                     </div>
-                                    <div class="form-row">
+                                    <div class="form-row mb-1">
                                         <div class="form-group col-sm-12 col-md-6">
                                             <label for="hora">Horas Trabajadas</label>
                                             <input type="text" class="form-control" name="hora" id="hora" placeholder="Tiempo laborado">
