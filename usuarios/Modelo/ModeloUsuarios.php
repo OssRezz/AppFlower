@@ -82,7 +82,7 @@ class Usuarios extends Conexion
     public function listaUsuariosLimit($paginationStart, $limit)
     {
         $listUser = null;
-        $statement = $this->db->prepare("SELECT @contador:=@contador+1 contador, u.*, P.perfil as 'tipoPerfil' FROM tbl_usuario U INNER JOIN tbl_perfil AS P ON P.id_perfil=U.perfil, (SELECT @contador:=0) r ORDER by correo desc LIMIT $paginationStart, $limit");
+        $statement = $this->db->prepare("SELECT @contador:=@contador+1 contador, u.*, P.perfil as 'tipoPerfil' FROM tbl_usuario U INNER JOIN tbl_perfil AS P ON P.id_perfil=U.perfil, (SELECT @contador:=0) r ORDER by id_perfil  LIMIT $paginationStart, $limit");
         $statement->execute();
         while ($consulta = $statement->fetch()) {
             $listUser[] = $consulta;

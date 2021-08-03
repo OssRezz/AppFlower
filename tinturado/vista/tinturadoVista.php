@@ -122,7 +122,7 @@ $semana = date('Y\-\WW');
                                             <input type="week" class="form-control" name="semana" id="semana" value="<?php echo $semana ?>">
                                         </div>
                                     </div>
-                                    <div class="form-row">
+                                    <div class="form-row mb-1">
                                         <div class="form-group col-sm-12 col-md-6">
                                             <label for="horas">Horas Trabajadas</label>
                                             <input type="number" class="form-control" name="horas" id="horas" placeholder="Tiempo laborado">
@@ -132,7 +132,7 @@ $semana = date('Y\-\WW');
                                             <input type="number" class="form-control" name="tallos" id="tallos" placeholder="Tallos del operario">
                                         </div>
                                     </div>
-                                    <div class="form-row d-flex justify-content-center">
+                                    <div class="form-row d-flex justify-content-center px-1">
                                         <input type="button" class="btn btn-outline-primary  col-sm-12 col-md-6" value="Ingresar" id="btn-ingresar-tinturados">
                                     </div>
                                 </form>

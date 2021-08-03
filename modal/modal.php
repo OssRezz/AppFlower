@@ -223,7 +223,7 @@ class Modal
 
     public function modalActualizarOperario($codigo, $nombre)
     {
-        echo "<div class='modal fade' id='modal-login' tabindex='-1' style='display: block;' data-keyboard='false'>";
+        echo "<div class='modal fade' id='modal-login' tabindex='-1' style='display: block;' data-keyboard='false' data-backdrop='static'>";
         echo    "<div class='modal-dialog modal-dialog-centered'>";
         echo        "<div class='modal-content'>";
         echo            "<div class='modal-header'>";
@@ -235,7 +235,8 @@ class Modal
         echo                 "<form class='p-1'>";
         echo                    "<div class='form-group col'>";
         echo                        "<label for='idOperario'>Codigo</label>";
-        echo                        "<input type='email' class='form-control' id='idOperario' value='$codigo' disabled>";
+        echo                        "<input type='hidden' class='form-control hidden' id='id' value='$codigo'>";
+        echo                        "<input type='email' class='form-control' id='idOperario' value='$codigo'>";
         echo                    "</div>";
         echo                    "<div class='form-group col mb-5'>";
         echo                        "<label for='nombreOperario'>Nombre</label>";

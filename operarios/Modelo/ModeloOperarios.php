@@ -58,6 +58,18 @@ class Operarios extends Conexion
         return $listOperario;
     }
 
+    public function listarOperario($codigo)
+    {
+        $listOperario = null;
+        $statement = $this->db->prepare("SELECT * FROM `tbl_operarios` Where id_operario= :codigo");
+        $statement->bindParam(':codigo', $codigo);
+        $statement->execute();
+        while ($consulta = $statement->fetch()) {
+            $listOperario[] = $consulta;
+        }
+        return $listOperario;
+    }
+
     public function listarOperarioByNombre($nombre)
     {
         $listOperario = null;
@@ -71,9 +83,10 @@ class Operarios extends Conexion
     }
 
 
-    public function actualizarOperario($Codigo, $Nombre)
+    public function actualizarOperario($id,$Codigo, $Nombre)
     {
-        $statement = $this->db->prepare("UPDATE `tbl_operarios` SET `id_operario`=:codigo,`nombre`=:nombre WHERE id_operario= :codigo");
+        $statement = $this->db->prepare("UPDATE `tbl_operarios` SET `id_operario`=:codigo,`nombre`=:nombre WHERE id_operario= :id");
+        $statement->bindParam(':id', $id);
         $statement->bindParam(':codigo', $Codigo);
         $statement->bindParam(':nombre', $Nombre);
         if ($statement->execute()) {

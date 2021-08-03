@@ -122,7 +122,7 @@ $semana = date('Y\-\WW');
                                     </div>
                                 </div>
 
-                                <div class="form-row">
+                                <div class="form-row mb-1">
                                     <div class="form-group col-sm-12 col-md-6">
                                         <label for="hora">Horas Trabajadas</label>
                                         <input type="text" class="form-control" name="hora" id="hora" placeholder="Tiempo laborado">
@@ -133,7 +133,7 @@ $semana = date('Y\-\WW');
                                     </div>
                                 </div>
 
-                                <div class="form-row d-flex justify-content-center">
+                                <div class="form-row d-flex justify-content-center px-1">
                                     <input type="button" class="btn btn-outline-primary  col-sm-12 col-md-6" value="Ingresar" id="btn-ingresar-materialSeco">
                                 </div>
                             </form>
@@ -173,8 +173,7 @@ $semana = date('Y\-\WW');
                                                                 //Cada labor tiene un icono definido
                                                                 switch ($materialSeco['id_labor']) {
                                                                     case '1':
-                                                                        
-                                                                        $laborIcon = "fas fa-ribbon";
+                                                                        $laborIcon = "fas fa-tag";
                                                                         break;
                                                                     case '2':
                                                                         $laborIcon = "fas fa-leaf-heart";

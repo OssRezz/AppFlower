@@ -12,10 +12,9 @@ $accion = $_POST['accion'];
 
 if ($accion == "btn-editar-operario"){
 
-    $Operarios = $Operario->listarOperarioById($codigo);
+    $Operarios = $Operario->listarOperario($codigo);
     if ($Operarios !=null) {
         foreach($Operarios as $Operarios){
-            $codigo =  $Operarios['id_operario'];
             $nombre =  $Operarios['nombre'];
         }
         $Modal->modalActualizarOperario($codigo,$nombre);

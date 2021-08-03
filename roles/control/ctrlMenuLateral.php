@@ -86,7 +86,7 @@ function liderMenu($title)
             break;
     }
     echo "<a href='../../produccion/vista/produccionVista.php' class='btn btn-block $produccion mb-2 text-left'><i
-        class='fas fa-percentage pr-2'></i>Produccion</a>";
+        class='fas fa-seedling pr-2'></i>Produccion</a>";
     echo "<a href='../../empaque/vista/empaqueVista.php' class='btn btn-block $empaque mb-2 text-left'><i
         class='fas fa-box-open  pr-2'></i>Empaque</a>";
     echo "<a href='../../materialSeco/vista/materialSecoVista.php' class='btn btn-block $materialSeco mb-2 text-left'><i

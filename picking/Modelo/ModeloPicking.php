@@ -11,7 +11,7 @@ class Picking extends Conexion
     public function listarLaborGeneral()
     {
         $listaLaborGeneral = null;
-        $statement = $this->db->prepare("SELECT * FROM labor_general");
+        $statement = $this->db->prepare("SELECT * FROM labor_general LIMIT 2");
         $statement->execute();
         while ($consulta = $statement->fetch()) {
             $listaLaborGeneral[] = $consulta;

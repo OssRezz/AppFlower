@@ -90,7 +90,7 @@ $Operario = new Operarios();
                                             <input type="text" class="form-control" name="codigo" id="codigo" placeholder="Ingrese el codigo">
                                         </div>
                                     </div>
-                                    <div class="form-row">
+                                    <div class="form-row mb-1">
                                         <div class="form-group col-12">
                                             <label for="correo">Nombre</label>
                                             <input  type="text" class="form-control" name="nombre"  id="nombre" placeholder="Ingrese el nombre">
@@ -100,7 +100,7 @@ $Operario = new Operarios();
                                             <input type="text" class="form-control" name="apellidos" id="apellidos" placeholder="Ingrese los apellidos">
                                         </div>
                                     </div>
-                                    <div class="form-row d-flex justify-content-center">
+                                    <div class="form-row d-flex justify-content-center  px-1">
                                         <input type="button" class="btn btn-outline-primary  col-sm-12 col-md-6"
                                          id="btn-ingresar-operario"   value="Ingresar">
                                     </div>

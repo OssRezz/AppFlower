@@ -92,9 +92,11 @@ $(document).ready(function () {
         var accion = e.target.id;
         if (e.target.id === "btn-update-operario") {
             var idOperario = $('#idOperario').val();
+            var id = $('#id').val();
             var nombreOperario = $('#nombreOperario').val();
             $.post('../control/ctrlActualizarOperario.php', {
                 accion: accion,
+                id: id,
                 idOperario: idOperario,
                 nombreOperario: nombreOperario
             }, function (responseText) {

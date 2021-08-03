@@ -73,7 +73,7 @@ $user->session();
                                             <input type="email" class="form-control" id="correo" placeholder="Ingrese el correo">
                                         </div>
                                     </div>
-                                    <div class="form-row">
+                                    <div class="form-row mb-1">
                                         <div class="form-group col-12">
                                             <label for="nombre">Nombre</label>
                                             <input type="text" class="form-control" id="nombre" placeholder="Ingrese el nombre">
@@ -103,7 +103,7 @@ $user->session();
 
                                         </div>
                                     </div>
-                                    <div class="form-row d-flex justify-content-center">
+                                    <div class="form-row d-flex justify-content-center px-1">
                                         <input type="button" class="btn btn-outline-primary  col-sm-12 col-md-6" id="btn-insertUser" value="Ingresar">
                                     </div>
                                 </form>

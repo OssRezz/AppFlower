@@ -24,7 +24,7 @@ if ($accion == "btn-buscar-operario" && empty($codigo) != 1) {
             echo            "<button type='button' class='close' id='cerrar' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
             echo            "</div>";
             echo            "<div class='modal-body p-0'>";
-            echo                "<table class='table table-border table-hover'>";
+            echo                "<table class='table table-border table-hover text-center'>";
             echo                    "<tr>";
             echo                        "<th>Codigo</th>";
             echo                        "<th>Nombre</th>";

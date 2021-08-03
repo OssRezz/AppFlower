@@ -143,13 +143,13 @@ $semana = date('Y\-\WW');
                                             <input type="number" class="form-control" id="tallos" name="tallos" placeholder="Tallos realizados">
                                         </div>
                                     </div>
-                                    <div class="form-row">
+                                    <div class="form-row mb-1">
                                         <div class="form-group col-12">
                                             <label for="recetas" id="recetasLabel" style="display: none;">Recetas</label>
                                             <textarea class="form-control" name="recetas" id="recetas" rows="3" style="display: none;   resize: none;" placeholder="Ejm: 600+325+80+456"></textarea>
                                         </div>
                                     </div>
-                                    <div class="form-row d-flex justify-content-center">
+                                    <div class="form-row d-flex justify-content-center  px-1">
                                         <input type="button" class="btn btn-outline-primary  col-sm-12 col-md-6" value="Ingresar" id="ingresar-produccion">
                                     </div>
                                 </form>
@@ -200,6 +200,15 @@ $semana = date('Y\-\WW');
                                                                             break;
                                                                         case '3':
                                                                             $laborIcon = "fas fa-leaf";
+                                                                            break;
+                                                                        case '4':
+                                                                            $laborIcon = "far fa-person-dolly";
+                                                                            break;
+                                                                        case '5':
+                                                                            $laborIcon = "far fa-clipboard-list-check";
+                                                                            break;
+                                                                        case '6':
+                                                                            $laborIcon = "far fa-clipboard-list-check";
                                                                             break;
                                                                     }
 

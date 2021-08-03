@@ -12,6 +12,7 @@ $semana = date('Y\-\WW');
 <html>
 
 <head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
     <link rel="shortcut icon" href="../../img/isabelitaLogo.jpg">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
@@ -36,8 +37,8 @@ $semana = date('Y\-\WW');
 
             </div>
 
-            
-            <div class="col  vh-100 border-left">
+
+            <div class="col vh-100 border-left contenedor">
 
                 <div class="row mb-3 border-bottom border-top">
 
@@ -116,7 +117,7 @@ $semana = date('Y\-\WW');
                                             <input type="week" class="form-control" name="semana" id="semana" value="<?php echo $semana ?>">
                                         </div>
                                     </div>
-                                    <div class="form-row">
+                                    <div class="form-row mb-1">
                                         <div class="form-group col-sm-12 col-md-6">
                                             <label for="horas">Horas Trabajadas</label>
                                             <input type="number" class="form-control" name="horas" id="horas" placeholder="Tiempo laborado">
@@ -126,7 +127,7 @@ $semana = date('Y\-\WW');
                                             <input type="number" class="form-control" name="tallos" id="tallos" placeholder="Tallos del operario">
                                         </div>
                                     </div>
-                                    <div class="form-row d-flex justify-content-center">
+                                    <div class="form-row d-flex justify-content-center px-1">
                                         <input type="button" class="btn btn-outline-primary  col-sm-12 col-md-6" value="Ingresar" id="btn-ingresar-picking">
                                     </div>
                                 </form>
@@ -210,16 +211,24 @@ $semana = date('Y\-\WW');
                                                             <li class="list-group-item lp"><b>Promedio </b>: <?php echo $Picking['Promedio'] ?></li>
                                                         </ul>
                                                     </div>
-                                            <?php
+                                                <?php
                                                 }
-                                            }
-                                            ?>
+
+                                                ?>
                                         </div>
                                     </tr>
 
                                 </table>
                                 <!-- Pagination -->
                                 <div class="col d-flex justify-content-end" id="respuesta-paginacion"></div>
+                            <?php
+
+                                            } else {
+                            ?>
+                            
+                            <?php
+                                            }
+                            ?>
 
                             </div>
                         </div>

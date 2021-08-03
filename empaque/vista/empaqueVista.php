@@ -46,9 +46,9 @@ $semana = date('Y\-\WW');
                         <div class="navbar-brand">
                             <button type="button" id="hamburguer-menu" class="btn text-dark"><i class="far fa-bars fa-lg"></i></button>
                             <?php echo $user->getUsername(); ?>
-                            <input type="hidden"  id="perfil" value="<?= $_SESSION['perfil'] ?>"></input>
-                            <input type="hidden"  id="limit" value="<?= $limit = isset($_SESSION['records-limit']) ? $_SESSION['records-limit'] : 10; ?>"></input>
-                            <input type="hidden"  id="pagina" value="<?= $pagina = (isset($_GET['page']) && is_numeric($_GET['page'])) ? $_GET['page'] : 1; ?>"></input>
+                            <input type="hidden" id="perfil" value="<?= $_SESSION['perfil'] ?>"></input>
+                            <input type="hidden" id="limit" value="<?= $limit = isset($_SESSION['records-limit']) ? $_SESSION['records-limit'] : 10; ?>"></input>
+                            <input type="hidden" id="pagina" value="<?= $pagina = (isset($_GET['page']) && is_numeric($_GET['page'])) ? $_GET['page'] : 1; ?>"></input>
                         </div>
                         <button type="button" class="btn text-danger ml-auto" id="btn-logOut"><i class="fal fa-sign-out-alt fa-lg"></i></button>
                     </nav>
@@ -137,7 +137,7 @@ $semana = date('Y\-\WW');
                                             <input type="text" class="form-control" name="cajas" id="cajas" placeholder="Cantidad del operario">
                                         </div>
                                     </div>
-                                    <div class="form-row d-flex justify-content-center">
+                                    <div class="form-row d-flex justify-content-center px-1">
                                         <input type="button" class="btn btn-outline-primary  col-sm-12 col-md-6" id="btn-ingresar-Empaque" value="Ingresar">
                                     </div>
                                 </form>
@@ -187,6 +187,9 @@ $semana = date('Y\-\WW');
                                                                             $laborIcon = "fas fa-tape";
                                                                             break;
                                                                         case '4':
+                                                                            $laborIcon = "fas fa-paste";
+                                                                            break;
+                                                                        case '5':
                                                                             $laborIcon = "fas fa-hand-holding-seedling";
                                                                             break;
                                                                     }

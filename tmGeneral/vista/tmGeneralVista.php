@@ -134,13 +134,13 @@ $semana = date('Y\-\WW');
                                         </div>
                                     </div>
 
-                                    <div class="form-row">
+                                    <div class="form-row mb-1">
                                         <div class="form-group col-sm-12 col-md-12">
                                             <label for="tiempo">Tiempo</label>
                                             <input type="number" class="form-control" id="tiempo" placeholder="Tiempo muerto del operario">
                                         </div>
                                     </div>
-                                    <div class="form-row d-flex justify-content-center">
+                                    <div class="form-row d-flex justify-content-center px-1">
                                         <input type="button" class="btn btn-outline-primary  col-sm-12 col-md-6" value="Ingresar" id="btn-ingresar-tmGeneral">
                                     </div>
                                 </form>
