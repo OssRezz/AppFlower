@@ -5,7 +5,7 @@ $user = new Roles();
 $TmEmpaque = new tmEmpaque();
 
 $date = date('Y-m-d');
-$semana = date('Y\-\WW');
+
 ?>
 
 <!DOCTYPE html>
@@ -103,13 +103,9 @@ $semana = date('Y\-\WW');
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                        <div class="form-group col-sm-12 col-md-6">
+                                        <div class="form-group col-sm-12 col-md-12">
                                             <label for="fecha">Fecha</label>
                                             <input type="date" class="form-control" name="fecha" id="fecha" value="<?php echo $date; ?>">
-                                        </div>
-                                        <div class="form-group col-sm-12 col-md-6">
-                                            <label for="semana">Semana</label>
-                                            <input type="week" class="form-control" name="semana" id="semana" value="<?php echo $semana ?>">
                                         </div>
                                     </div>
                                     <div class="form-row">

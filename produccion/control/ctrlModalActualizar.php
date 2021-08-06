@@ -21,14 +21,13 @@ if ($accion == "btn-editar-produccion") {
             $codigo =  $Produccion['operario'];
             $nombre =  $Produccion['nombre'];
             $posicion =  $Produccion['posicion'];
-            $Semana =  $Produccion['semana'];
             $tiempo =  $Produccion['hora'];
             $tallos =  $Produccion['tallos'];
             $recetas =  $Produccion['recetas'];
         }
     }
     $labores = $produccion->listarLaborProduccion();
-    $Modal->modalActualizarProduccion($idProduccion,$fecha,$Semana,$nombre, $codigo,$laborNombre, $idLabor, $labores,$posicion,$tiempo,$tallos,$recetas);
+    $Modal->modalActualizarProduccion($idProduccion,$fecha, $nombre, $codigo,$laborNombre, $idLabor, $labores,$posicion,$tiempo,$tallos,$recetas);
 }
 
 

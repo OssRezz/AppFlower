@@ -11,7 +11,6 @@ $accion = $_POST['accion'];
 $idSeco = $_POST['idSeco'];
 $operario = $_POST['operarioMaterial'];
 $labor = $_POST['laborMaterial'];
-$semana = $_POST['semanaMaterial'];
 $fecha = $_POST['fechaMaterial'];
 $hora = $_POST['horaMaterial'];
 $cantidad = $_POST['cantidadMaterial'];
@@ -19,7 +18,6 @@ $cantidad = $_POST['cantidadMaterial'];
 $Operario = rtrim($operario, " ");
 $Labor = rtrim($labor, " ");
 $Fecha = rtrim($fecha, " ");
-$Semana = rtrim($semana, " ");
 $Hora = rtrim($hora, " ");
 $Cantidad = rtrim($cantidad, " ");
 
@@ -30,6 +28,11 @@ try {
     if ($accion == "btn-update-material") {
 
         if (empty($Operario) != 1 && empty($Cantidad) != 1) {
+            $date = new DateTime($Fecha);
+            $week = $date->format("W");
+            $year = $date->format('Y');
+            $Semana = "$year-W$week";
+
             if ($MaterialSeco->actualizarMaterialSeco($idSeco, $Operario,$Labor,$Semana,$Fecha, $Cantidad, $Hora)) {
                 $modal->modalInfo("success", "Material seco actualizado.");
             } else {

@@ -6,13 +6,13 @@ require_once '../Modelo/ModeloTmProduccion.php';
 $modal = new Modal();
 $TmProduccion = new tmProduccion();
 
-$id_tmproduccioon = $_POST['idTmProduccion'];
+$id_tmproduccion = $_POST['idTmProduccion'];
 $accion = $_POST['accion'];
 
 
-if ($accion == "btn-editar-tmProduccion") {
+if ($accion === "btn-editar-tmProduccion") {
 
-    $tmProduccion = $TmProduccion->listarTmProduccionUpdate($id_tmproduccioon);
+    $tmProduccion = $TmProduccion->listarTmProduccionUpdate($id_tmproduccion);
     if ($tmProduccion != null) {
         foreach ($tmProduccion as $tmProduccion) {
             $laborNombre =  $tmProduccion['nombreLabor'];
@@ -21,19 +21,16 @@ if ($accion == "btn-editar-tmProduccion") {
             $nombre =  $tmProduccion['nombre'];
             $posicion =  $tmProduccion['posicion'];
             $fecha =  $tmProduccion['fecha'];
-            $Semana =  $tmProduccion['semana'];
             $tiempo =  $tmProduccion['tiempo'];
             $nombreCausa =  $tmProduccion['nombreCausa'];
             $causa =  $tmProduccion['causa'];
         }
-        $labores = $TmProduccion->listarLaborProduccion();
-        $causas = $TmProduccion->listarCausaProduccion();
-        $modal->modalActualiarTmProduccion($id_tmproduccioon,$fecha,$Semana,$nombre, $codigo,$laborNombre, $idLabor, $labores,$posicion,$nombreCausa,$causa,$causas,$tiempo);
     } else {
-        $modal->modalInfo("danger","algo salio mal");
+        $modal->modalInfo("danger", "Problemas en la base de datos");
     }
-
+    $labores = $TmProduccion->listarLaborProduccion();
+    $causas = $TmProduccion->listarCausaProduccion();
+    $modal->modalActualiarTmProduccion($id_tmproduccion, $fecha, $nombre, $codigo, $laborNombre, $idLabor, $labores, $posicion, $nombreCausa, $causa, $causas, $tiempo);
 }
-
 
 ?>

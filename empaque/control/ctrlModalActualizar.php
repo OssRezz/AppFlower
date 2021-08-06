@@ -21,14 +21,13 @@ if ($accion == "btn-editar-empaque") {
             $operario =  $Empaque['operario'];
             $nombre =  $Empaque['nombre'];
             $posicion =  $Empaque['posicion'];
-            $Semana =  $Empaque['semana'];
             $hora =  $Empaque['hora'];
             $cajas =  $Empaque['cajas'];
 
         }
     }
     $labores = $empaque->listaLaborEmpaque();
-    $Modal->modalActualizarEmpaque($idEmpaque,$fecha,$Semana,$nombre, $operario,$posicion,$idLabor,$laborNombre, $labores,$hora,$cajas);
+    $Modal->modalActualizarEmpaque($idEmpaque,$fecha,$nombre, $operario,$posicion,$idLabor,$laborNombre, $labores,$hora,$cajas);
 }
 
 

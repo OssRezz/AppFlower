@@ -9,16 +9,12 @@ $modal =  new Modal();
 $accion = $_POST['accion'];
 $idPicking = $_POST['idPicking'];
 $operario = $_POST['operarioPicking'];
-$labor = $_POST['laborPicking'];
-$semana = $_POST['semanaPicking'];
 $fecha = $_POST['fechaPicking'];
 $hora = $_POST['horasPicking'];
 $tallos = $_POST['tallosPicking'];
 
 $Operario = rtrim($operario, " ");
-$Labor = rtrim($labor, " ");
 $Fecha = rtrim($fecha, " ");
-$Semana = rtrim($semana, " ");
 $Horas = rtrim($hora, " ");
 $Tallos = rtrim($tallos, " ");
 
@@ -29,7 +25,13 @@ try {
     if ($accion === "btn-update-picking") {
 
         if (empty($Operario) != 1 && empty($Tallos) != 1) {
-            if ($picking->actualizarPicking($idPicking, $Operario, $Labor, $Fecha,  $Semana,  $Tallos, $Horas)) {
+            $date = new DateTime($Fecha);
+            $week = $date->format("W");
+            $year = $date->format('Y');
+            $Semana = "$year-W$week";
+            $Labor = 1;
+
+            if ($picking->actualizarPicking($idPicking, $Operario, $Labor, $Fecha,$Semana,  $Tallos, $Horas)) {
                 $modal->modalInfo("success", "Picking  actualizado.");
             } else {
                 $modal->modalInfo("danger", "Error en la base de datos");

@@ -13,7 +13,6 @@ $operario = $_POST['operarioEmpaque'];
 $labor = $_POST['laborEmpaque'];
 $posicion = $_POST['posicionEmpaque'];
 $fecha = $_POST['fechaEmpaque'];
-$semana = $_POST['semanaEmpaque'];
 $hora = $_POST['horaEmpaque'];
 $cajas = $_POST['cajasEmpaque'];
 
@@ -21,7 +20,6 @@ $Operario = rtrim($operario, " ");
 $Labor = rtrim($labor, " ");
 $Posicion = rtrim($posicion, " ");
 $Fecha = rtrim($fecha, " ");
-$Semana = rtrim($semana, " ");
 $Hora = rtrim($hora, " ");
 $Cajas = rtrim($cajas, " ");
 
@@ -30,6 +28,11 @@ try {
     if ($accion == "btn-update-empaque") {
 
         if (empty($Operario) != 1 && empty($Cajas) != 1) {
+            $date = new DateTime($Fecha);
+            $week = $date->format("W");
+            $year = $date->format('Y');
+            $Semana = "$year-W$week";
+            
             if ($empaque->actualizarEmpaque($idEmpaque, $posicion, $labor, $Operario, $Fecha, $Semana, $Cajas, $Hora)) {
                 $modal->modalInfo("success", "Empaque actualizado.");
             } else {
@@ -42,6 +45,3 @@ try {
 } catch (PDOException $e) {
     $modal->modalInfo("danger", "Verifica los datos ingresados.");
 }
-
-
-?>

@@ -273,7 +273,7 @@ class Modal
         echo "<script>$('#modal-login').modal('show')</script>";
     }
 
-    public function modalActualizarProduccion($idProduccion, $fecha, $Semana, $nombre, $codigo, $laborNombre, $idLabor, $labores, $posicion, $tiempo, $tallos, $recetas)
+    public function modalActualizarProduccion($idProduccion, $fecha, $nombre, $codigo, $laborNombre, $idLabor, $labores, $posicion, $tiempo, $tallos, $recetas)
     {
         echo "<div class='modal fade' id='modal-login' tabindex='-1' style='display: block;' data-keyboard='false' data-backdrop='static'>";
         echo    "<div class='modal-dialog modal-dialog-centered modal-lg'>";
@@ -286,14 +286,10 @@ class Modal
 
         echo                 "<form class='p-1'>";
         echo                    "<div class='form-row'>";
-        echo                    "<div class='form-group col-sm-12 col-md-6'>";
+        echo                    "<div class='form-group col-sm-12 col-md-12'>";
         echo                        "<label for='fechaProduccion'>Fecha</label>";
         echo                        "<input type='hidden' class='form-control' id='idProduccion' value='$idProduccion'>";
         echo                        "<input type='date' class='form-control' id='fechaProduccion' value='$fecha'>";
-        echo                    "</div>";
-        echo                    "<div class='form-group col-sm-12 col-md-6'>";
-        echo                        "<label for='semanaProduccion'>Semana</label>";
-        echo                        "<input type='week' class='form-control' id='semanaProduccion' value='$Semana'>";
         echo                    "</div>";
         echo                    "<div class='form-group col-sm-12 col-md-6'>";
         echo                        "<label for='nombreProduccion'>Nombre</label>";
@@ -354,7 +350,7 @@ class Modal
 
         echo                    "<div class='form-group col-sm-12 mb-0 col-md-12 d-flex justify-content-center'>";
         echo                        "<div class='form-group col-sm-12 col-md-5'>";
-        echo                            "<input type='button' class='btn btn-outline-dark  btn-block' data-dismiss='modal' value='Regresar'>";
+        echo                            "<input type='button' class='btn btn-outline-dark  btn-block' data-dismiss='modal' id='regresar' value='Regresar'>";
         echo                        "</div>";
         echo                        "<div class='form-group col-sm-12 col-md-5'>";
         echo                            "<input type='button' class='btn btn-outline-primary btn-block' id='btn-update-Produccion' value='Actualizar'>";
@@ -368,9 +364,11 @@ class Modal
         echo    "</div>";
         echo "</div>";
         echo "<script>$('#modal-login').modal('show')</script>";
+        echo "<script>$('#cerrar').click(function(){location.reload()});</script>";
+        echo "<script>$('#regresar').click(function(){location.reload()});</script>";
     }
 
-    public function modalActualizarEmpaque($idEmpaque, $fecha, $Semana, $nombre, $operario, $posicion, $idLabor, $laborNombre, $labores, $hora, $cajas)
+    public function modalActualizarEmpaque($idEmpaque, $fecha, $nombre, $operario, $posicion, $idLabor, $laborNombre, $labores, $hora, $cajas)
     {
         echo "<div class='modal fade' id='modal-empaque' tabindex='-1' style='display: block;' data-keyboard='false' data-backdrop='static'>";
         echo    "<div class='modal-dialog modal-dialog-centered modal-lg'>";
@@ -383,14 +381,10 @@ class Modal
 
         echo                 "<form class='p-1'>";
         echo                    "<div class='form-row'>";
-        echo                    "<div class='form-group col-sm-12 col-md-6'>";
+        echo                    "<div class='form-group col-sm-12 col-md-12'>";
         echo                        "<label for='idEmpaque'>Fecha</label>";
         echo                        "<input type='hidden' class='form-control' id='idEmpaque' value='$idEmpaque'>";
         echo                        "<input type='date' class='form-control' id='fechaEmpaque' value='$fecha'>";
-        echo                    "</div>";
-        echo                    "<div class='form-group col-sm-12 col-md-6'>";
-        echo                        "<label for='semanaEmpaque'>Semana</label>";
-        echo                        "<input type='week' class='form-control' id='semanaEmpaque' value='$Semana'>";
         echo                    "</div>";
         echo                    "<div class='form-group col-sm-12 col-md-6'>";
         echo                        "<label for='nombreEmpaque'>Nombre</label>";
@@ -456,7 +450,7 @@ class Modal
         echo "<script>$('#regresar').click(function(){location.reload()});</script>";
     }
 
-    public function modalActualiarMaterial($id_seco, $fecha, $Semana, $nombre, $operario, $idLabor, $laborNombre, $labores, $hora, $cantidad)
+    public function modalActualiarMaterial($id_seco, $fecha, $nombre, $operario, $idLabor, $laborNombre, $labores, $hora, $cantidad)
     {
         echo "<div class='modal fade' id='modal-material' tabindex='-1' style='display: block;' data-keyboard='false' data-backdrop='static'>";
         echo    "<div class='modal-dialog modal-dialog-centered modal-lg'>";
@@ -469,14 +463,10 @@ class Modal
 
         echo                 "<form class='p-1'>";
         echo                    "<div class='form-row'>";
-        echo                    "<div class='form-group col-sm-12 col-md-6'>";
+        echo                    "<div class='form-group col-sm-12 col-md-12'>";
         echo                        "<label for='idSeco'>Fecha</label>";
         echo                        "<input type='hidden' class='form-control' id='idSeco' value='$id_seco'>";
         echo                        "<input type='date' class='form-control' id='fechaMaterial' value='$fecha'>";
-        echo                    "</div>";
-        echo                    "<div class='form-group col-sm-12 col-md-6'>";
-        echo                        "<label for='semanaMaterial'>Semana</label>";
-        echo                        "<input type='week' class='form-control' id='semanaMaterial' value='$Semana'>";
         echo                    "</div>";
         echo                    "<div class='form-group col-sm-12 col-md-6'>";
         echo                        "<label for='nombreMaterial'>Nombre</label>";
@@ -530,7 +520,7 @@ class Modal
         echo "<script>$('#regresar').click(function(){location.reload()});</script>";
     }
 
-    public function modalActualiarTinturado($id_tinturado, $fecha, $Semana, $nombre, $operario, $idLabor, $laborNombre, $labores, $horas, $tallos)
+    public function modalActualiarTinturado($id_tinturado, $fecha, $nombre, $operario,$horas, $tallos)
     {
         echo "<div class='modal fade' id='modal-tinturado' tabindex='-1' style='display: block;' data-keyboard='false' data-backdrop='static'>";
         echo    "<div class='modal-dialog modal-dialog-centered modal-lg'>";
@@ -543,14 +533,10 @@ class Modal
 
         echo                 "<form class='p-1'>";
         echo                    "<div class='form-row'>";
-        echo                    "<div class='form-group col-sm-12 col-md-6'>";
+        echo                    "<div class='form-group col-sm-12 col-md-12'>";
         echo                        "<label for='idTinturado'>Fecha</label>";
         echo                        "<input type='hidden' class='form-control' id='idTinturado' value='$id_tinturado'>";
         echo                        "<input type='date' class='form-control' id='fechaTinturado' value='$fecha'>";
-        echo                    "</div>";
-        echo                    "<div class='form-group col-sm-12 col-md-6'>";
-        echo                        "<label for='semanaTinturado'>Semana</label>";
-        echo                        "<input type='week' class='form-control' id='semanaTinturado' value='$Semana'>";
         echo                    "</div>";
         echo                    "<div class='form-group col-sm-12 col-md-6'>";
         echo                        "<label for='nombreTinturado'>Nombre</label>";
@@ -561,17 +547,6 @@ class Modal
         echo                        "<input type='number' class='form-control' id='operarioTinturado' value='$operario'>";
         echo                    "</div>";
 
-        echo                    "<div class='form-group col-sm-12 col-md-12'>";
-        echo                        "<label for='laborTinturado'>Labor</label>";
-        echo                        "<select name='laborTinturado' id='laborTinturado' class='form-control'>";
-        echo                        "<option value='$idLabor' selected>$laborNombre</option>";
-        foreach ($labores as $labores) {
-            $id_labor =  $labores['id_labor'];
-            $laborTinturado =  $labores['labor'];
-            echo                               "<option value='$id_labor'>$laborTinturado</option>";
-        }
-        echo                        "</select>";
-        echo                    "</div>";
 
         echo                    "<div class='form-group col-sm-12 col-md-6'>";
         echo                                "<label for='horaTinturado'>Horas Trabajadas</label>";
@@ -604,7 +579,7 @@ class Modal
         echo "<script>$('#regresar').click(function(){location.reload()});</script>";
     }
 
-    public function modalActualiarPicking($id_Picking, $fecha, $Semana, $nombre, $operario, $idLabor, $laborNombre, $labores, $horas, $tallos)
+    public function modalActualiarPicking($id_Picking, $fecha, $nombre, $operario, $horas, $tallos)
     {
         echo "<div class='modal fade' id='modal-picking' tabindex='-1' style='display: block;' data-keyboard='false' data-backdrop='static'>";
         echo    "<div class='modal-dialog modal-dialog-centered modal-lg'>";
@@ -617,14 +592,10 @@ class Modal
 
         echo                 "<form class='p-1'>";
         echo                    "<div class='form-row'>";
-        echo                    "<div class='form-group col-sm-12 col-md-6'>";
+        echo                    "<div class='form-group col-sm-12 col-md-12'>";
         echo                        "<label for='idPicking'>Fecha</label>";
         echo                        "<input type='hidden' class='form-control' id='idPicking' value='$id_Picking'>";
         echo                        "<input type='date' class='form-control' id='fechaPicking' value='$fecha'>";
-        echo                    "</div>";
-        echo                    "<div class='form-group col-sm-12 col-md-6'>";
-        echo                        "<label for='semanaPicking'>Semana</label>";
-        echo                        "<input type='week' class='form-control' id='semanaPicking' value='$Semana'>";
         echo                    "</div>";
         echo                    "<div class='form-group col-sm-12 col-md-6'>";
         echo                        "<label for='nombrePicking'>Nombre</label>";
@@ -633,18 +604,6 @@ class Modal
         echo                    "<div class='form-group col-sm-12 col-md-6'>";
         echo                        "<label for='operarioPicking'>Codigo</label>";
         echo                        "<input type='number' class='form-control' id='operarioPicking' value='$operario'>";
-        echo                    "</div>";
-
-        echo                    "<div class='form-group col-sm-12 col-md-12'>";
-        echo                        "<label for='laborPicking'>Labor</label>";
-        echo                        "<select name='laborPicking' id='laborPicking' class='form-control'>";
-        echo                        "<option value='$idLabor' selected>$laborNombre</option>";
-        foreach ($labores as $labores) {
-            $id_labor =  $labores['id_labor'];
-            $laborPicking =  $labores['labor'];
-            echo                               "<option value='$id_labor'>$laborPicking</option>";
-        }
-        echo                        "</select>";
         echo                    "</div>";
 
         echo                    "<div class='form-group col-sm-12 col-md-6'>";
@@ -678,7 +637,7 @@ class Modal
         echo "<script>$('#regresar').click(function(){location.reload()});</script>";
     }
 
-    public function modalActualiarTmProduccion($id_tmproduccioon, $fecha, $Semana, $nombre, $operario, $laborNombre, $idLabor, $labores, $posicion, $nombreCausa, $causa, $causas, $tiempo)
+    public function modalActualiarTmProduccion($id_tmproduccion, $fecha, $nombre, $operario, $laborNombre, $idLabor, $labores, $posicion, $nombreCausa, $causa, $causas, $tiempo)
     {
         echo "<div class='modal fade' id='modal-tmProduccion' tabindex='-1' style='display: block;' data-keyboard='false' data-backdrop='static'>";
         echo    "<div class='modal-dialog modal-dialog-centered modal-lg'>";
@@ -691,14 +650,10 @@ class Modal
 
         echo                 "<form class='p-1'>";
         echo                    "<div class='form-row'>";
-        echo                    "<div class='form-group col-sm-12 col-md-6'>";
+        echo                    "<div class='form-group col-sm-12 col-md-12'>";
         echo                        "<label for='idTmProduccion'>Fecha</label>";
-        echo                        "<input type='hidden' class='form-control' id='idTmProduccion' value='$id_tmproduccioon'>";
+        echo                        "<input type='hidden' class='form-control' id='idTmProduccion' value='$id_tmproduccion'>";
         echo                        "<input type='date' class='form-control' id='fechaTmProduccion' value='$fecha'>";
-        echo                    "</div>";
-        echo                    "<div class='form-group col-sm-12 col-md-6'>";
-        echo                        "<label for='semanaTmProduccion'>Semana</label>";
-        echo                        "<input type='week' class='form-control' id='semanaTmProduccion' value='$Semana'>";
         echo                    "</div>";
         echo                    "<div class='form-group col-sm-12 col-md-6'>";
         echo                        "<label for='nombreTmProduccion'>Nombre</label>";
@@ -768,7 +723,7 @@ class Modal
         echo "<script>$('#regresar').click(function(){location.reload()});</script>";
     }
 
-    public function modalActualiarTmEmpaque($id_tmproduccioon, $fecha, $Semana, $nombre, $operario, $nombreCausa, $causa, $causas, $celula, $horas, $minutos)
+    public function modalActualiarTmEmpaque($id_tmproduccioon, $fecha, $nombre, $operario, $nombreCausa, $causa, $causas, $celula, $horas, $minutos)
     {
         echo "<div class='modal fade' id='modal-tmEmpaque' tabindex='-1' style='display: block;' data-keyboard='false' data-backdrop='static'>";
         echo    "<div class='modal-dialog modal-dialog-centered modal-lg'>";
@@ -781,14 +736,10 @@ class Modal
 
         echo                 "<form class='p-1'>";
         echo                    "<div class='form-row'>";
-        echo                    "<div class='form-group col-sm-12 col-md-6'>";
+        echo                    "<div class='form-group col-sm-12 col-md-12'>";
         echo                        "<label for='idTmEmpaque'>Fecha</label>";
         echo                        "<input type='hidden' class='form-control' id='idTmEmpaque' value='$id_tmproduccioon'>";
         echo                        "<input type='date' class='form-control' id='fechaTmEmpaque' value='$fecha'>";
-        echo                    "</div>";
-        echo                    "<div class='form-group col-sm-12 col-md-6'>";
-        echo                        "<label for='semanaTmEmpaque'>Semana</label>";
-        echo                        "<input type='week' class='form-control' id='semanaTmEmpaque' value='$Semana'>";
         echo                    "</div>";
         echo                    "<div class='form-group col-sm-12 col-md-6'>";
         echo                        "<label for='nombreTmEmpaque'>Nombre</label>";
@@ -853,7 +804,7 @@ class Modal
         echo "<script>$('#regresar').click(function(){location.reload()});</script>";
     }
 
-    public function modalActualiarTmGeneral($id_general, $fecha, $Semana, $nombre, $operario, $laborNombre, $idLabor, $labores, $nombreCausa, $causa, $causas, $tiempo)
+    public function modalActualiarTmGeneral($id_general, $fecha, $nombre, $operario, $laborNombre, $idLabor, $labores, $nombreCausa, $causa, $causas, $tiempo)
     {
         echo "<div class='modal fade' id='modal-tmGeneral' tabindex='-1' style='display: block;' data-keyboard='false' data-backdrop='static'>";
         echo    "<div class='modal-dialog modal-dialog-centered modal-lg'>";
@@ -866,14 +817,10 @@ class Modal
 
         echo                 "<form class='p-1'>";
         echo                    "<div class='form-row'>";
-        echo                    "<div class='form-group col-sm-12 col-md-6'>";
+        echo                    "<div class='form-group col-sm-12 col-md-12'>";
         echo                        "<label for='idTmGeneral'>Fecha</label>";
         echo                        "<input type='hidden' class='form-control' id='idTmGeneral' value='$id_general'>";
         echo                        "<input type='date' class='form-control' id='fechaTmGeneral' value='$fecha'>";
-        echo                    "</div>";
-        echo                    "<div class='form-group col-sm-12 col-md-6'>";
-        echo                        "<label for='semanaTmGeneral'>Semana</label>";
-        echo                        "<input type='week' class='form-control' id='semanaTmGeneral' value='$Semana'>";
         echo                    "</div>";
         echo                    "<div class='form-group col-sm-12 col-md-6'>";
         echo                        "<label for='nombreTmGeneral'>Nombre</label>";

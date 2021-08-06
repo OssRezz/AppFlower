@@ -66,6 +66,8 @@ if ($accion === "btn-buscar-tmProduccion" && empty($codigo) != 1) {
             echo                              "<li class='list-group-item lp'><b>Semana </b>:  $semana</li>";
             echo                              "<li class='list-group-item lp'><b>Tiempo </b>: $tiempo</li>";
             echo                              "<li class='list-group-item lp'><b>Tallos </b>:  $causa</li>";
+            echo                           "</ul>";
+            echo                           "</div>";
         }
         echo                        "</div>";
         echo                    "</tr>";

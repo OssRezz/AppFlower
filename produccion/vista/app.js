@@ -68,7 +68,7 @@ $(document).ready(function () {
         const labor = $("#labor").val();
         const posicion = $("#posicion").val();
         const fecha = $("#fecha").val();
-        const semana = $("#semana").val();
+        // const semana = $("#semana").val();
         const tallos = $("#tallos").val();
         const hora = $("#hora").val();
         const recetas = $("#recetas").val();
@@ -77,7 +77,7 @@ $(document).ready(function () {
             labor: labor,
             posicion: posicion,
             fecha: fecha,
-            semana: semana,
+            // semana: semana,
             tallos: tallos,
             hora: hora,
             recetas: recetas

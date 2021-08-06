@@ -4,7 +4,6 @@ require '../Modelo/ModeloMaterialSeco.php';
 $user = new Roles();
 $MaterialSeco = new materialSeco();
 $date = date('Y-m-d');
-$semana = date('Y\-\WW');
 
 ?>
 
@@ -113,13 +112,9 @@ $semana = date('Y\-\WW');
                                 </div>
 
                                 <div class="form-row">
-                                    <div class="form-group col-sm-12 col-md-6">
+                                    <div class="form-group col-sm-12 col-md-12">
                                         <label for="fecha">Fecha</label>
                                         <input type="date" class="form-control" name="fecha" id="fecha" value="<?php echo $date; ?>">
-                                    </div>
-                                    <div class="form-group col-sm-12 col-md-6">
-                                        <label for="semana">Semana</label>
-                                        <input type="week" class="form-control" name="semana" id="semana" value="<?php echo $semana; ?>">
                                     </div>
                                 </div>
 
@@ -193,7 +188,7 @@ $semana = date('Y\-\WW');
                                                             </div>
                                                             <div class="col d-flex justify-content-end px-0">
                                                                 <div class="m-2 mr-4"><small class="">ID:</i><?php echo $materialSeco['operario'] ?></small></div>
-                                                                <div class="m-2 mr-4"><small><span class="<?php echo $iconRendimiento ?>" style="width: 45px;"><?php echo $materialSeco['Promedio'] ?>%</span></small></div>
+                                                                <div class="m-2 mr-4"><small><span class="<?php echo $iconRendimiento ?>" style="width: 45px;"><?php echo $materialSeco['Promedio'] ?></span></small></div>
                                                             </div>
                                                         </div>
                                                     </button>

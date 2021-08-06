@@ -20,14 +20,13 @@ if ($accion === "btn-editar-materialSeco") {
             $idLabor =  $materialSeco['id_labor'];
             $operario =  $materialSeco['operario'];
             $nombre =  $materialSeco['nombre'];
-            $Semana =  $materialSeco['semana'];
             $hora =  $materialSeco['hora'];
             $cantidad =  $materialSeco['cantidad'];
 
         }
     }
     $labores = $MaterialSeco->listaLaborMaterial();
-    $Modal->modalActualiarMaterial($id_seco,$fecha,$Semana,$nombre, $operario,$idLabor,$laborNombre, $labores,$hora,$cantidad);
+    $Modal->modalActualiarMaterial($id_seco,$fecha,$nombre, $operario,$idLabor,$laborNombre, $labores,$hora,$cantidad);
 }
 
 

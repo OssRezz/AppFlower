@@ -44,10 +44,10 @@ class tmGeneral extends Conexion
     public function listatmGeneralLimit($paginationStart, $limit)
     {
         $listatmGeneral = null;
-        $statement = $this->db->prepare("SELECT G.id_general, G.operario,L.labor as 'nombreLabor',G.semana, G.labor, C.causa as 'nombreCausa', G.fecha, O.nombre, Week(fecha) AS 'Semana',G.tiempo,G.causa FROM `TM_GENERAL` as G
+        $statement = $this->db->prepare("SELECT G.id_general, G.operario,L.labor as 'nombreLabor',G.semana, G.labor, C.causa as 'nombreCausa', G.fecha, O.nombre, Week(fecha) AS 'Semana',G.tiempo,G.causa FROM `tm_general` as G
         INNER JOIN tbl_operarios AS O ON O.id_operario=G.operario
         INNER JOIN labor_general AS L ON L.id_labor=G.labor
-        INNER JOIN causa_general as C on C.id_causa=G.id_general
+        INNER JOIN causa_general as C on C.id_causa=G.causa
         ORDER BY `id_general` desc LIMIT $paginationStart, $limit");
         $statement->execute();
         while ($consulta = $statement->fetch()) {
@@ -76,10 +76,10 @@ class tmGeneral extends Conexion
     public function listarTmGeneralTable($codigo)
     {
         $listatmGeneral = null;
-        $statement = $this->db->prepare("SELECT G.id_general, G.operario,L.labor as 'nombreLabor',G.semana, G.labor, C.causa as 'nombreCausa', G.fecha, O.nombre, Week(fecha) AS 'Semana',G.tiempo,G.causa FROM `TM_GENERAL` as G
+        $statement = $this->db->prepare("SELECT G.id_general, G.operario,L.labor as 'nombreLabor',G.semana, G.labor, C.causa as 'nombreCausa', G.fecha, O.nombre, Week(fecha) AS 'Semana',G.tiempo,G.causa FROM `tm_general` as G
         INNER JOIN tbl_operarios AS O ON O.id_operario=G.operario
         INNER JOIN labor_general AS L ON L.id_labor=G.labor
-        INNER JOIN causa_general as C on C.id_causa=G.id_general
+        INNER JOIN causa_general as C on C.id_causa=G.causa
          Where G.operario LIKE '%' :codigo '%' OR O.nombre LIKE '%' :codigo '%' ORDER BY fecha desc LIMIT 5;");
         $statement->bindParam(':codigo', $codigo);
         $statement->execute();
@@ -93,11 +93,10 @@ class tmGeneral extends Conexion
     public function listarTmGeneralUpdate($id_general)
     {
         $listatmGeneral = null;
-        $statement = $this->db->prepare("SELECT G.id_general, G.operario,L.labor as 'nombreLabor',G.semana, G.labor, C.causa as 'nombreCausa', G.fecha, O.nombre, Week(fecha) AS 'Semana',G.tiempo,G.causa FROM `TM_GENERAL` as G
+        $statement = $this->db->prepare("SELECT G.id_general, G.operario,L.labor as 'nombreLabor',G.semana, G.labor, C.causa as 'nombreCausa', G.fecha, O.nombre, Week(fecha) AS 'Semana',G.tiempo,G.causa FROM `tm_general` as G
         INNER JOIN tbl_operarios AS O ON O.id_operario=G.operario
         INNER JOIN labor_general AS L ON L.id_labor=G.labor
-        INNER JOIN causa_general as C on C.id_causa=G.id_general
-         Where G.id_general= :id_general LIMIT 1;");
+        INNER JOIN causa_general as C on C.id_causa=G.causa Where G.id_general= :id_general LIMIT 1;");
         $statement->bindParam(':id_general', $id_general);
         $statement->execute();
         while ($consulta = $statement->fetch()) {
