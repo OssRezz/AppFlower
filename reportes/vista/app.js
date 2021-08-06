@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    var perfil = $("#perfil").val();
-    var title = $(document).attr('title');
+    const perfil = $("#perfil").val();
+    const title = $(document).attr('title');
     $.post('../../roles/control/ctrlMenuLateral.php', {
         perfil: perfil,
         title: title
@@ -10,7 +10,7 @@ $(document).ready(function () {
 
     //Modal Para salir de la sesión ctrlModalOut
     $("#btn-logOut").click(function (e) {
-        var numero = 1;
+        const numero = 1;
         $.post('../../roles/control/ctrlModalOut.php', {
             numero: numero
         }, function (responseText) {
@@ -20,7 +20,7 @@ $(document).ready(function () {
 
     //Cerrar la sesion, volver al index. ctrlSesiónDestroy
     $(document).click(function (e) {
-        var accion = e.target.id;
+        const accion = e.target.id;
         if (accion === "btn-sesionOut") {
             $.post('../../roles/control/ctrlSesionDestroy.php', {
                 accion: accion
@@ -29,4 +29,6 @@ $(document).ready(function () {
             });
         }
     });
+
+
 });

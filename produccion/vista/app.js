@@ -135,4 +135,34 @@ $(document).ready(function () {
 
     });
 
+    //Boton actualizar usuario
+    $(document).click((e) => {
+        const accion = e.target.id;
+        if (e.target.id === "btn-update-Produccion") {
+            const idProduccion = $('#idProduccion').val();
+            const codigoProduccion = $('#codigoProduccion').val();
+            const fechaProduccion = $('#fechaProduccion').val();
+            const semanaProduccion = $('#semanaProduccion').val();
+            const posicionProduccion = $('#posicionProduccion').val();
+            const laborProduccion = $('#laborProduccion').val();
+            const tallosProduccion = $('#tallosProduccion').val();
+            const horasProduccion = $('#horasProduccion').val();
+            const recetasProduccion = $('#recetasProduccion').val();
+            $.post('../control/ctrlActualizarProduccion.php', {
+                accion: accion,
+                idProduccion: idProduccion,
+                codigoProduccion: codigoProduccion,
+                fechaProduccion: fechaProduccion,
+                posicionProduccion: posicionProduccion,
+                semanaProduccion: semanaProduccion,
+                laborProduccion: laborProduccion,
+                tallosProduccion: tallosProduccion,
+                horasProduccion: horasProduccion,
+                recetasProduccion: recetasProduccion
+            }, (responseText) => {
+                $('#respuesta').html(responseText);
+            });
+        }
+    });
+
 });

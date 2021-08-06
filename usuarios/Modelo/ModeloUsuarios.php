@@ -10,6 +10,16 @@ class Usuarios extends Conexion
         $this->db = parent::__construct();
     }
 
+    public function listaPerfil(){
+        $ListaPerfil = null;
+        $statement = $this->db->prepare("SELECT * FROM tbl_perfil");
+        $statement->execute();
+        while($consulta = $statement->fetch()){
+            $ListaPerfil[] = $consulta;
+        }
+        return $ListaPerfil;
+    }
+    
     public function insertarUsuario($Correo, $Nombre, $Password, $Perfil)
     {
         $statement = $this->db->prepare("INSERT INTO tbl_usuario(correo,nombre,password,perfil) VALUES (:Correo,:Nombre,:Password,:Perfil)");
@@ -24,9 +34,10 @@ class Usuarios extends Conexion
         }
     }
 
-    public function actualizarUsuario($Correo, $Nombre, $Password, $Perfil)
+    public function actualizarUsuario($id,$Correo, $Nombre, $Password, $Perfil)
     {
-        $statement = $this->db->prepare("UPDATE `tbl_usuario` SET `correo`=:correo,`nombre`=:nombre,`password`=:password,`perfil`=perfil WHERE correo= :correo");
+        $statement = $this->db->prepare("UPDATE `tbl_usuario` SET `correo`=:id,`nombre`=:nombre,`password`=:password,`perfil`=:perfil WHERE correo= :correo");
+        $statement->bindParam(':id', $id);
         $statement->bindParam(':correo', $Correo);
         $statement->bindParam(':nombre', $Nombre);
         $statement->bindParam(':password', $Password);

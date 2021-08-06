@@ -64,16 +64,17 @@ $semana = date('Y\-\WW');
 
                         <!--Search Component-->
                         <div class="card mb-3">
-                            <div class="searchBar text-primary">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="BuscartmEmpaque" placeholder="Ingresa el codigo del operario" required>
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-primary" type="submit" id="btn-buscar-tmEmpaque">
-                                            <i class="fa fa-search" style="pointer-events: none;"></i>
-                                        </button>
-                                    </div>
+                            <div class="card-header text-primary"><i class="fa fa-search"></i> Buscar operario en tiempo muerto empaque: </div>
+
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="BuscartmEmpaque">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-primary" type="submit" id="btn-buscar-tmEmpaque">
+                                        <i class="fa fa-search" style="pointer-events: none;"></i>
+                                    </button>
                                 </div>
                             </div>
+
                         </div>
 
                         <div class="card">
@@ -131,11 +132,11 @@ $semana = date('Y\-\WW');
                                     <div class="form-row mb-1">
                                         <div class="form-group col-sm-12 col-md-6">
                                             <label for="horas">Horas</label>
-                                            <input type="number" class="form-control" name="horas" id="horas" placeholder="Horas trabajadas">
+                                            <input type="number" class="form-control" name="horas" id="horas" placeholder="Horas muertas">
                                         </div>
                                         <div class="form-group col-sm-12 col-md-6">
                                             <label for="minutos">Minutos</label>
-                                            <input type="number" class="form-control" name="minutos" id="minutos" placeholder="Minutos trabajados">
+                                            <input type="number" class="form-control" name="minutos" id="minutos" placeholder="Minutos muertos">
                                         </div>
                                     </div>
 
@@ -173,7 +174,7 @@ $semana = date('Y\-\WW');
                                                     <!--collapseExampleOne es el id -->
                                                     <div class="">
                                                         <button class="btn btn-block  p-0 border bg-light rounded-0 shadow-none px-2 text-dark" data-toggle="collapse" data-target="#collapse<?php echo $tmEmpaque['id_empaquetm'] ?>" aria-expanded="true" aria-controls="collapse<?php echo $tmEmpaque['id_empaquetm'] ?>">
-                                                        <div class='row text-center'>
+                                                            <div class='row text-center'>
                                                                 <div class='col-8 d-flex justify-content-start'>
                                                                     <div class='m-2'><i class='fas fa-stopwatch text-muted pr-1'></i> <?php echo $tmEmpaque['nombre'] ?></div>
                                                                 </div>

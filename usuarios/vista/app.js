@@ -86,16 +86,18 @@ $(document).ready(function () {
     $(document).click(function (e) {
         var accion = e.target.id;
         if (e.target.id === "btn-update-usuarios") {
+            var id = $('#id').val();
             var correoUser = $('#correoUser').val();
             var nombreUser = $('#nombreUser').val();
             var passwordUser = $('#passwordUser').val();
-            var perfilUser = $('#perfilUser').val();
+            var perfilUsuario = $('#perfilUsuario').val();
             $.post('../control/ctrlActualizarUsuario.php', {
                 accion: accion,
+                id: id,
                 correoUser: correoUser,
                 nombreUser: nombreUser,
                 passwordUser: passwordUser,
-                perfilUser: perfilUser
+                perfilUsuario: perfilUsuario
             }, function (responseText) {
                 $('#respuesta').html(responseText);
             });

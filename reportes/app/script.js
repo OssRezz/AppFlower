@@ -1,26 +1,34 @@
 const botonHB = document.querySelector('.navbar #hamburguer-menu');
-const lateralMenu = document .querySelector('.lateralMenu');
+const lateralMenu = document.querySelector('.lateralMenu');
 botonHB.addEventListener('click', ocultarLateral);
 
 
-function ocultarLateral(){
-    if(lateralMenu.classList.contains('d-none')){
+function ocultarLateral() {
+    if (lateralMenu.classList.contains('d-none')) {
         lateralMenu.classList.remove('d-none');
         botonHB.classList.remove('text-primary');
         botonHB.classList.add('text-dark');
-        sessionStorage.setItem('menu','open');
+        sessionStorage.setItem('menu', 'open');
     } else {
         lateralMenu.classList.add('d-none');
         botonHB.classList.remove('text-dark');
         botonHB.classList.add('text-primary');
-        sessionStorage.setItem('menu','close');
+        sessionStorage.setItem('menu', 'close');
     }
 }
 
 window.onload = () => {
-    if(sessionStorage.getItem('menu') !== "open"){
-        if(sessionStorage.getItem('menu') == "close"){
+    if (sessionStorage.getItem('menu') !== "open") {
+        if (sessionStorage.getItem('menu') == "close") {
             ocultarLateral();
         }
     }
 }
+
+
+reporte = (url, fechaInicio, fechaFin) => {
+    const desde = $('#' + fechaInicio + '').val();
+    const hasta = $('#' + fechaFin + '').val();
+    window.open('../control/' + url + '.php?desde=' + desde + '&hasta=' + hasta);
+}
+

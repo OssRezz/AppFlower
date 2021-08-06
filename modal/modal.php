@@ -175,7 +175,7 @@ class Modal
     }
 
 
-    public function modalActualizarUsuario($correo, $nombre, $password, $id_perfil)
+    public function modalActualizarUsuario($correo, $nombre, $password, $id_perfil,$nombrePerfil,$arrayPerfil)
     {
         echo "<div class='modal fade' id='modal-login' tabindex='-1' style='display: block;' data-keyboard='false' data-backdrop='static'>";
         echo    "<div class='modal-dialog modal-dialog-centered'>";
@@ -184,12 +184,13 @@ class Modal
         echo                "<h6 class='modal-title text-primary'><i class='far fa-edit'></i> Actualizar usuario</h6>";
         echo            "<button type='button' class='close' id='cerrar' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
         echo            "</div>";
-        echo            "<div class='modal-body p-2'>";
+        echo            "<div class='modal-body p-2 pb-0'>";
 
         echo                 "<form class='p-1'>";
         echo                    "<div class='form-group col'>";
         echo                        "<label for='correoUser'>Correo</label>";
-        echo                        "<input type='email' class='form-control' id='correoUser' value='$correo' disabled>";
+        echo                        "<input type='hidden' class='form-control' id='correoUser' value='$correo' disabled>";
+        echo                        "<input type='text' class='form-control' id='id' value='$correo'>";
         echo                    "</div>";
         echo                    "<div class='form-group col'>";
         echo                        "<label for='nombreUser'>Nombre</label>";
@@ -199,10 +200,21 @@ class Modal
         echo                        "<label for='passwordUser'>Contraseña</label>";
         echo                        "<input type='text' class='form-control' id='passwordUser' value='$password'>";
         echo                    "</div>";
-        echo                    "<div class='form-group col mb-5 hidden'>";
-        echo                        "<input type='hidden' class='form-control' id='perfilUser' value='$id_perfil'>";
+
+        echo                    "<div class='form-group col-sm-12 col-md-12 mb-5'>";
+        echo                        "<label for='perfilUsuario'>Labor</label>";
+        echo                        "<select name='perfilUsuario' id='perfilUsuario' class='form-control'>";
+        //      echo                        "<option value='$idLabor' disabled selected>$laborNombre</option>";
+        echo                        "<option value='$id_perfil'>$nombrePerfil</option>";
+
+        foreach ($arrayPerfil as $Perfil) {
+            $idPerfil =  $Perfil['id_perfil'];
+            $perfil =  $Perfil['perfil'];
+            echo                        "<option value='$idPerfil'>$perfil</option>";
+        }
+        echo                        "</select>";
         echo                    "</div>";
-        echo                    "<div class='form-group d-flex justify-content-center'>";
+        echo                    "<div class='form-group d-flex justify-content-center  m-0'>";
         echo                    "<div class='form-group col-5'>";
         echo                        "<input type='button' class='btn btn-outline-dark  btn-block' data-dismiss='modal' value='Regresar'>";
         echo                    "</div>";
@@ -230,9 +242,9 @@ class Modal
         echo                "<h6 class='modal-title text-primary'><i class='far fa-edit'></i> Actualizar operario</h6>";
         echo            "<button type='button' class='close' id='cerrar' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
         echo            "</div>";
-        echo            "<div class='modal-body p-2'>";
+        echo            "<div class='modal-body pb-0'>";
 
-        echo                 "<form class='p-1'>";
+        echo                 "<form class=''>";
         echo                    "<div class='form-group col'>";
         echo                        "<label for='idOperario'>Codigo</label>";
         echo                        "<input type='hidden' class='form-control hidden' id='id' value='$codigo'>";
@@ -242,7 +254,7 @@ class Modal
         echo                        "<label for='nombreOperario'>Nombre</label>";
         echo                        "<input type='text' class='form-control' id='nombreOperario' value='$nombre'>";
         echo                    "</div>";
-        echo                    "<div class='form-group d-flex justify-content-center'>";
+        echo                    "<div class='form-group d-flex justify-content-center pb-0'>";
         echo                    "<div class='form-group col-5'>";
         echo                        "<input type='button' class='btn btn-outline-dark  btn-block' data-dismiss='modal' value='Regresar'>";
         echo                    "</div>";
@@ -294,11 +306,8 @@ class Modal
 
         echo                    "<div class='form-group col-sm-12 col-md-6'>";
         echo                        "<label for='laborProduccion'>Labor</label>";
-        echo                        "<select name='laborProduccion' id='laborProduccion' class='form-control'>";
-        //      echo                        "<option value='$idLabor' disabled selected>$laborNombre</option>";
-        echo                        "<option value='$idLabor' disabled selected>Seleccione la labor</option>";
-
-
+        echo                        "<select name='laborProduccion' id='laborProduccion' class='form-control' disabled>";
+        echo                        "<option value='$idLabor'selected>$laborNombre</option>";
         foreach ($labores as $labores) {
             $id_labor =  $labores['id_labor'];
             $laborProduccion =  $labores['labor'];
@@ -309,7 +318,7 @@ class Modal
         echo                    "<div class='form-group col-sm-12 col-md-6'>";
         echo                        "<label for='posicionProduccion'>Posicion</label>";
         echo                        "<select name='posicionProduccion' id='posicionProduccion' class='form-control'>";
-        echo                        "<option value='$posicion' disabled selected>$posicion</option>";
+        echo                        "<option value='$posicion' selected>$posicion</option>";
         for ($i = 1; $i < 17; $i++) {
             echo                        "<option value='$i'>$i</option>";
         }
@@ -318,7 +327,7 @@ class Modal
         if ($idLabor != 1) {
             echo                            "<div class='form-group col-sm-12 col-md-6 ' id='horasLaborProduccion'>";
             echo                                "<label for='tiempoProduccion'>Horas Trabajadas</label>";
-            echo                                "<input type='number' class='form-control' id='tiempoProduccion' value='$tiempo'>";
+            echo                                "<input type='number' class='form-control' id='horasProduccion' value='$tiempo'>";
             echo                            "</div>";
             echo                            "<div class='form-group col-sm-12 col-md-6' >";
             echo                                "<label for='tallosLabelProduccion' id='tallosLabelProduccion'>Tallos</label>";
@@ -331,11 +340,11 @@ class Modal
         } else {
             echo                            "<div class='form-group col-sm-12 col-md-6 ' id='horasLaborProduccion'>";
             echo                                "<label for='tiempoProduccion'>Horas Trabajadas</label>";
-            echo                                "<input type='number' class='form-control' id='tiempoProduccion' value='$tiempo'>";
+            echo                                "<input type='number' class='form-control' id='horasProduccion' value='$tiempo'>";
             echo                            "</div>";
             echo                            "<div class='form-group col-sm-12 col-md-6' >";
             echo                                "<label for='tallosLabelProduccion' id='tallosLabelProduccion'>Tallos</label>";
-            echo                                "<input type='number' class='form-control' id='tallosProduccion' value='$tallos'>";
+            echo                                "<input type='number' class='form-control' id='tallosProduccion' value='$tallos' disabled>";
             echo                            "</div>";
             echo                            "<div class='form-group col-sm-12 col-md-12 mb-4'>";
             echo                                "<label for='recetasLabelProduccion' id='recetasLabelProduccion'>Recetas</label>";
@@ -348,7 +357,7 @@ class Modal
         echo                            "<input type='button' class='btn btn-outline-dark  btn-block' data-dismiss='modal' value='Regresar'>";
         echo                        "</div>";
         echo                        "<div class='form-group col-sm-12 col-md-5'>";
-        echo                            "<input type='button' class='btn btn-outline-primary btn-block' id='btn-update-usuarios' value='Actualizar'>";
+        echo                            "<input type='button' class='btn btn-outline-primary btn-block' id='btn-update-Produccion' value='Actualizar'>";
         echo                        "</div>";
         echo                    "</div>";
         echo                    "</div>";
