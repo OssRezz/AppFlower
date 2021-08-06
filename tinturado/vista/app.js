@@ -60,9 +60,7 @@ $(document).ready(function () {
     //Enviar los datos de la vista al control de la inserción 
     $("#btn-ingresar-tinturados").click(() => {
         const operario = $("#operario").val();
-        const labor = $("#labor").val();
         const fecha = $("#fecha").val();
-        const semana = $("#semana").val();
         const horas = $("#horas").val();
         const tallos = $("#tallos").val();
         $.post('../control/ctrlIngresarTinturados.php', {
@@ -100,8 +98,6 @@ $(document).ready(function () {
             const idTinturado = $('#idTinturado').val();
             const operarioTinturado = $('#operarioTinturado').val();
             const fechaTinturado = $('#fechaTinturado').val();
-            const semanaTinturado = $('#semanaTinturado').val();
-            const laborTinturado = $('#laborTinturado').val();
             const tallosTinturado = $('#tallosTinturado').val();
             const horasTinturado = $('#horasTinturado').val();
             $.post('../control/ctrlActualizarTinturado.php', {
@@ -109,8 +105,6 @@ $(document).ready(function () {
                 idTinturado: idTinturado,
                 operarioTinturado: operarioTinturado,
                 fechaTinturado: fechaTinturado,
-                semanaTinturado: semanaTinturado,
-                laborTinturado: laborTinturado,
                 tallosTinturado: tallosTinturado,
                 horasTinturado: horasTinturado
             }, (responseText) => {

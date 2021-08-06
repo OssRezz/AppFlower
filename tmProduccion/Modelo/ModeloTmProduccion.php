@@ -32,8 +32,7 @@ class tmProduccion extends Conexion
 
     public function ingresartmProduccion($Operario, $Labor, $Posicion, $Causa, $Fecha, $Semana, $Tiempo)
     {
-        $statement = $this->db->prepare("INSERT INTO `tmproduccion`(`operario`, `labor`, `posicion`, `causa`, `fecha`, `semana`,`tiempo`)
-          VALUES (:Operario,:Labor,:Posicion,:Causa,:Fecha,:Semana,:Tiempo)");
+        $statement = $this->db->prepare("INSERT INTO `tmproduccion`(`operario`, `labor`, `posicion`, `causa`, `fecha`, `semana`,`tiempo`) VALUES (:Operario,:Labor,:Posicion,:Causa,:Fecha,:Semana,:Tiempo)");
         $statement->bindParam(':Operario', $Operario);
         $statement->bindParam(':Labor', $Labor);
         $statement->bindParam(':Posicion', $Posicion);
@@ -62,9 +61,10 @@ class tmProduccion extends Conexion
     public function listatmProduccionLimit($paginationStart, $limit)
     {
         $listatmProduccion = null;
-        $statement = $this->db->prepare("SELECT P.id_tmproduccion, P.operario, P.labor, C.causa as 'nombreCausa', P.fecha, O.nombre, CONCAT(L.labor, ' ', P.posicion) AS 'Labor',
-        Week(fecha) AS 'Semana',P.tiempo,P.causa FROM `tmproduccion` as P
-         INNER JOIN tbl_operarios AS O ON O.id_operario=P.operario INNER JOIN labor_produccion AS L ON L.id_labor=P.labor INNER JOIN causa_produccion as C on C.id_causa=P.id_tmproduccion ORDER BY `id_tmproduccion` desc LIMIT $paginationStart, $limit");
+        $statement = $this->db->prepare("SELECT P.id_tmproduccion, P.operario, P.labor, C.causa as 'nombreCausa', P.fecha, O.nombre, CONCAT(L.labor, ' ', P.posicion) AS 'Labor', Week(fecha) AS 'Semana',P.tiempo,P.causa FROM `tmproduccion` as P
+        INNER JOIN tbl_operarios AS O ON O.id_operario=P.operario
+        INNER JOIN labor_produccion AS L ON L.id_labor=P.labor
+        INNER JOIN causa_produccion as C on C.id_causa=P.causa ORDER BY `id_tmproduccion` desc  LIMIT $paginationStart, $limit;");
         $statement->execute();
         while ($consulta = $statement->fetch()) {
             $listatmProduccion[] = $consulta;
@@ -75,9 +75,11 @@ class tmProduccion extends Conexion
     public function listarTmProduccionTable($codigo)
     {
         $listatmProduccion = null;
-        $statement = $this->db->prepare("SELECT P.id_tmproduccion, P.operario, P.labor, C.causa as 'nombreCausa', P.fecha, O.nombre, CONCAT(L.labor, ' ', P.posicion) AS 'Labor',
-        Week(fecha) AS 'Semana',P.tiempo,P.causa FROM `tmproduccion` as P
-         INNER JOIN tbl_operarios AS O ON O.id_operario=P.operario INNER JOIN labor_produccion AS L ON L.id_labor=P.labor INNER JOIN causa_produccion as C on C.id_causa=P.id_tmproduccion Where P.operario LIKE '%' :codigo '%' OR O.nombre LIKE '%' :codigo '%' ORDER BY fecha desc LIMIT 5;");
+        $statement = $this->db->prepare("SELECT P.id_tmproduccion, P.operario, P.labor, C.causa as 'nombreCausa', P.fecha, O.nombre, CONCAT(L.labor, ' ', P.posicion) AS 'Labor',Week(fecha) AS 'Semana',P.tiempo,P.causa FROM `tmproduccion` as P
+        INNER JOIN tbl_operarios AS O ON O.id_operario=P.operario
+        INNER JOIN labor_produccion AS L ON L.id_labor=P.labor
+        INNER JOIN causa_produccion as C on C.id_causa=P.causa
+        Where P.operario LIKE '%' :codigo '%' OR O.nombre LIKE '%' :codigo '%' ORDER BY fecha desc LIMIT 5;");
         $statement->bindParam(':codigo', $codigo);
         $statement->execute();
         while ($consulta = $statement->fetch()) {
@@ -89,9 +91,10 @@ class tmProduccion extends Conexion
     public function listarTmProduccionUpdate($id_tmproduccion)
     {
         $listatmProduccion = null;
-        $statement = $this->db->prepare("SELECT P.id_tmproduccion, P.semana , P.operario, L.labor as 'nombreLabor', P.labor, C.causa as 'nombreCausa',P.posicion,P.semana, P.fecha, O.nombre, CONCAT(L.labor, ' ', P.posicion) AS 'Labor',
-        Week(fecha) AS 'Semana',P.tiempo,P.causa FROM `tmproduccion` as P
-         INNER JOIN tbl_operarios AS O ON O.id_operario=P.operario INNER JOIN labor_produccion AS L ON L.id_labor=P.labor INNER JOIN causa_produccion as C on C.id_causa=P.id_tmproduccion Where P.id_tmproduccion= :id_tmproduccion LIMIT 1;");
+        $statement = $this->db->prepare("SELECT P.id_tmproduccion, P.semana , P.operario, L.labor as 'nombreLabor', P.labor, C.causa as 'nombreCausa',P.posicion,P.semana, P.fecha, O.nombre, CONCAT(L.labor, ' ', P.posicion) AS 'Labor',Week(fecha) AS 'Semana',P.tiempo,P.causa FROM `tmproduccion` as P
+        INNER JOIN tbl_operarios AS O ON O.id_operario=P.operario 
+        INNER JOIN labor_produccion AS L ON L.id_labor=P.labor 
+        INNER JOIN causa_produccion as C on C.id_causa=P.causa Where P.id_tmproduccion= :id_tmproduccion LIMIT 1;");
         $statement->bindParam(':id_tmproduccion', $id_tmproduccion);
         $statement->execute();
         while ($consulta = $statement->fetch()) {

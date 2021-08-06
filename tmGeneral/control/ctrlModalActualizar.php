@@ -20,14 +20,13 @@ if ($accion == "btn-editar-tmGeneral") {
             $codigo =  $tmGeneral['operario'];
             $nombre =  $tmGeneral['nombre'];
             $fecha =  $tmGeneral['fecha'];
-            $Semana =  $tmGeneral['semana'];
             $tiempo =  $tmGeneral['tiempo'];
             $nombreCausa =  $tmGeneral['nombreCausa'];
             $causa =  $tmGeneral['causa'];
         }
         $labores = $TmGeneral->listarLabor();
         $causas = $TmGeneral->listarCausa();
-        $modal->modalActualiarTmGeneral($id_general,$fecha,$Semana,$nombre, $codigo,$laborNombre, $idLabor, $labores,$nombreCausa,$causa,$causas,$tiempo);
+        $modal->modalActualiarTmGeneral($id_general,$fecha,$nombre, $codigo,$laborNombre, $idLabor, $labores,$nombreCausa,$causa,$causas,$tiempo);
     } else {
         $modal->modalInfo("danger","algo salio mal");
     }

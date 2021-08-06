@@ -9,7 +9,6 @@ $accion = $_POST['accion'];
 $idTmGeneral = $_POST['idTmGeneral'];
 $operario = $_POST['operarioTmGeneral'];
 $labor = $_POST['laborTmGeneral'];
-$semana = $_POST['semanaTmGeneral'];
 $fecha = $_POST['fechaTmGeneral'];
 $tiempo = $_POST['tiempoTmGeneral'];
 $causa = $_POST['causaTmGeneral'];
@@ -17,7 +16,6 @@ $causa = $_POST['causaTmGeneral'];
 $Operario = rtrim($operario, " ");
 $Labor = rtrim($labor, " ");
 $Fecha = rtrim($fecha, " ");
-$Semana = rtrim($semana, " ");
 $Tiempo = rtrim($tiempo, " ");
 $Causa = rtrim($causa, " ");
 
@@ -27,6 +25,11 @@ try {
     if ($accion === "btn-update-tmGeneral") {
 
         if (empty($Operario) != 1 && empty($Tiempo) != 1) {
+            $date = new DateTime($Fecha);
+            $week = $date->format("W");
+            $year = $date->format('Y');
+            $Semana = "$year-W$week";
+    
             if ($TmGeneral->updateTmGeneral($idTmGeneral, $Operario, $Labor, $Causa, $Fecha, $Semana, $Tiempo)) {
                 $modal->modalInfo("success", "Tiempo muerto de producción  actualizado.");
             } else {

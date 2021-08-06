@@ -125,13 +125,9 @@ $semana = date('Y\-\WW');
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                        <div class="form-group col-sm-12 col-md-6">
+                                        <div class="form-group col-sm-12 col-md-12">
                                             <label for="fecha">Fecha</label>
                                             <input type="date" class="form-control" id="fecha" name="fecha" placeholder="Ingrese su correo" name="trip-start" value="<?php echo $date; ?>">
-                                        </div>
-                                        <div class="form-group col-sm-12 col-md-6">
-                                            <label for="semana">Semana</label>
-                                            <input type="week" class="form-control" name="semana" id="semana" value="<?php echo $semana ?>">
                                         </div>
                                     </div>
                                     <div class="form-row">
@@ -225,7 +221,7 @@ $semana = date('Y\-\WW');
                                                                 </div>
                                                                 <div class="col d-flex justify-content-end px-0">
                                                                     <div class="m-2 mr-4"><small class="">ID:</i><?php echo $listProduccion['operario'] ?></small></div>
-                                                                    <div class="m-2 mr-4"><small><span class="<?php echo $iconRendimiento ?>" style="width: 45px;"><?php echo $listProduccion['Promedio'] ?>%</span></small></div>
+                                                                    <div class="m-2 mr-4"><small><span class="<?php echo $iconRendimiento ?>" style="width: 40px;"><?php echo $listProduccion['Promedio'] ?></span></small></div>
                                                                 </div>
                                                             </div>
                                                         </button>

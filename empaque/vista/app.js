@@ -48,7 +48,6 @@ $(document).ready(function () {
         const labor = $("#labor").val();
         const operario = $("#operario").val();
         const fecha = $("#fecha").val();
-        const semana = $("#semana").val();
         const hora = $("#hora").val();
         const cajas = $("#cajas").val();
         $.post('../control/ctrlIngresarEmpaque.php', {
@@ -56,7 +55,6 @@ $(document).ready(function () {
             labor: labor,
             posicion: posicion,
             fecha: fecha,
-            semana: semana,
             hora: hora,
             cajas: cajas
         }, function (responseText) {
@@ -85,7 +83,6 @@ $(document).ready(function () {
             const idEmpaque = $('#idEmpaque').val();
             const operarioEmpaque = $('#operarioEmpaque').val();
             const fechaEmpaque = $('#fechaEmpaque').val();
-            const semanaEmpaque = $('#semanaEmpaque').val();
             const posicionEmpaque = $('#posicionEmpaque').val();
             const laborEmpaque = $('#laborEmpaque').val();
             const cajasEmpaque = $('#cajasEmpaque').val();
@@ -95,7 +92,6 @@ $(document).ready(function () {
                 idEmpaque: idEmpaque,
                 operarioEmpaque: operarioEmpaque,
                 fechaEmpaque: fechaEmpaque,
-                semanaEmpaque: semanaEmpaque,
                 posicionEmpaque: posicionEmpaque,
                 laborEmpaque: laborEmpaque,
                 cajasEmpaque: cajasEmpaque,

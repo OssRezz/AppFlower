@@ -5,7 +5,7 @@ $user = new Roles();
 $picking = new Picking();
 
 $date = date('Y-m-d');
-$semana = date('Y\-\WW');
+
 ?>
 
 <!DOCTYPE html>
@@ -92,29 +92,8 @@ $semana = date('Y\-\WW');
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-sm-12 col-md-12">
-                                            <label for="labor">Labor</label>
-                                            <select name="labor" id="labor" class="form-control">
-                                                <?php
-                                                $Picking = $picking->listarLaborGeneral();
-                                                if ($Picking != null) {
-                                                    foreach ($Picking as $Picking) {
-                                                ?>
-                                                        <option value="<?php echo $Picking['id_labor']; ?>"><?php echo $Picking['labor']; ?></option>
-                                                <?php
-                                                    }
-                                                }
-                                                ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-sm-12 col-md-6">
                                             <label for="fecha">Fecha</label>
                                             <input type="date" class="form-control" name="fecha" id="fecha" value="<?php echo $date ?>">
-                                        </div>
-                                        <div class="form-group col-sm-12 col-md-6">
-                                            <label for="semana">Semana</label>
-                                            <input type="week" class="form-control" name="semana" id="semana" value="<?php echo $semana ?>">
                                         </div>
                                     </div>
                                     <div class="form-row mb-1">
@@ -189,7 +168,7 @@ $semana = date('Y\-\WW');
                                                                 </div>
                                                                 <div class="col d-flex justify-content-end px-0">
                                                                     <div class="m-2 mr-4"><small class="">ID:</i><?php echo $Picking['operario'] ?></small></div>
-                                                                    <div class="m-2 mr-4"><small><span class="<?php echo $iconRendimiento ?>" style="width: 45px;"><?php echo $Picking['Promedio'] ?>%</span></small></div>
+                                                                    <div class="m-2 mr-4"><small><span class="<?php echo $iconRendimiento ?>" style="width: 45px;"><?php echo $Picking['Promedio'] ?></span></small></div>
                                                                 </div>
                                                             </div>
                                                         </button>

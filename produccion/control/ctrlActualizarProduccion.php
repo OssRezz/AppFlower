@@ -10,7 +10,6 @@ $accion = $_POST['accion'];
 $idProduccion = $_POST['idProduccion'];
 $operario = $_POST['codigoProduccion'];
 $fecha = $_POST['fechaProduccion'];
-$semana = $_POST['semanaProduccion'];
 $posicion = $_POST['posicionProduccion'];
 $labor = $_POST['laborProduccion'];
 $hora = $_POST['horasProduccion'];
@@ -20,13 +19,16 @@ $Operario = rtrim($operario, " ");
 $Labor = rtrim($labor, " ");
 $Posicion = rtrim($posicion, " ");
 $Fecha = rtrim($fecha, " ");
-$Semana = rtrim($semana, " ");
 $Hora = rtrim($hora, " ");
 
 try {
     if ($accion === "btn-update-Produccion") {
+        $date = new DateTime($Fecha);
+        $week = $date->format("W");
+        $year = $date->format('Y');
+        $Semana = "$year-W$week";
 
-        if (empty($Operario) != 1 && empty($Labor) != 1 && empty($Posicion) != 1  && empty($Fecha) != 1 && empty($Semana) != 1 && empty($Hora) != 1) {
+        if (empty($Operario) != 1 && empty($Labor) != 1 && empty($Posicion) != 1  && empty($Fecha) != 1 && empty($Hora) != 1) {
 
             if ($labor === "1") {
 

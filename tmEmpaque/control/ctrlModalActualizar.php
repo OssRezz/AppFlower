@@ -17,7 +17,6 @@ if ($accion == "btn-editar-tmEmpaque") {
         foreach ($tmEmpaque as $tmEmpaque) {
             $id_tmEmpaque =  $tmEmpaque['id_empaquetm'];
             $fecha =  $tmEmpaque['fecha'];
-            $semana =  $tmEmpaque['semana'];
             $codigo =  $tmEmpaque['operario'];
             $nombre =  $tmEmpaque['nombre'];
             $minutos =  $tmEmpaque['minutos'];
@@ -27,7 +26,7 @@ if ($accion == "btn-editar-tmEmpaque") {
             $celula =  $tmEmpaque['celula'];
         }
         $causas = $TmEmpaque->listarCausaEmpaque();
-        $modal->modalActualiarTmEmpaque($idTmEmpaque, $fecha, $semana, $nombre, $codigo, $nombreCausa, $causa, $causas,$celula, $horas, $minutos);
+        $modal->modalActualiarTmEmpaque($idTmEmpaque, $fecha, $nombre, $codigo, $nombreCausa, $causa, $causas,$celula, $horas, $minutos);
     } else {
         $modal->modalInfo("danger", "algo salio mal");
     }

@@ -11,7 +11,6 @@ $labor = $_POST['labor'];
 $posicion = $_POST['posicion'];
 $causa = $_POST['causa'];
 $fecha = $_POST['fecha'];
-$semana = $_POST['semana'];
 $tiempo = $_POST['tiempo'];
 
 
@@ -20,12 +19,15 @@ $Labor = rtrim($labor, " ");
 $Posicion = rtrim($posicion, " ");
 $Causa = rtrim($causa, " ");
 $Fecha = rtrim($fecha, " ");
-$Semana = rtrim($semana, " ");
 $Tiempo = rtrim($tiempo, " ");
 
 try {
 
-    if (empty($Operario) != 1 && empty($Labor) != 1 && empty($Posicion) != 1  && empty($Fecha) != 1 && empty($Semana) != 1 && empty($Tiempo) != 1) {
+    if (empty($Operario) != 1 && empty($Labor) != 1 && empty($Posicion) != 1  && empty($Fecha) != 1  && empty($Tiempo) != 1) {
+        $date = new DateTime($Fecha);
+        $week = $date->format("W");
+        $year = $date->format('Y');
+        $Semana = "$year-W$week";
 
         if ($TmProduccion->ingresartmProduccion($Operario, $Labor, $Posicion, $Causa, $Fecha, $Semana, $Tiempo)) {
             $modal->modalInsert("success");

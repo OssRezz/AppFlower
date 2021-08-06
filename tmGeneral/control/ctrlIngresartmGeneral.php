@@ -10,7 +10,6 @@ $operario = $_POST['operario'];
 $labor = $_POST['labor'];
 $causa = $_POST['causa'];
 $fecha = $_POST['fecha'];
-$semana = $_POST['semana'];
 $tiempo = $_POST['tiempo'];
 
 
@@ -18,12 +17,16 @@ $Operario = rtrim($operario, " ");
 $Labor = rtrim($labor, " ");
 $Causa = rtrim($causa, " ");
 $Fecha = rtrim($fecha, " ");
-$Semana = rtrim($semana, " ");
 $Tiempo = rtrim($tiempo, " ");
 
 try {
 
-    if (empty($Operario) != 1 && empty($Labor) != 1 &&  empty($Fecha) != 1 && empty($Semana) != 1 && empty($Tiempo) != 1) {
+    if (empty($Operario) != 1 && empty($Labor) != 1 &&  empty($Fecha) != 1 && empty($Tiempo) != 1) {
+        $date = new DateTime($Fecha);
+        $week = $date->format("W");
+        $year = $date->format('Y');
+        $Semana = "$year-W$week";
+
 
         if ($TmGeneral->ingresartmGeneral($Operario, $Labor, $Causa, $Fecha, $Semana, $Tiempo)) {
             $modal->modalInsert("success");

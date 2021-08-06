@@ -61,16 +61,12 @@ $(document).ready(function () {
     //Enviar los datos de la vista al control de la inserción 
     $("#btn-ingresar-picking").click(() => {
         const operario = $("#operario").val();
-        const labor = $("#labor").val();
         const fecha = $("#fecha").val();
-        const semana = $("#semana").val();
         const horas = $("#horas").val();
         const tallos = $("#tallos").val();
         $.post('../control/ctrlIngresarPicking.php', {
             operario: operario,
-            labor: labor,
             fecha: fecha,
-            semana: semana,
             horas: horas,
             tallos: tallos
         }, (responseText) => {
@@ -99,8 +95,6 @@ $(document).ready(function () {
                 const idPicking = $('#idPicking').val();
                 const operarioPicking = $('#operarioPicking').val();
                 const fechaPicking = $('#fechaPicking').val();
-                const semanaPicking = $('#semanaPicking').val();
-                const laborPicking = $('#laborPicking').val();
                 const tallosPicking = $('#tallosPicking').val();
                 const horasPicking = $('#horasPicking').val();
                 $.post('../control/ctrlActualizarPicking.php', {
@@ -108,8 +102,6 @@ $(document).ready(function () {
                     idPicking: idPicking,
                     operarioPicking: operarioPicking,
                     fechaPicking: fechaPicking,
-                    semanaPicking: semanaPicking,
-                    laborPicking: laborPicking,
                     tallosPicking: tallosPicking,
                     horasPicking: horasPicking
                 }, (responseText) => {

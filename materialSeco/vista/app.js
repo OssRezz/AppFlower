@@ -48,14 +48,12 @@ $(document).ready(function () {
         const labor = $("#labor").val();
         const operario = $("#operario").val();
         const fecha = $("#fecha").val();
-        const semana = $("#semana").val();
         const hora = $("#hora").val();
         const cantidad = $("#cantidad").val();
         $.post('../control/ctrlIngresarMaterialSeco.php', {
             operario: operario,
             labor: labor,
             fecha: fecha,
-            semana: semana,
             hora: hora,
             cantidad: cantidad
         }, function (responseText) {
@@ -98,7 +96,6 @@ $(document).ready(function () {
             const idSeco = $('#idSeco').val();
             const operarioMaterial = $('#operarioMaterial').val();
             const fechaMaterial = $('#fechaMaterial').val();
-            const semanaMaterial = $('#semanaMaterial').val();
             const laborMaterial = $('#laborMaterial').val();
             const cantidadMaterial = $('#cantidadMaterial').val();
             const horaMaterial = $('#horaMaterial').val();
@@ -107,7 +104,6 @@ $(document).ready(function () {
                 idSeco: idSeco,
                 operarioMaterial: operarioMaterial,
                 fechaMaterial: fechaMaterial,
-                semanaMaterial: semanaMaterial,
                 laborMaterial: laborMaterial,
                 cantidadMaterial: cantidadMaterial,
                 horaMaterial: horaMaterial

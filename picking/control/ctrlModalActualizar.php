@@ -16,18 +16,14 @@ if ($accion === "btn-editar-picking") {
     if ($Picking != null) {
         foreach ($Picking as $Picking) {
             $fecha =  $Picking['fecha'];
-            $laborNombre =  $Picking['labor'];
-            $idLabor =  $Picking['id_labor'];
             $operario =  $Picking['operario'];
             $nombre =  $Picking['nombre'];
-            $Semana =  $Picking['semana'];
             $horas =  $Picking['horas'];
             $tallos =  $Picking['tallos'];
 
         }
     }
-    $labores = $picking->listarLaborGeneral();
-    $Modal->modalActualiarPicking($id_picking,$fecha,$Semana,$nombre, $operario,$idLabor,$laborNombre, $labores,$horas,$tallos);
+    $Modal->modalActualiarPicking($id_picking,$fecha,$nombre, $operario,$horas,$tallos);
 }
 
 

@@ -64,14 +64,12 @@ $(document).ready(function () {
         const posicion = $("#posicion").val();
         const causa = $("#causa").val();
         const fecha = $("#fecha").val();
-        const semana = $("#semana").val();
         const tiempo = $("#tiempo").val();
         $.post('../control/ctrlIngresartmProduccion.php', {
             operario: operario,
             labor: labor,
             posicion: posicion,
             fecha: fecha,
-            semana: semana,
             tiempo: tiempo,
             causa: causa
         }, (responseText) => {
@@ -100,7 +98,6 @@ $(document).ready(function () {
             const idTmProduccion = $('#idTmProduccion').val();
             const operarioTmProduccion = $('#operarioTmProduccion').val();
             const fechaTmProduccion = $('#fechaTmProduccion').val();
-            const semanaTmProduccion = $('#semanaTmProduccion').val();
             const laborTmProduccion = $('#laborTmProduccion').val();
             const posicionTmProduccion = $('#posicionTmProduccion').val();
             const causaTmProduccion = $('#causaTmProduccion').val();
@@ -110,7 +107,6 @@ $(document).ready(function () {
                 idTmProduccion: idTmProduccion,
                 operarioTmProduccion: operarioTmProduccion,
                 fechaTmProduccion: fechaTmProduccion,
-                semanaTmProduccion: semanaTmProduccion,
                 laborTmProduccion: laborTmProduccion,
                 posicionTmProduccion: posicionTmProduccion,
                 causaTmProduccion: causaTmProduccion,
