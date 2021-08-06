@@ -65,16 +65,17 @@ $semana = date('Y\-\WW');
 
                     <!--Search Component-->
                     <div class="card mb-3">
-                        <div class="searchBar text-primary">
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="buscarMaterial" placeholder="Ingresa el codigo del operario" required>
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-primary" type="submit" id="btn-buscar-material">
-                                        <i class="fa fa-search" style="pointer-events: none;"></i>
-                                    </button>
-                                </div>
+                        <div class="card-header text-primary"><i class="fa fa-search"></i> Buscar operario en la tabla de material seco: </div>
+
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="buscarMaterial">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-primary" type="submit" id="btn-buscar-material">
+                                    <i class="fa fa-search" style="pointer-events: none;"></i>
+                                </button>
                             </div>
                         </div>
+
                     </div>
 
 

@@ -45,14 +45,13 @@ $Operario = new Operarios();
                     <!-- Image and text -->
                     <nav class="navbar navbar-light w-100 pl-1">
                         <div class="navbar-brand">
-                        <button type="button" id="hamburguer-menu" class="btn text-dark"><i class="far fa-bars fa-lg"></i></button>
+                            <button type="button" id="hamburguer-menu" class="btn text-dark"><i class="far fa-bars fa-lg"></i></button>
                             <?php echo $user->getUsername(); ?>
-                            <input type="hidden" name="perfil" id="perfil" value="<?=$_SESSION['perfil']?>"></input>
+                            <input type="hidden" name="perfil" id="perfil" value="<?= $_SESSION['perfil'] ?>"></input>
                             <input type="hidden" name="perfil" id="limit" value="<?= $limit = isset($_SESSION['records-limit']) ? $_SESSION['records-limit'] : 10; ?>"></input>
                             <input type="hidden" name="perfil" id="pagina" value="<?= $pagina = (isset($_GET['page']) && is_numeric($_GET['page'])) ? $_GET['page'] : 1; ?>"></input>
                         </div>
-                        <button type="button" class="btn text-danger ml-auto" id="btn-logOut"><i
-                                class="fal fa-sign-out-alt fa-lg"></i></button>
+                        <button type="button" class="btn text-danger ml-auto" id="btn-logOut"><i class="fal fa-sign-out-alt fa-lg"></i></button>
                     </nav>
 
 
@@ -65,18 +64,18 @@ $Operario = new Operarios();
                     <div class="col-sm-12  col-lg-12 col-xl-4   mb-3 mb-sm-3 mb-md-3 mb-lg-3 mb-xl-0 pr-md-3 pr-lg-3 pr-xl-0">
 
                         <!--Search Component-->
-                        <div class="card  mb-3">
-                            <div class="searchBar text-primary">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="BuscarOperario"
-                                        placeholder="Ingresa el codigo del operario" required>
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-primary" type="submit" id="btn-buscar-operario">
-                                            <i class="fa fa-search" style="pointer-events: none;"></i>
-                                        </button>
-                                    </div>
+                        <div class="card mb-3">
+                            <div class="card-header text-primary"><i class="fa fa-search"></i> Buscar operario: </div>
+
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="BuscarOperario" required>
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-primary" type="submit" id="btn-buscar-operario">
+                                        <i class="fa fa-search" style="pointer-events: none;"></i>
+                                    </button>
                                 </div>
                             </div>
+
                         </div>
 
                         <div class="card">
@@ -93,7 +92,7 @@ $Operario = new Operarios();
                                     <div class="form-row mb-1">
                                         <div class="form-group col-12">
                                             <label for="correo">Nombre</label>
-                                            <input  type="text" class="form-control" name="nombre"  id="nombre" placeholder="Ingrese el nombre">
+                                            <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Ingrese el nombre">
                                         </div>
                                         <div class="form-group col-12">
                                             <label for="cedula">Apellidos</label>
@@ -101,8 +100,7 @@ $Operario = new Operarios();
                                         </div>
                                     </div>
                                     <div class="form-row d-flex justify-content-center  px-1">
-                                        <input type="button" class="btn btn-outline-primary  col-sm-12 col-md-6"
-                                         id="btn-ingresar-operario"   value="Ingresar">
+                                        <input type="button" class="btn btn-outline-primary  col-sm-12 col-md-6" id="btn-ingresar-operario" value="Ingresar">
                                     </div>
                                 </form>
                             </div>
@@ -116,7 +114,7 @@ $Operario = new Operarios();
                     <!--Segunda tarjeta-->
                     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-8  mb-3 mb-sm-3 mb-lg-0">
 
-                    <div class="card">
+                        <div class="card">
                             <div class="card-header border-bottom-0 text-primary"><i class="fas fa-th-list"></i>
                                 Operarios registrados</div>
                             <div class="card-body p-0">
@@ -162,7 +160,7 @@ $Operario = new Operarios();
 
                                 <!-- Pagination -->
                                 <div class="col d-flex justify-content-end" id="respuesta-paginacion"></div>
-                                
+
                             </div>
                         </div>
 

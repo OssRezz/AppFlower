@@ -17,12 +17,14 @@ if ($accion == "btn-editar-usuario"){
     $Usuarios = $Usuario->getUsuarioById($correo);
     if ($Usuarios !=null) {
         foreach($Usuarios as $Usuarios){
-            $correo =  $Usuarios['correo'];
             $nombre =  $Usuarios['nombre'];
             $password =  $Usuarios['password'];
-            $id_perfil =  $Usuarios['tperfil'];
+            $id_perfil =  $Usuarios['perfil'];
+            $nombrePerfil =  $Usuarios['tperfil'];
+
         }
-        $Modal->modalActualizarUsuario($correo,$nombre,$password,$id_perfil);
+        $arrayPerfil = $Usuario->listaPerfil();
+        $Modal->modalActualizarUsuario($correo,$nombre,$password,$id_perfil,$nombrePerfil,$arrayPerfil);
     }
 }
 

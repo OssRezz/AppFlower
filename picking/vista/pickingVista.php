@@ -12,7 +12,7 @@ $semana = date('Y\-\WW');
 <html>
 
 <head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
     <link rel="shortcut icon" href="../../img/isabelitaLogo.jpg">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
@@ -65,17 +65,17 @@ $semana = date('Y\-\WW');
 
                         <!--Search Component-->
                         <div class="card mb-3">
-                            <div class="searchBar text-primary">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="BuscarPicking" placeholder="Ingresa el codigo del operario" required>
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-primary" type="submit" id="btn-buscar-picking">
-                                            <i class="fa fa-search" style="pointer-events: none;"></i>
-                                        </button>
-                                    </div>
+                            <div class="card-header text-primary"><i class="fa fa-search"></i> Buscar operario en la tabla de picking: </div>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="BuscarPicking">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-primary" type="submit" id="btn-buscar-picking">
+                                        <i class="fa fa-search" style="pointer-events: none;"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
+
 
                         <div class="card">
                             <div class="card-header text-primary"><i class="fas fa-plus-circle "></i> Formulario de
@@ -225,7 +225,7 @@ $semana = date('Y\-\WW');
 
                                             } else {
                             ?>
-                            
+
                             <?php
                                             }
                             ?>

@@ -22,34 +22,37 @@ $Semana = rtrim($semana, " ");
 $Hora = rtrim($hora, " ");
 
 
-if (empty($Operario) != 1 && empty($Labor) != 1 && empty($Posicion) != 1  && empty($Fecha) != 1 && empty($Semana) != 1 && empty($Hora) != 1) {
+try {
+    if (empty($Operario) != 1 && empty($Labor) != 1 && empty($Posicion) != 1  && empty($Fecha) != 1 && empty($Semana) != 1 && empty($Hora) != 1) {
 
-    if ($labor === "1") {
-        
-        $recetas = $_POST['recetas'];
-        $Separador = str_replace("+", ',', $recetas);
-        $produccion_arreglo = preg_split("/\,/", $Separador);
-        $Tallos = array_sum($produccion_arreglo);
+        if ($labor === "1") {
 
-        if ($produccion->insertarProduccion($Operario, $Labor, $Posicion, $Fecha, $Semana, $Tallos, $Hora, $recetas)) {
-            $modal->modalInsert("success");
+            $recetas = $_POST['recetas'];
+            $Separador = str_replace("+", ',', $recetas);
+            $produccion_arreglo = preg_split("/\,/", $Separador);
+            $Tallos = array_sum($produccion_arreglo);
+
+            if ($produccion->insertarProduccion($Operario, $Labor, $Posicion, $Fecha, $Semana, $Tallos, $Hora, $recetas)) {
+                $modal->modalInsert("success");
+            } else {
+                $modal->modalInfo("danger", "Error en la base de datos");
+            }
         } else {
-            $modal->modalInfo("danger", "Error en la base de datos");
-        }
 
+            $Tallos = $_POST['tallos'];
+            $recetas = null;
+
+            if ($produccion->insertarProduccion($Operario, $Labor, $Posicion, $Fecha, $Semana, $Tallos, $Hora, $recetas)) {
+                $modal->modalInsert("success");
+            } else {
+                $modal->modalInfo("danger", "Error en la base de datos");
+            }
+        }
     } else {
-
-        $Tallos = $_POST['tallos'];
-        $recetas = null;
-
-        if ($produccion->insertarProduccion($Operario, $Labor, $Posicion, $Fecha, $Semana, $Tallos, $Hora, $recetas)) {
-            $modal->modalInsert("success");
-        } else {
-            $modal->modalInfo("danger", "Error en la base de datos");
-        }
-
+        $modal->modalInfo("primary", "Verifica los datos ingresados.");
     }
-
-} else {
-    $modal->modalInfo("primary", "Verifica los datos ingresados.");
+} catch (PDOException $e) {
+    $Modal->modalInfo("danger", "Verifica los datos ingresados.");
 }
+
+?>

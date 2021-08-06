@@ -39,6 +39,26 @@ class Produccion extends Conexion
         }
     }
 
+    public function actualizarProduccion($id_produccion, $Operario, $Labor, $Posicion, $Fecha, $Semana, $Tallos, $Hora, $recetas)
+    {
+        $statement = $this->db->prepare("UPDATE `tbl_produccion` SET `id_produccion`=:id_produccion,`operario`=:Operario,`labor`=:Labor,`posicion`=:Posicion,`fecha`=:Fecha,`semana`=:Semana,`tallos`=:Tallos,`hora`=:Hora,`recetas`=:recetas WHERE id_produccion= :id_produccion");
+
+        $statement->bindParam(':id_produccion', $id_produccion);
+        $statement->bindParam(':Operario', $Operario);
+        $statement->bindParam(':Labor', $Labor);
+        $statement->bindParam(':Posicion', $Posicion);
+        $statement->bindParam(':Fecha', $Fecha);
+        $statement->bindParam(':Semana', $Semana);
+        $statement->bindParam(':Tallos', $Tallos); 
+        $statement->bindParam(':Hora', $Hora);
+        $statement->bindParam(':recetas', $recetas);
+        if ($statement->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     //Lista con el total de los Operarios
     public function listaProduccion()
     {
@@ -105,7 +125,7 @@ class Produccion extends Conexion
         }
         return $listaProduccion;
     }
-
 }
+
 
 ?>
