@@ -31,8 +31,10 @@ try {
             $week = $date->format("W");
             $year = $date->format('Y');
             $Semana = "$year-W$week";
+
+            $tiempoDecimal = round(($tiempo / 60), 2);
             
-            if ($TmProduccion->updateTmProduccion($id_tmproduccion, $Operario, $Labor, $Posicion, $Causa, $Fecha, $Semana, $Tiempo)) {
+            if ($TmProduccion->updateTmProduccion($id_tmproduccion, $Operario, $Labor, $Posicion, $Causa, $Fecha, $Semana, $tiempoDecimal)) {
                 $modal->modalInfo("success", "Tiempo muerto de producción  actualizado.");
             } else {
                 $modal->modalInfo("danger", "Error en la base de datos");

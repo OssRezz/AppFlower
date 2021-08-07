@@ -52,7 +52,7 @@ class tmEmpaque extends Conexion
         return $listatmEmpaque;
     }
 
-    public function ingresartmEmpaque($Operario, $Celula, $Causa, $Fecha, $Semana, $Minutos,$Horas)
+    public function ingresartmEmpaque($Operario, $Celula, $Causa, $Fecha, $Semana, $Minutos, $Horas)
     {
         $statement = $this->db->prepare("INSERT INTO `tm_empaquefinal`(`operario`, `celula`, `causa`, `fecha`, `semana`, `minutos`, `horas`) VALUES (:Operario,:Celula,:Causa,:Fecha,:Semana,:Minutos,:Horas)");
         $statement->bindParam(':Operario', $Operario);
@@ -81,7 +81,7 @@ class tmEmpaque extends Conexion
         return $listatmEmpaque;
     }
 
-    public function updateTmEmpaque($id_empaquetm, $operario, $celula, $causa, $fecha, $semana,$minutos,$horas)
+    public function updateTmEmpaque($id_empaquetm, $operario, $celula, $causa, $fecha, $semana, $minutos, $horas)
     {
         $statement = $this->db->prepare("UPDATE `tm_empaquefinal` SET `id_empaquetm`=:id_empaquetm,`operario`=:operario,`celula`=:celula,`causa`=:causa,`fecha`=:fecha,`semana`=:semana,`minutos`=:minutos,`horas`=:horas WHERE id_empaquetm= :id_empaquetm");
         $statement->bindParam(':id_empaquetm', $id_empaquetm);
@@ -99,7 +99,30 @@ class tmEmpaque extends Conexion
         }
     }
 
+    public function formatHoras($numero,$funcion)
+    {
+        //$function es lo que vamos hacer, en este caso dividor o multiplicar
+        // bcdiv division, bcmul multiplicacion
+
+        //validamos si el numero es entero
+        if (ctype_digit($numero)) {
+            return $numero;
+        } else {
+            $arregloHora = preg_split("/\./", $numero);
+            //Despues del punto siempre seran los minutos  array(1 , 35) minutos->35
+            $minutosDecimales = $funcion($arregloHora[1], 60, 2);
+            //Al calcular lo minutos nos devuelve 0.58, por ende tenemos que separar de nuevo array(0 , 58)
+            $decimalesEntero = preg_split("/\./", $minutosDecimales);
+            //La hora siempre será la posicion 0
+            $hora = $arregloHora[0];
+            //los minutos siempren serán la posicion 1
+            $minutos = $decimalesEntero[1];
+            $horaDecimal = $hora . "." . $minutos;
+            return  $horaDecimal;
+        }
+    }
 
 }
+
 
 ?>

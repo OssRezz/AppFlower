@@ -103,7 +103,7 @@ class tmProduccion extends Conexion
         return $listatmProduccion;
     }
 
-    public function updateTmProduccion($id_tmproduccion, $operario, $labor, $posicion, $causa, $fecha, $semana,$tiempo)
+    public function updateTmProduccion($id_tmproduccion, $operario, $labor, $posicion, $causa, $fecha, $semana, $tiempo)
     {
         $statement = $this->db->prepare("UPDATE `tmproduccion` SET `id_tmproduccion`=:id_tmproduccion,`operario`=:operario,`labor`=:labor,`posicion`=:posicion,`causa`=:causa,`fecha`=:fecha,`semana`=:semana,`tiempo`=:tiempo WHERE id_tmproduccion= :id_tmproduccion");
         $statement->bindParam(':id_tmproduccion', $id_tmproduccion);
@@ -120,4 +120,9 @@ class tmProduccion extends Conexion
             return false;
         }
     }
+
+
 }
+
+
+?>

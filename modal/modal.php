@@ -175,7 +175,7 @@ class Modal
     }
 
 
-    public function modalActualizarUsuario($correo, $nombre, $password, $id_perfil,$nombrePerfil,$arrayPerfil)
+    public function modalActualizarUsuario($correo, $nombre, $password, $id_perfil, $nombrePerfil, $arrayPerfil)
     {
         echo "<div class='modal fade' id='modal-login' tabindex='-1' style='display: block;' data-keyboard='false' data-backdrop='static'>";
         echo    "<div class='modal-dialog modal-dialog-centered'>";
@@ -520,7 +520,7 @@ class Modal
         echo "<script>$('#regresar').click(function(){location.reload()});</script>";
     }
 
-    public function modalActualiarTinturado($id_tinturado, $fecha, $nombre, $operario,$horas, $tallos)
+    public function modalActualiarTinturado($id_tinturado, $fecha, $nombre, $operario, $horas, $tallos)
     {
         echo "<div class='modal fade' id='modal-tinturado' tabindex='-1' style='display: block;' data-keyboard='false' data-backdrop='static'>";
         echo    "<div class='modal-dialog modal-dialog-centered modal-lg'>";
@@ -699,8 +699,9 @@ class Modal
         echo                    "</div>";
 
         echo                    "<div class='form-group col-sm-12 col-md-12 mb-4'>";
-        echo                                "<label for='tiempoTmProduccion'>Horas Trabajadas</label>";
-        echo                                "<input type='number' class='form-control' id='tiempoTmProduccion' value='$tiempo'>";
+        echo                                "<label for='tiempoTmProduccion'>Tiempo muerto</label>";
+        $tiempoMinutos = round(($tiempo * 60), 0);
+        echo                                "<input type='number' class='form-control' id='tiempoTmProduccion' value='$tiempoMinutos'>";
         echo                    "</div>";
 
         echo                    "<div class='form-group col-sm-12 col-md-12 d-flex justify-content-center mb-3'>";
@@ -773,15 +774,15 @@ class Modal
         echo                        "<option value='Postcosecha'>Postcosecha</option>";
         echo                        "</select>";
         echo                    "</div>";
-
         echo                    "<div class='form-group col-sm-12 col-md-6'>";
         echo                                "<label for='horasTmEmpaque'>Horas muertas</label>";
-        echo                                "<input type='number' class='form-control' id='horasTmEmpaque' value='$horas'>";
+        echo                                "<input type='number' class='form-control' id='horasTmEmpaque' value='$horas' disabled>";
         echo                    "</div>";
 
         echo                    "<div class='form-group col-sm-12 col-md-6 mb-4'>";
         echo                                "<label for='minutosTmEmpaque'>Minutos muertos</label>";
-        echo                                "<input type='number' class='form-control' id='minutosTmEmpaque' value='$minutos'>";
+        $MinutosDecimal = round(($minutos * 60), 0);
+        echo                                "<input type='number' class='form-control' id='minutosTmEmpaque' value='$MinutosDecimal'>";
         echo                    "</div>";
 
         echo                    "<div class='form-group col-sm-12 col-md-12 d-flex justify-content-center mb-3'>";
@@ -855,9 +856,11 @@ class Modal
         echo                        "</select>";
         echo                    "</div>";
 
+
         echo                    "<div class='form-group col-sm-12 col-md-12 mb-4'>";
         echo                                "<label for='tiempoTmGeneral'>Horas Trabajadas</label>";
-        echo                                "<input type='number' class='form-control' id='tiempoTmGeneral' value='$tiempo'>";
+        $tiempoMinutos = round(($tiempo * 60), 0);
+        echo                                "<input type='number' class='form-control' id='tiempoTmGeneral' value='$tiempoMinutos'>";
         echo                    "</div>";
 
         echo                    "<div class='form-group col-sm-12 col-md-12 d-flex justify-content-center mb-3'>";
@@ -880,6 +883,3 @@ class Modal
         echo "<script>$('#regresar').click(function(){location.reload()});</script>";
     }
 }
-
-
-?>

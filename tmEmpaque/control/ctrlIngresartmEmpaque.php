@@ -11,7 +11,6 @@ $celula = $_POST['celula'];
 $causa = $_POST['causa'];
 $fecha = $_POST['fecha'];
 $minutos = $_POST['minutos'];
-$horas = $_POST['horas'];
 
 
 
@@ -20,17 +19,23 @@ $Celula = rtrim($celula, " ");
 $Causa = rtrim($causa, " ");
 $Fecha = rtrim($fecha, " ");
 $Minutos = rtrim($minutos, " ");
-$Horas = rtrim($horas, " ");
 
 try {
 
-    if (empty($Operario) != 1 && empty($Horas) != 1 && empty($Celula) != 1  && empty($Fecha) != 1 && empty($Minutos) != 1) {
+    if (empty($Operario) != 1  && empty($Celula) != 1  && empty($Fecha) != 1 && empty($Minutos) != 1) {
+        
         $date = new DateTime($Fecha);
         $week = $date->format("W");
         $year = $date->format('Y');
         $Semana = "$year-W$week";
 
-        if ($TmEmpaque->ingresartmEmpaque($Operario, $Celula, $Causa, $Fecha, $Semana, $Minutos,$Horas)) {
+        $MinutosDecimal = bcdiv($Minutos, 60, 2);
+
+        $minutosEnHoras = bcmul($Minutos, 60, 0);
+        $HorasDecimal = (bcdiv($minutosEnHoras, 60, 2)/60);
+
+
+        if ($TmEmpaque->ingresartmEmpaque($Operario, $Celula, $Causa, $Fecha, $Semana, $MinutosDecimal,$HorasDecimal)) {
             $modal->modalInsert("success");
         } else {
             $modal->modalInfo("danger", "Error en la base de datos");

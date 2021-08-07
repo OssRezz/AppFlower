@@ -28,8 +28,9 @@ try {
         $week = $date->format("W");
         $year = $date->format('Y');
         $Semana = "$year-W$week";
+        $tiempoDecimal = round(($Tiempo / 60), 2);
 
-        if ($TmProduccion->ingresartmProduccion($Operario, $Labor, $Posicion, $Causa, $Fecha, $Semana, $Tiempo)) {
+        if ($TmProduccion->ingresartmProduccion($Operario, $Labor, $Posicion, $Causa, $Fecha, $Semana, $tiempoDecimal)) {
             $modal->modalInsert("success");
         } else {
             $modal->modalInfo("danger", "Error en la base de datos");
@@ -40,6 +41,5 @@ try {
 } catch (PDOException $e) {
     $modal->modalInfo("danger", "El operario: $Operario. No se encuentra registrado en el sistema, Por favor verifique la información.");
 }
-
 
 ?>

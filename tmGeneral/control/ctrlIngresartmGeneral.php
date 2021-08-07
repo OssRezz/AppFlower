@@ -26,9 +26,10 @@ try {
         $week = $date->format("W");
         $year = $date->format('Y');
         $Semana = "$year-W$week";
+        $tiempoDecimal = round(($Tiempo / 60), 2);
 
 
-        if ($TmGeneral->ingresartmGeneral($Operario, $Labor, $Causa, $Fecha, $Semana, $Tiempo)) {
+        if ($TmGeneral->ingresartmGeneral($Operario, $Labor, $Causa, $Fecha, $Semana, $tiempoDecimal)) {
             $modal->modalInsert("success");
         } else {
             $modal->modalInfo("danger", "Error en la base de datos");
