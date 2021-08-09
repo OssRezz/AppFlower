@@ -4,7 +4,10 @@ require_once('../../Roles/Modelo/ModeloRoles.php');
 $user = new Roles();
 $user->session();
 $date = date('Y-m-d');
-
+$dateObject = new DateTime($date);
+$week = $dateObject->format("W");
+$year = $dateObject->format('Y');
+$semana = "$year-W$week";
 ?>
 
 <!DOCTYPE html>
@@ -69,26 +72,44 @@ $date = date('Y-m-d');
                                 </div>
                                 <div id="carduno" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
 
-                                    <form class="m-3">
-                                        <div class="form-row">
-                                            <div class="form-group col">
-                                                <label for="fechaInicio">Fecha inicial:</label>
-                                                <input type="date" class="form-control" id="desde" value="<?php echo $date ?>">
-                                            </div>
-                                            <div class="form-group col">
-                                                <label for="fechaFin">Fecha final:</label>
-                                                <input type="date" class="form-control" id="hasta" value="<?php echo $date ?>">
-                                            </div>
+                                <div class="form-row m-3">
+                                        <div class="form-group col">
+                                            <label for="nombre">Tipo de reporte:</label>
+                                            <select class="form-control" id="selectOption">
+                                                <option disabled selected>Seleccione una opcion</option>
+                                                <option value="1">Fecha</option>
+                                                <option value="2">Semana</option>
+                                            </select>
                                         </div>
-                                    </form>
+                                    </div>
+
+                                    <div class="form-row m-3" id="fechaArmado" style="display: none;">
+                                        <div class="form-group col">
+                                            <label for="">Fecha inicial:</label>
+                                            <input type="date" class="form-control" id="desdeArmado" value="<?php echo $date ?>">
+                                        </div>
+                                        <div class="form-group col">
+                                            <label for="">Fecha final:</label>
+                                            <input type="date" class="form-control" id="hastaAmardo" value="<?php echo $date ?>">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row m-3" id="semanaArmado" style="display: none;">
+                                        <div class="form-group col">
+                                            <label for="">Semana:</label>
+                                            <input type="week" class="form-control" id="semana" value="<?php echo $semana ?>">
+                                        </div>
+                                    </div>
+
+
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item d-flex justify-content-between align-items-center py-1">
                                             Promedio mayor a menor
-                                            <a href="javascript:reporte('ctrlArmadoMayorMenor','desde','hasta');" type="button" class="btn text-primary"><i class="fas fa-download"></i></a>
+                                            <a href="javascript:reporte('ctrlArmadoMayorMenor','desdeArmado','hastaAmardo','selectOption','semana');" type="button" class="btn text-primary"><i class="fas fa-download"></i></a>
                                         </li>
                                         <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
                                             Tallos mayor a menor
-                                            <a href="javascript:reporte('ctrlArmadoMenorMayorTallos','desde','hasta');" type="button" class="btn text-primary"> <i class="fas fa-download"></i></a>
+                                            <a href="javascript:reporte('ctrlArmadoMenorMayorTallos','desdeArmado','hastaAmardo','selectOption','semana');" type="button" class="btn text-primary"> <i class="fas fa-download"></i></a>
                                         </li>
                                         <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
                                             Promedio armado
@@ -112,28 +133,6 @@ $date = date('Y-m-d');
                                 </div>
                                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
 
-                                    <form class="m-3">
-                                        <div class="form-row">
-                                            <div class="form-group col">
-                                                <label for="nombre">Fecha inicial:</label>
-                                                <input type="date" class="form-control" id="nombre" placeholder="nombre de la materia">
-                                            </div>
-                                            <div class="form-group col">
-                                                <label for="nombre">Fecha final:</label>
-                                                <input type="date" class="form-control" id="nombre" placeholder="nombre de la materia">
-                                            </div>
-                                        </div>
-                                    </form>
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item d-flex justify-content-between align-items-center py-1">
-                                            Rendimiento maquinas
-                                            <a href="reportePromedio.php" type="button" class="btn text-primary" target="_blank"> <i class="fas fa-download"></i></a>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
-                                            Rendimiento maquinas
-                                            <a href="#" type="button" class="btn text-primary" target="_blank"> <i class="fas fa-download"></i></a>
-                                        </li>
-                                    </ul>
 
                                 </div>
                             </div>
@@ -148,28 +147,7 @@ $date = date('Y-m-d');
                                 </div>
                                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
 
-                                    <form class="m-3">
-                                        <div class="form-row">
-                                            <div class="form-group col">
-                                                <label for="nombre">Fecha inicial:</label>
-                                                <input type="date" class="form-control" id="nombre" placeholder="nombre de la materia">
-                                            </div>
-                                            <div class="form-group col">
-                                                <label for="nombre">Fecha final:</label>
-                                                <input type="date" class="form-control" id="nombre" placeholder="nombre de la materia">
-                                            </div>
-                                        </div>
-                                    </form>
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item d-flex justify-content-between align-items-center py-1">
-                                            Rendimiento de maquinas tallo a tallo
-                                            <a href="reportePromedio.php" type="button" class="btn text-primary" target="_blank"> <i class="fas fa-download"></i></a>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
-                                            Rendimiento de maquinas tallo a tallo
-                                            <a href="#" type="button" class="btn text-primary" target="_blank"> <i class="fas fa-download"></i></a>
-                                        </li>
-                                    </ul>
+
 
                                 </div>
                             </div>
@@ -193,29 +171,6 @@ $date = date('Y-m-d');
                                 </div>
                                 <div id="tarjeta1" class="collapse" aria-labelledby="heading1" data-parent="#accordion2">
 
-                                    <form class="m-3">
-                                        <div class="form-row">
-                                            <div class="form-group col">
-                                                <label for="nombre">Fecha inicial:</label>
-                                                <input type="date" class="form-control" id="nombre" placeholder="nombre de la materia">
-                                            </div>
-                                            <div class="form-group col">
-                                                <label for="nombre">Fecha final:</label>
-                                                <input type="date" class="form-control" id="nombre" placeholder="nombre de la materia">
-                                            </div>
-                                        </div>
-                                    </form>
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item d-flex justify-content-between align-items-center py-1">
-                                            Rendimiento picking
-                                            <a href="reportePromedio.php" type="button" class="btn text-primary" target="_blank"> <i class="fas fa-download"></i></a>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
-                                            Rendimiento picking
-                                            <a href="#" type="button" class="btn text-primary" target="_blank"> <i class="fas fa-download"></i></a>
-                                        </li>
-                                    </ul>
-
 
                                 </div>
                             </div>
@@ -231,28 +186,6 @@ $date = date('Y-m-d');
                                 </div>
                                 <div id="tarjeta2" class="collapse" aria-labelledby="heading2" data-parent="#accordion2">
 
-                                    <form class="m-3">
-                                        <div class="form-row">
-                                            <div class="form-group col">
-                                                <label for="nombre">Fecha inicial:</label>
-                                                <input type="date" class="form-control" id="nombre" placeholder="nombre de la materia">
-                                            </div>
-                                            <div class="form-group col">
-                                                <label for="nombre">Fecha final:</label>
-                                                <input type="date" class="form-control" id="nombre" placeholder="nombre de la materia">
-                                            </div>
-                                        </div>
-                                    </form>
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item d-flex justify-content-between align-items-center py-1">
-                                            Rendimiento producto final
-                                            <a href="reportePromedio.php" type="button" class="btn text-primary" target="_blank"> <i class="fas fa-download"></i></a>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
-                                            Rendimiento producto final
-                                            <a href="#" type="button" class="btn text-primary" target="_blank"> <i class="fas fa-download"></i></a>
-                                        </li>
-                                    </ul>
 
                                 </div>
                             </div>
@@ -266,28 +199,6 @@ $date = date('Y-m-d');
                                 </div>
                                 <div id="tarjeta3" class="collapse" aria-labelledby="heading3" data-parent="#accordion2">
 
-                                    <form class="m-3">
-                                        <div class="form-row">
-                                            <div class="form-group col">
-                                                <label for="nombre">Fecha inicial:</label>
-                                                <input type="date" class="form-control" id="nombre" placeholder="nombre de la materia">
-                                            </div>
-                                            <div class="form-group col">
-                                                <label for="nombre">Fecha final:</label>
-                                                <input type="date" class="form-control" id="nombre" placeholder="nombre de la materia">
-                                            </div>
-                                        </div>
-                                    </form>
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item d-flex justify-content-between align-items-center py-1">
-                                            Rendimiento generales
-                                            <a href="reportePromedio.php" type="button" class="btn text-primary" target="_blank"> <i class="fas fa-download"></i></a>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
-                                            Rendimiento generales
-                                            <a href="#" type="button" class="btn text-primary" target="_blank"> <i class="fas fa-download"></i></a>
-                                        </li>
-                                    </ul>
 
                                 </div>
                             </div>

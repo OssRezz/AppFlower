@@ -26,10 +26,11 @@ $tableStyle = [
 $report = new Reporte();
 $spreadsheet = new Spreadsheet();
 
-//Formateamos la fecha
-if (strlen($_GET['desde']) > 0 and strlen($_GET['hasta']) > 0) {
+if (strlen($_GET['desde']) > 0 and strlen($_GET['hasta']) > 0 and strlen($_GET['selectOption']) > 0 and strlen($_GET['semanaReport']) > 0) {
     $desde = $_GET['desde'];
     $hasta = $_GET['hasta'];
+    $selectedOption = $_GET['selectOption'];
+    $Week = $_GET['semanaReport'];
 
     $verDesde = date('d/m/Y', strtotime($desde));
     $verHasta = date('d/m/Y', strtotime($hasta));
@@ -42,7 +43,16 @@ $reporte->setTitle("Reporte Armado");
 //Posicion del titulo
 $reporte->setCellValue('A1', 'Tallos de mayor a menor armado');
 $reporte->setCellValue('H1', 'fecha:');
-$reporte->setCellValue('I1',  $verDesde);
+
+if ($selectedOption === "1") {
+    $reporte->setCellValue('H1', 'Fecha:');
+    $reporte->setCellValue('I1',  $verDesde);
+
+} else {
+    $reporte->setCellValue('H1', 'Semana:');
+    $reporte->setCellValue('I1',  $Week);
+}
+
 
 //Estilo del titulo
 $spreadsheet->getActiveSheet()->mergeCells("A1:G1");
@@ -82,9 +92,15 @@ $spreadsheet->getActiveSheet()->getRowDimension("2")->setRowHeight(30);
 $spreadsheet->getActiveSheet()->getStyle('A1:I1')->applyFromArray($tableStyle);
 $spreadsheet->getActiveSheet()->getStyle('A2:I2')->applyFromArray($tableStyle);
 
+if ($selectedOption === "1") {
+    $labor = 1;
+    $Reporte = $report->produccionTallosMenorMayor($labor,$desde, $hasta);
+} else {
+    $labor = 1;
+    $Reporte = $report->produccionTallosMenorMayorSemana($labor,$Week);
+}
+
 $count = 3;
-$labor = 1;
-$Reporte = $report->produccionTallosMenorMayor($labor,$desde, $hasta);
 if ($Reporte != null) {
     foreach ($Reporte as $rows) {
         $reporte->setCellValue('A' . $count, $rows['Labor']);

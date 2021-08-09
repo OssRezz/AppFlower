@@ -19,8 +19,9 @@ class Reporte extends conexion
         }
         return $listAarmado;
     }
+    
 
-    //promedio mayor
+    //promedio mayor por fecha
     public function produccionMayorMenor($labor,  $desde, $hasta)
     {
         $listaProduccion = null;
@@ -38,8 +39,27 @@ class Reporte extends conexion
         }
         return $listaProduccion;
     }
+    //promedio mayor semana
+    public function produccionMayorMenorSemana($labor,  $semana)
+    {
+        $listaProduccion = null;
+        $statement = $this->db->prepare("SELECT CONCAT(L.labor, ' ', P.posicion) AS 'Labor',P.operario,O.nombre,P.fecha, Week(fecha) AS 'Semana',P.hora, P.tallos,P.recetas, ROUND(P.tallos/P.hora,0) AS 'Promedio' FROM `tbl_produccion` as P
+        INNER JOIN tbl_operarios AS O ON O.id_operario=P.operario
+        INNER JOIN labor_produccion AS L ON L.id_labor=P.labor 
+        where P.labor = :labor AND semana= :semana
+        ORDER by (Promedio) DESC");
+        $statement->bindParam(':labor', $labor);
+        $statement->bindParam(':semana', $semana);
+        $statement->execute();
+        while ($consulta = $statement->fetch()) {
+            $listaProduccion[] = $consulta;
+        }
+        return $listaProduccion;
+    }
 
-    //tallos
+
+
+    //tallos por fecha
     public function produccionTallosMenorMayor($labor,  $desde, $hasta)
     {
         $listaProduccion = null;
@@ -57,6 +77,25 @@ class Reporte extends conexion
         }
         return $listaProduccion;
     }
+    //talos por semana
+    public function produccionTallosMenorMayorSemana($labor, $semana)
+    {
+        $listaProduccion = null;
+        $statement = $this->db->prepare("SELECT CONCAT(L.labor, ' ', P.posicion) AS 'Labor',P.operario,O.nombre,P.fecha, Week(fecha) AS 'Semana',P.hora, P.tallos,P.recetas, ROUND(P.tallos/P.hora,0) AS 'Promedio' FROM `tbl_produccion` as P
+        INNER JOIN tbl_operarios AS O ON O.id_operario=P.operario
+        INNER JOIN labor_produccion AS L ON L.id_labor=P.labor 
+        where P.labor = :labor AND semana= :semana
+        ORDER by (tallos) DESC");
+        $statement->bindParam(':labor', $labor);
+        $statement->bindParam(':semana', $semana);
+        $statement->execute();
+        while ($consulta = $statement->fetch()) {
+            $listaProduccion[] = $consulta;
+        }
+        return $listaProduccion;
+    }
+
+
 
     //promedio armado
     public function ProduccionPromedio($id,  $desde, $hasta)
