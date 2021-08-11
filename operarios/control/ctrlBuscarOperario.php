@@ -28,14 +28,21 @@ if ($accion == "btn-buscar-operario" && empty($codigo) != 1) {
             echo                    "<tr>";
             echo                        "<th>Codigo</th>";
             echo                        "<th>Nombre</th>";
+            echo                        "<th>Cédula</th>";
+            echo                        "<th>Acción</th>";
             echo                    "</tr>";
             echo                    "<tr>";
             foreach ($Operarios as $Operarios) {
                 $codigo =  $Operarios['id_operario'];
                 $nombre =  $Operarios['nombre'];
+                $cedula =  $Operarios['cedula'];
                 echo                        "<td>$codigo</td>";
                 echo                        "<td>$nombre</td>";
-
+                echo                        "<td>$cedula</td>";
+                echo                        "<td>";
+                echo                        "<button class='btn  btn-sm  btn-outline-primary border-0' id='btn-editar-operario' value='$codigo'>Editar</button>";
+                echo                        "<button class='btn btn-sm btn-outline-danger  border-0  lp' id='btn-eliminar-operario' value='$codigo'><i class='far fa-trash-alt' style='pointer-events: none;'></i></button>";
+                echo                        "</td>";
                 echo                    "</tr>";
             }
             echo                "</table>";
@@ -69,9 +76,14 @@ if ($accion == "btn-buscar-operario" && empty($codigo) != 1) {
             foreach ($Operarios as $Operarios) {
                 $codigo =  $Operarios['id_operario'];
                 $nombre =  $Operarios['nombre'];
+                $cedula =  $Operarios['cedula'];
                 echo                        "<td>$codigo</td>";
                 echo                        "<td>$nombre</td>";
-
+                echo                        "<td>$cedula</td>";
+                echo                        "<td>";
+                echo                        "<button class='btn  btn-sm  btn-outline-primary border-0' id='btn-editar-operario' value='$codigo'>Editar</button>";
+                echo                        "<button class='btn btn-sm btn-outline-danger  border-0  lp' id='btn-eliminar-operario' value='$codigo'><i class='far fa-trash-alt' style='pointer-events: none;'></i></button>";
+                echo                        "</td>";
                 echo                    "</tr>";
             }
             echo                "</table>";

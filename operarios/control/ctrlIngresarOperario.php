@@ -8,15 +8,18 @@ $Operario =  new Operarios();
 
 $codigo = $_POST['codigo'];
 $nombre = $_POST['nombre'] . " " . $_POST['apellido'];
+$cedula = $_POST['cedula'];
 
 
 $Codigo = rtrim($codigo, " ");
 $Nombre = rtrim($nombre, " ");
+$Cedula = rtrim($cedula, " ");
+
 
 try {
 
-    if (empty($Codigo) != 1 && empty($Nombre) != 1) {
-        if ($Operario->ingresarOperarios($Codigo, $Nombre)) {
+    if (empty($Codigo) != 1 && empty($Nombre) != 1 && empty($Cedula) != 1) {
+        if ($Operario->ingresarOperarios($Codigo, $Nombre ,$Cedula)) {
             $modal->modalInsert("success");
         } else {
             $modal->modalInfo("danger", "Error en la base de datos");

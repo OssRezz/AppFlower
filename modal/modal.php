@@ -109,7 +109,7 @@ class Modal
         echo        "</div>";
         echo            "<div class='p-2 bd-highlight'>";
         echo            "<div class='d-flex justify-content-end'>";
-        echo                "<button type='button' class='btn btn-outline-dark' data-dismiss='modal' aria-label='Close'>Regresar</button>";
+        echo                "<button type='button' class='btn btn-outline-dark' data-dismiss='modal' id='regresar' aria-label='Close'>Regresar</button>";
         echo            "</div>";
         echo        "</div>";
         echo        "</div>";
@@ -119,6 +119,8 @@ class Modal
         echo "</div>";
         echo "<script>$('#modal-login').modal('show')</script>";
         echo "<script>$('#btn-delete-usuario').click(function(){location.reload()})</script>";
+        echo "<script>$('#regresar').click(function(){location.reload()});</script>";
+        echo "<script>$('#cerrar').click(function(){location.reload()});</script>";
     }
     public function modalEliminarOperario($color, $nombre, $Codigo)
     {
@@ -139,7 +141,7 @@ class Modal
         echo        "</div>";
         echo            "<div class='p-2 bd-highlight'>";
         echo            "<div class='d-flex justify-content-end'>";
-        echo                "<button type='button' class='btn btn-outline-dark' data-dismiss='modal' aria-label='Close'>Regresar</button>";
+        echo                "<button type='button' class='btn btn-outline-dark' data-dismiss='modal' id='regresar' aria-label='Close'>Regresar</button>";
         echo            "</div>";
         echo        "</div>";
         echo        "</div>";
@@ -148,7 +150,9 @@ class Modal
         echo    "</div>";
         echo "</div>";
         echo "<script>$('#modal-login').modal('show')</script>";
-        echo "<script>$('#btn-delete-operario').click(function(){location.reload()})</script>";
+        echo "<script>$('#btn-delete-operario').click(function(){location.href='operariosVista.php'})</script>";
+        echo "<script>$('#regresar').click(function(){location.reload()});</script>";
+        echo "<script>$('#cerrar').click(function(){location.reload()});</script>";
     }
 
     public function modalInsert($color)
@@ -233,7 +237,7 @@ class Modal
         echo "<script>$('#modal-login').modal('show')</script>";
     }
 
-    public function modalActualizarOperario($codigo, $nombre)
+    public function modalActualizarOperario($codigo,$cedula, $nombre)
     {
         echo "<div class='modal fade' id='modal-login' tabindex='-1' style='display: block;' data-keyboard='false' data-backdrop='static'>";
         echo    "<div class='modal-dialog modal-dialog-centered'>";
@@ -245,18 +249,22 @@ class Modal
         echo            "<div class='modal-body pb-0'>";
 
         echo                 "<form class=''>";
-        echo                    "<div class='form-group col'>";
+        echo                    "<div class='form-group col-sm-12 col-md-12'>";
         echo                        "<label for='idOperario'>Codigo</label>";
         echo                        "<input type='hidden' class='form-control hidden' id='id' value='$codigo'>";
         echo                        "<input type='email' class='form-control' id='idOperario' value='$codigo'>";
         echo                    "</div>";
-        echo                    "<div class='form-group col mb-5'>";
+        echo                    "<div class='form-group col-sm-12 col-md-12'>";
+        echo                        "<label for='cedula'>Cédula</label>";
+        echo                        "<input type='cedula' class='form-control' id='cedulaOperario' value='$cedula'>";
+        echo                    "</div>";
+        echo                    "<div class='form-group col-sm-12 col-md-12 mb-5'>";
         echo                        "<label for='nombreOperario'>Nombre</label>";
         echo                        "<input type='text' class='form-control' id='nombreOperario' value='$nombre'>";
         echo                    "</div>";
         echo                    "<div class='form-group d-flex justify-content-center pb-0'>";
         echo                    "<div class='form-group col-5'>";
-        echo                        "<input type='button' class='btn btn-outline-dark  btn-block' data-dismiss='modal' value='Regresar'>";
+        echo                        "<input type='button' class='btn btn-outline-dark  btn-block' data-dismiss='modal' id='regresar' value='Regresar'>";
         echo                    "</div>";
         echo                    "<div class='form-group col-5'>";
         echo                        "<input type='button' class='btn btn-outline-primary btn-block' id='btn-update-operario' value='Actualizar'>";
@@ -270,7 +278,9 @@ class Modal
         echo        "</div>";
         echo    "</div>";
         echo "</div>";
+        echo "<script>$('#cerrar').click(function(){location.reload()});</script>";
         echo "<script>$('#modal-login').modal('show')</script>";
+        echo "<script>$('#regresar').click(function(){location.reload()});</script>";
     }
 
     public function modalActualizarProduccion($idProduccion, $fecha, $nombre, $codigo, $laborNombre, $idLabor, $labores, $posicion, $tiempo, $tallos, $recetas)
