@@ -10,11 +10,12 @@ class Operarios extends Conexion
         $this->db = parent::__construct();
     }
 
-    public function ingresarOperarios($Codigo, $Nombre)
+    public function ingresarOperarios($Codigo, $Nombre,$Cedula)
     {
-        $statement = $this->db->prepare("INSERT INTO tbl_operarios(id_operario,nombre) VALUES (:Codigo,:Nombre)");
+        $statement = $this->db->prepare("INSERT INTO tbl_operarios(id_operario,nombre,cedula) VALUES (:Codigo,:Nombre,:Cedula)");
         $statement->bindParam(':Codigo', $Codigo);
         $statement->bindParam(':Nombre', $Nombre);
+        $statement->bindParam(':Cedula', $Cedula);
         if ($statement->execute()) {
             return true;
         } else {
@@ -49,7 +50,7 @@ class Operarios extends Conexion
     public function listarOperarioById($codigo)
     {
         $listOperario = null;
-        $statement = $this->db->prepare("SELECT * FROM `tbl_operarios` Where id_operario LIKE '%' :codigo '%'");
+        $statement = $this->db->prepare("SELECT * FROM `tbl_operarios` Where id_operario LIKE '%' :codigo '%' LIMIT 5");
         $statement->bindParam(':codigo', $codigo);
         $statement->execute();
         while ($consulta = $statement->fetch()) {
@@ -57,6 +58,19 @@ class Operarios extends Conexion
         }
         return $listOperario;
     }
+
+    public function listarOperarioByIdLimit($codigo)
+    {
+        $listOperario = null;
+        $statement = $this->db->prepare("SELECT * FROM `tbl_operarios` Where id_operario= :codigo  LIMIT 1");
+        $statement->bindParam(':codigo', $codigo);
+        $statement->execute();
+        while ($consulta = $statement->fetch()) {
+            $listOperario[] = $consulta;
+        }
+        return $listOperario;
+    }
+
 
     public function listarOperario($codigo)
     {
@@ -73,7 +87,7 @@ class Operarios extends Conexion
     public function listarOperarioByNombre($nombre)
     {
         $listOperario = null;
-        $statement = $this->db->prepare("SELECT * FROM `tbl_operarios` WHERE nombre LIKE '%' :nombre '%'");
+        $statement = $this->db->prepare("SELECT * FROM `tbl_operarios` WHERE nombre LIKE '%' :nombre '%' LIMIT 5");
         $statement->bindParam(':nombre', $nombre);
         $statement->execute();
         while ($consulta = $statement->fetch()) {
@@ -83,12 +97,13 @@ class Operarios extends Conexion
     }
 
 
-    public function actualizarOperario($id,$Codigo, $Nombre)
+    public function actualizarOperario($id,$Codigo, $Nombre,$Cedula)
     {
-        $statement = $this->db->prepare("UPDATE `tbl_operarios` SET `id_operario`=:codigo,`nombre`=:nombre WHERE id_operario= :id");
+        $statement = $this->db->prepare("UPDATE `tbl_operarios` SET `id_operario`=:codigo,`nombre`=:nombre,`cedula`=:cedula WHERE id_operario= :id");
         $statement->bindParam(':id', $id);
         $statement->bindParam(':codigo', $Codigo);
         $statement->bindParam(':nombre', $Nombre);
+        $statement->bindParam(':cedula', $Cedula);
         if ($statement->execute()) {
             return true;
         } else {
@@ -105,6 +120,18 @@ class Operarios extends Conexion
             return false;
         }
     }
+    
+    public function listOperario()
+    {
+        $listOperario = null;
+        $statement = $this->db->prepare("SELECT * FROM tbl_operarios");
+        $statement->execute();
+        while ($consulta = $statement->fetch()) {
+            $listOperario[] = $consulta;
+        }
+        return $listOperario;
+    }
+
 
 }
 

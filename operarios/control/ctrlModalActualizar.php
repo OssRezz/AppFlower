@@ -16,8 +16,9 @@ if ($accion == "btn-editar-operario"){
     if ($Operarios !=null) {
         foreach($Operarios as $Operarios){
             $nombre =  $Operarios['nombre'];
+            $cedula =  $Operarios['cedula'];
         }
-        $Modal->modalActualizarOperario($codigo,$nombre);
+        $Modal->modalActualizarOperario($codigo,$cedula,$nombre);
     }
 }
 

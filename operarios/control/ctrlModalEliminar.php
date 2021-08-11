@@ -12,13 +12,12 @@ $Codigo = $_POST['codigo'];
 
 if ($accion == "btn-eliminar-operario"){
 
-    $Operarios = $Operario->listarOperarioById($Codigo);
+    $Operarios = $Operario->listarOperarioByIdLimit($Codigo);
     if ($Operarios !=null) {
         foreach($Operarios as $Operarios){
-            $codigo =  $Operarios['id_operario'];
             $nombre =  $Operarios['nombre'];
         }
-        $Modal->modalEliminarOperario("danger",$nombre,$codigo);
+        $Modal->modalEliminarOperario("danger",$nombre,$Codigo);
     }
 }
 

@@ -78,15 +78,20 @@ $Operario = new Operarios();
 
                         </div>
 
-                        <div class="card">
+                        <!-- Card formulario operarios-->
+                        <div class="card mb-3">
                             <div class="card-header text-primary"><i class="fas fa-plus-circle "></i> Formulario de operarios</div>
 
                             <div class="card-body">
                                 <form>
                                     <div class="form-row">
-                                        <div class="form-group col-12">
+                                        <div class="form-group col-sm-12 col-md-6">
                                             <label for="codigo">Codigo</label>
                                             <input type="text" class="form-control" name="codigo" id="codigo" placeholder="Ingrese el codigo">
+                                        </div>
+                                        <div class="form-group  col-sm-12 col-md-6">
+                                            <label for="cedula">Cedula</label>
+                                            <input type="text" class="form-control" name="cedula" id="cedula" placeholder="Ingrese la cedula">
                                         </div>
                                     </div>
                                     <div class="form-row mb-1">
@@ -95,7 +100,7 @@ $Operario = new Operarios();
                                             <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Ingrese el nombre">
                                         </div>
                                         <div class="form-group col-12">
-                                            <label for="cedula">Apellidos</label>
+                                            <label for="apellidos">Apellidos</label>
                                             <input type="text" class="form-control" name="apellidos" id="apellidos" placeholder="Ingrese los apellidos">
                                         </div>
                                     </div>
@@ -106,7 +111,33 @@ $Operario = new Operarios();
                             </div>
                         </div>
 
+                        <!-- Card pra cargar los archivos a la base de datos-->
+                        <div class="card">
+                            <div class="card-header text-primary"><i class="fas fa-upload"></i> Cargar base de datos de los operarios</div>
+                            <div class="card-body pb-2">
 
+                                <div class="form-row">
+                                    <div class="form-group col">
+                                        <label class="label" data-toggle="tooltip" data-placement="top" title="Archivo de excel">Selecciona el archivo para cargar la base de datos</label>
+                                        <span id="message"></span>
+                                    </div>
+                                </div>
+                                <form method="post" id="import_excel_form" enctype="multipart/form-data">
+
+                                    <div class="form-row">
+                                        <div class="form-group col-sm-12 col-md-12 mb-4">
+                                            <input type="file" class="form-control-file" name="import_excel" />
+                                        </div>
+
+                                        <div class="form-group col-sm-12 col-md-12 d-flex justify-content-center">
+                                            <input type="submit" class="btn btn-outline-primary col-sm-12 col-md-6" name="import" id="import" class="btn btn-primary" value="Cargar operarios" />
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        </div>
 
                     </div>
 
@@ -147,12 +178,14 @@ $Operario = new Operarios();
                                                                 </div>
                                                             </li>
                                                             <li class="list-group-item lp"><b>Codigo </b>: <?php echo $Operarios['id_operario'] ?></li>
+                                                            <li class="list-group-item lp"><b>Cedula </b>: <?php echo $Operarios['cedula'] ?></li>
+
                                                         </ul>
                                                     </div>
-                                            <?php
+                                                <?php
                                                 }
-                                            }
-                                            ?>
+
+                                                ?>
                                         </div>
                                     </tr>
 
@@ -160,7 +193,14 @@ $Operario = new Operarios();
 
                                 <!-- Pagination -->
                                 <div class="col d-flex justify-content-end" id="respuesta-paginacion"></div>
+                            <?php
 
+                                            } else {
+                            ?>
+
+                            <?php
+                                            }
+                            ?>
                             </div>
                         </div>
 

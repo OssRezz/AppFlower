@@ -48,10 +48,12 @@ $(document).ready(function () {
         var codigo = $('#codigo').val();
         var nombre = $('#nombre').val();
         var apellido = $('#apellidos').val();
+        var cedula = $('#cedula').val();
         $.post('../control/ctrlIngresarOperario.php', {
             codigo: codigo,
             nombre: nombre,
-            apellido: apellido
+            apellido: apellido,
+            cedula: cedula
         }, function (responseText) {
             $('#respuesta').html(responseText);
         });
@@ -133,5 +135,34 @@ $(document).ready(function () {
         }
     });
 
+
+    
+    $('#import_excel_form').on('submit', function (event) {
+        event.preventDefault();
+        $.ajax({
+            url: "../control/ctrlCargarOperarios.php",
+            method: "POST",
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            beforeSend: function () {
+                $('#import').attr('disabled', 'disabled');
+                $('#import').val('cargando...');
+                $('#import').addClass('text-dark');
+            },
+            success: function (data) {
+                $('#message').html(data);
+                $('#import_excel_form')[0].reset();
+                $('#import').attr('disabled', false);
+                $('#import').val('Cargar información');
+                $('#import').removeClass('text-dark');
+            }
+        })
+    });
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    });
 
 });
