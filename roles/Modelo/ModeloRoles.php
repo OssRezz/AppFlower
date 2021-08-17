@@ -24,7 +24,12 @@ Class Roles extends Conexion{
 
 
     public function getUsername(){
-        return $_SESSION['nombre'];
+        if ($_SESSION['nombre'] != null) {
+            return $_SESSION['nombre'];
+        }else{
+            header('Location: ../../index.php');
+        }
+
     }
 
     public function getPerfil(){
@@ -37,6 +42,8 @@ Class Roles extends Conexion{
             if ($_SESSION['perfil'] != 1 & $_SESSION['perfil'] != 2) {
                 header('Location: ../../produccion/vista/produccionVista.php');
             }
+        } else {
+            header('Location: ../../index.php');
         }
     }
 

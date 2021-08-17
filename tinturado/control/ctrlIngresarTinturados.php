@@ -6,14 +6,12 @@ $tinturados = new Tinturados();
 $modal = new Modal();
 
 $operario = $_POST['operario'];
-// $labor = $_POST['labor'];
 $fecha = $_POST['fecha'];
 $horas = $_POST['horas'];
 $tallos = $_POST['tallos'];
 
 
 $Operario = rtrim($operario, " ");
-// $Labor = rtrim($labor, " ");
 $Fecha = rtrim($fecha, " ");
 $Horas = rtrim($horas, " ");
 $Tallos = rtrim($tallos, " ");

@@ -33,15 +33,14 @@ function userMenu($title)
     $Operarios = "btn-outline-dark";
 
     switch ($title) {
-        case 'Index Admin':
+        case 'Reportes':
             $indexAdmin = "btn-dark";
             break;
         case 'Operarios':
             $Operarios = "btn-dark";
             break;
     }
-    echo "<a href='../../reportes/vista/reportesVista.php' class='btn btn-block $indexAdmin  mb-2 text-left'><i class='fas fa-home  pr-2'></i> App
-    Flower</a>";
+    echo "<a href='../../reportes/vista/reportesVista.php' class='btn btn-block $indexAdmin  mb-2 text-left'><i class='fas fa-flag pr-2'></i>Reportes</a>";
 
     echo "<a href='../../operarios/vista/operariosVista.php' class='btn btn-block $Operarios  mb-2   text-left'><i
         class='fad fa-user-hard-hat  pr-2'></i>Operarios</a>";

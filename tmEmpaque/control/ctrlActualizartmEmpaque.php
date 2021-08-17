@@ -31,13 +31,11 @@ try {
             $week = $date->format("W");
             $year = $date->format('Y');
             $Semana = "$year-W$week";
-
-            $MinutosDecimal = bcdiv($Minutos, 60, 2);
-
+            
             $minutosEnHoras = bcmul($Minutos, 60, 0);
             $HorasDecimal = (bcdiv($minutosEnHoras, 60, 2)/60);
 
-            if ($TmEmpaque->updateTmEmpaque($id_empaquetm, $Operario, $Celula, $Causa, $Fecha, $Semana, $MinutosDecimal,$HorasDecimal)) {
+            if ($TmEmpaque->updateTmEmpaque($id_empaquetm, $Operario, $Celula, $Causa, $Fecha, $Semana, $Minutos,$HorasDecimal)) {
                 $modal->modalInfo("success", "Tiempo muerto de empaque  actualizado.");
             } else {
                 $modal->modalInfo("danger", "Error en la base de datos");

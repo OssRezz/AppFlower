@@ -58,5 +58,5 @@ try {
         $modal->modalInfo("primary", "Verifica los datos ingresados.");
     }
 } catch (PDOException $e) {
-    $Modal->modalInfo("danger", "Verifica los datos ingresados.");
+    $modal->modalInfo("danger", "Verifica los datos ingresados.");
 }

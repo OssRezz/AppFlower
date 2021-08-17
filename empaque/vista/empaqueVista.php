@@ -87,10 +87,10 @@ $date = date('Y-m-d');
                                         <div class="form-group col-sm-12 col-md-6">
                                             <label for="posicion">Posicion</label>
                                             <select name="posicion" id="posicion" class="form-control">
-                                                <option value="Celula 1" selected>Celula 1</option>
-                                                <option value="Celula 2">Celula 2</option>
-                                                <option value="Celula 3">Celula 3</option>
-                                                <option value="Celula 4">Celula 4</option>
+                                                <option value="Célula 1" selected>Célula 1</option>
+                                                <option value="Célula 2">Célula 2</option>
+                                                <option value="Célula 3">Célula 3</option>
+                                                <option value="Célula 4">Célula 4</option>
                                                 <option value="Postcosecha">Postcosecha</option>
                                             </select>
                                         </div>
@@ -114,7 +114,7 @@ $date = date('Y-m-d');
                                     <div class="form-row">
                                         <div class="form-group col-sm-12 col-md-12">
                                             <label for="operario">Codigo</label>
-                                            <input type="text" class="form-control" name="operario" id="operario" placeholder="Ingrese el codigo del operario">
+                                            <input type="number" class="form-control" name="operario" id="operario" placeholder="Ingrese el codigo del operario">
                                         </div>
                                     </div>
                                     <div class="form-row">
@@ -126,11 +126,11 @@ $date = date('Y-m-d');
                                     <div class="form-row mb-1">
                                         <div class="form-group col-sm-12 col-md-6">
                                             <label for="hora">Horas Trabajadas</label>
-                                            <input type="text" class="form-control" name="hora" id="hora" placeholder="Tiempo laborado">
+                                            <input type="number" class="form-control" name="hora" id="hora" placeholder="Tiempo laborado">
                                         </div>
                                         <div class="form-group col-sm-12 col-md-6">
                                             <label for="cajas">Cajas</label>
-                                            <input type="text" class="form-control" name="cajas" id="cajas" placeholder="Cantidad del operario">
+                                            <input type="number" class="form-control" name="cajas" id="cajas" placeholder="Cantidad del operario">
                                         </div>
                                     </div>
                                     <div class="form-row d-flex justify-content-center px-1">
