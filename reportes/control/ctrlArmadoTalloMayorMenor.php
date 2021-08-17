@@ -38,11 +38,11 @@ if (strlen($_GET['desde']) > 0 and strlen($_GET['hasta']) > 0 and strlen($_GET['
 
 $reporte = $spreadsheet->getActiveSheet();
 
-$reporte->setTitle("Reporte Armado");
+$reporte->setTitle("Armado tallo");
 
 
 //Posicion del titulo
-$reporte->setCellValue('A1', 'Rendimientos descendente');
+$reporte->setCellValue('A1', 'Armado tallo, rendimiento descendente');
 
 if ($selectedOption === "1") {
     $reporte->setCellValue('D1', 'Fecha:');
@@ -52,7 +52,6 @@ if ($selectedOption === "1") {
     } else {
         $reporte->setCellValue('E1',  $verDesde . " Hasta: " .  $verHasta);
     }
-
 } else {
     $reporte->setCellValue('D1', 'Semana:');
     $reporte->setCellValue('E1',  $Week);
@@ -76,14 +75,14 @@ $reporte->setCellValue('D2', 'Rendimiento');
 $spreadsheet->getActiveSheet()->getColumnDimension("A")->setWidth(15);
 $spreadsheet->getActiveSheet()->getColumnDimension("B")->setWidth(15);
 $spreadsheet->getActiveSheet()->getColumnDimension("C")->setWidth(30);
-$spreadsheet->getActiveSheet()->getColumnDimension("D")->setWidth(27);
+$spreadsheet->getActiveSheet()->getColumnDimension("D")->setWidth(20);
 $spreadsheet->getActiveSheet()->getColumnDimension("E")->setWidth(27);
 
 
 //Estilo negrilla, tamaño de letra, y fila
 $spreadsheet->getActiveSheet()->getStyle('A2:E2')->getFont()->setSize(12);
 $spreadsheet->getActiveSheet()->getStyle('A1:E1')->getFont()->setBold(true);
-$spreadsheet->getActiveSheet()->getStyle('A2:D2')->getFont()->setBold(true);
+$spreadsheet->getActiveSheet()->getStyle('A2:E2')->getFont()->setBold(true);
 $spreadsheet->getActiveSheet()->getRowDimension("2")->setRowHeight(30);
 
 //Aplicamos nuestros colores del arreglo
@@ -91,7 +90,7 @@ $spreadsheet->getActiveSheet()->getStyle('A1:E1')->applyFromArray($tableStyle);
 $spreadsheet->getActiveSheet()->getStyle('A2:E2')->applyFromArray($tableStyle);
 
 $count = 3;
-$labor = 1;
+$labor = 3;
 
 if ($selectedOption === "1") {
     $Reporte = $report->produccionMayorMenor($labor, $desde, $hasta);
@@ -115,13 +114,13 @@ if ($Reporte != null) {
 //define first row and last row
 $firstRow = 2;
 $lasRow = $count - 1;
-$spreadsheet->getActiveSheet()->setAutoFilter("A" . $firstRow . ":D" . $lasRow);
+$spreadsheet->getActiveSheet()->setAutoFilter("A".$firstRow.":D".$lasRow);
 
 
 
 
 header('Content-Type: application/vnd.ms-excel');
-header('Content-Disposition: attachment;filename="armado_rendimiento__' . $desde . '.xls"');
+header('Content-Disposition: attachment;filename="armadoTallo_rendimiento_'.$desde.'.xls"');
 header('Cache-Control: max-age=0');
 
 $writer = IOFactory::createWriter($spreadsheet, 'Xls');

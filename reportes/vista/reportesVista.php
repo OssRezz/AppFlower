@@ -21,7 +21,7 @@ $semana = "$year-W$week";
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="app.js"></script>
-    <title>Index Admin</title>
+    <title>Reportes</title>
 </head>
 
 <body>
@@ -58,12 +58,12 @@ $semana = "$year-W$week";
                 <div class="row m-3 justify-content-center">
 
                     <!--Primer Collapse-->
-                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4 mb-3 mb-sm-3 mb-lg-0">
+                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 mb-3 mb-sm-3 mb-lg-0">
 
 
                         <div id="accordion">
 
-                            <!-- Reporte de Celulas (Primer tarjeta)-->
+                            <!-- Reporte de armado (Primer tarjeta)-->
                             <div class="card mb-3">
                                 <div class="card-header" id="headingOne">
                                     <button class="btn btn-link" data-toggle="collapse" data-target="#carduno" aria-expanded="true" aria-controls="carduno">
@@ -72,7 +72,7 @@ $semana = "$year-W$week";
                                 </div>
                                 <div id="carduno" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
 
-                                <div class="form-row m-3">
+                                    <div class="form-row m-3">
                                         <div class="form-group col">
                                             <label for="nombre">Tipo de reporte:</label>
                                             <select class="form-control" id="selectOption">
@@ -103,27 +103,27 @@ $semana = "$year-W$week";
 
 
                                     <ul class="list-group list-group-flush">
+                                        <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
+                                            Rendimiento armado
+                                            <a href="javascript:reporte('ctrlArmadoRendimiento','desdeArmado','hastaAmardo','selectOption','semana');" type="button" class="btn text-primary"> <i class="fas fa-download"></i></a>
+                                        </li>
                                         <li class="list-group-item d-flex justify-content-between align-items-center py-1">
-                                            Promedio mayor a menor
+                                            Rendmiento mayor a menor
                                             <a href="javascript:reporte('ctrlArmadoMayorMenor','desdeArmado','hastaAmardo','selectOption','semana');" type="button" class="btn text-primary"><i class="fas fa-download"></i></a>
                                         </li>
                                         <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
                                             Tallos mayor a menor
                                             <a href="javascript:reporte('ctrlArmadoMenorMayorTallos','desdeArmado','hastaAmardo','selectOption','semana');" type="button" class="btn text-primary"> <i class="fas fa-download"></i></a>
                                         </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
-                                            Promedio armado
-                                            <a href="javascript:reporte('ctrlArmadoPromedio','desde','hasta');" type="button" class="btn text-primary"> <i class="fas fa-download"></i></a>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
-                                            Reporte bonificación
+                                        <!-- <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
+                                            Bonificación armado
                                             <a href="javascript:reporte('ctrlBonificacionProduccion','desde','hasta');" type="button" class="btn text-primary"> <i class="fas fa-download"></i></a>
-                                        </li>
+                                        </li> -->
                                     </ul>
                                 </div>
                             </div>
 
-                            <!--Reporte de  maquinas(Segunda Tarjeta)-->
+                            <!--Reporte de  armado banda(Segunda Tarjeta)-->
                             <div class="card mb-3">
 
                                 <div class="card-header" id="headingTwo">
@@ -133,21 +133,166 @@ $semana = "$year-W$week";
                                 </div>
                                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
 
+                                    <div class="form-row m-3">
+                                        <div class="form-group col">
+                                            <label for="nombre">Tipo de reporte:</label>
+                                            <select class="form-control" id="selectOptionBanda">
+                                                <option disabled selected>Seleccione una opcion</option>
+                                                <option value="1">Fecha</option>
+                                                <option value="2">Semana</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row m-3" id="fechaArmadoBanda" style="display: none;">
+                                        <div class="form-group col">
+                                            <label for="">Fecha inicial:</label>
+                                            <input type="date" class="form-control" id="desdeArmadoBanda" value="<?php echo $date ?>">
+                                        </div>
+                                        <div class="form-group col">
+                                            <label for="">Fecha final:</label>
+                                            <input type="date" class="form-control" id="hastaArmadoBanda" value="<?php echo $date ?>">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row m-3" id="semanaArmadoBanda" style="display: none;">
+                                        <div class="form-group col">
+                                            <label for="">Semana:</label>
+                                            <input type="week" class="form-control" id="semanaBanda" value="<?php echo $semana ?>">
+                                        </div>
+                                    </div>
+
+
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
+                                            Rendimiento armado banda
+                                            <a href="javascript:reporte('ctrlBandaRendimiento','desdeArmadoBanda','hastaArmadoBanda','selectOptionBanda','semanaBanda');" type="button" class="btn text-primary"> <i class="fas fa-download"></i></a>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
+                                            Rendmiento mayor a menor
+                                            <a href="javascript:reporte('ctrlBandaMayorMenor','desdeArmadoBanda','hastaArmadoBanda','selectOptionBanda','semanaBanda');" type="button" class="btn text-primary"> <i class="fas fa-download"></i></a>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
+                                            Tallos mayor a menor
+                                            <a href="javascript:reporte('ctrlBandaTallos','desdeArmadoBanda','hastaArmadoBanda','selectOptionBanda','semanaBanda');" type="button" class="btn text-primary"> <i class="fas fa-download"></i></a>
+                                        </li>
+                                    </ul>
 
                                 </div>
                             </div>
 
 
-                            <!--Reporte de maquinas tallo a tallo(Tercer tarjeta)-->
-                            <div class="card">
+                            <!--Reporte de armado tallo (Tercer tarjeta)-->
+                            <div class="card  mb-3">
                                 <div class="card-header" id="headingThree">
                                     <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                        <i class="fas fa-flag pr-1"></i>Reporte de maquinas TaT
+                                        <i class="fas fa-flag pr-1"></i>Reporte de armado tallo
                                     </button>
                                 </div>
                                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
 
+                                    <div class="form-row m-3">
+                                        <div class="form-group col">
+                                            <label for="nombre">Tipo de reporte:</label>
+                                            <select class="form-control" id="selectOptionTallo">
+                                                <option disabled selected>Seleccione una opcion</option>
+                                                <option value="1">Fecha</option>
+                                                <option value="2">Semana</option>
+                                            </select>
+                                        </div>
+                                    </div>
 
+                                    <div class="form-row m-3" id="fechaArmadoTallo" style="display: none;">
+                                        <div class="form-group col">
+                                            <label for="">Fecha inicial:</label>
+                                            <input type="date" class="form-control" id="desdeArmadoTallo" value="<?php echo $date ?>">
+                                        </div>
+                                        <div class="form-group col">
+                                            <label for="">Fecha final:</label>
+                                            <input type="date" class="form-control" id="hastaArmadoTallo" value="<?php echo $date ?>">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row m-3" id="semanaArmadoTallo" style="display: none;">
+                                        <div class="form-group col">
+                                            <label for="">Semana:</label>
+                                            <input type="week" class="form-control" id="semanaTallo" value="<?php echo $semana ?>">
+                                        </div>
+                                    </div>
+
+
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
+                                            Rendimiento armado tallo
+                                            <a href="javascript:reporte('ctrlArmadoTalloRendimiento','desdeArmadoTallo','hastaArmadoTallo','selectOptionTallo','semanaTallo');" type="button" class="btn text-primary"> <i class="fas fa-download"></i></a>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
+                                            Rendmiento mayor a menor
+                                            <a href="javascript:reporte('ctrlArmadoTalloMayorMenor','desdeArmadoTallo','hastaArmadoTallo','selectOptionTallo','semanaTallo');" type="button" class="btn text-primary"> <i class="fas fa-download"></i></a>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
+                                            Tallos mayor a menor
+                                            <a href="javascript:reporte('ctrlArmadoTallo-Tallos','desdeArmadoTallo','hastaArmadoTallo','selectOptionTallo','semanaTallo');" type="button" class="btn text-primary"> <i class="fas fa-download"></i></a>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
+                                            Soporte tallo
+                                            <a href="javascript:reporte('ctrlSoporteTallo','desdeArmadoTallo','hastaArmadoTallo','selectOptionTallo','semanaTallo');" type="button" class="btn text-primary"> <i class="fas fa-download"></i></a>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </div>
+
+
+                            <!--Reporte de preparaciones (Primer tarjeta)-->
+                            <div class="card">
+                                <div class="card-header" id="headingFour">
+                                    <button class="btn btn-link" data-toggle="collapse" data-target="#tarjetaPre" aria-expanded="true" aria-controls="tarjetaPre">
+                                        <i class="fas fa-flag pr-1"></i>Reporte preparaciones
+                                    </button>
+                                </div>
+                                <div id="tarjetaPre" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+
+                                    <div class="form-row m-3">
+                                        <div class="form-group col">
+                                            <label for="nombre">Tipo de reporte:</label>
+                                            <select class="form-control" id="selectOptionPreparacion">
+                                                <option disabled selected>Seleccione una opcion</option>
+                                                <option value="1">Fecha</option>
+                                                <option value="2">Semana</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row m-3" id="fechaPreparacion" style="display: none;">
+                                        <div class="form-group col">
+                                            <label for="">Fecha inicial:</label>
+                                            <input type="date" class="form-control" id="desdePreparacion" value="<?php echo $date ?>">
+                                        </div>
+                                        <div class="form-group col">
+                                            <label for="">Fecha final:</label>
+                                            <input type="date" class="form-control" id="hastaPreparacion" value="<?php echo $date ?>">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row m-3" id="semanaPreparacion" style="display: none;">
+                                        <div class="form-group col">
+                                            <label for="">Semana:</label>
+                                            <input type="week" class="form-control" id="semanaModuloPreparacion" value="<?php echo $semana ?>">
+                                        </div>
+                                    </div>
+
+
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
+                                            Preparación armado
+                                            <a href="javascript:reporte('ctrlPreparacionArmado','desdePreparacion','hastaPreparacion','selectOptionPreparacion','semanaModuloPreparacion');" type="button" class="btn text-primary"> <i class="fas fa-download"></i></a>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
+                                            Preparación banda
+                                            <a href="javascript:reporte('ctrlPreparacionBanda','desdePreparacion','hastaPreparacion','selectOptionPreparacion','semanaModuloPreparacion');" type="button" class="btn text-primary"> <i class="fas fa-download"></i></a>
+                                        </li>
+                                    </ul>
 
                                 </div>
                             </div>
@@ -157,8 +302,11 @@ $semana = "$year-W$week";
 
                     </div>
 
+
+
+
                     <!--Segundo collapse-->
-                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4 mb-3 mb-sm-3 mb-lg-0">
+                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 mb-3 mb-sm-3 mb-lg-0">
 
                         <div id="accordion2">
 
@@ -166,11 +314,52 @@ $semana = "$year-W$week";
                             <div class="card mb-3">
                                 <div class="card-header" id="heading1">
                                     <button class="btn btn-link" data-toggle="collapse" data-target="#tarjeta1" aria-expanded="true" aria-controls="tarjeta1">
-                                        <i class="fas fa-flag pr-1"></i>Reporte picking
+                                        <i class="fas fa-flag pr-1"></i>Reporte empaque
                                     </button>
                                 </div>
                                 <div id="tarjeta1" class="collapse" aria-labelledby="heading1" data-parent="#accordion2">
 
+
+                                    <div class="form-row m-3">
+                                        <div class="form-group col">
+                                            <label for="nombre">Tipo de reporte:</label>
+                                            <select class="form-control" id="selectOptionEmpaque">
+                                                <option disabled selected>Seleccione una opcion</option>
+                                                <option value="1">Fecha</option>
+                                                <option value="2">Semana</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row m-3" id="fechaEmpaque" style="display: none;">
+                                        <div class="form-group col">
+                                            <label for="">Fecha inicial:</label>
+                                            <input type="date" class="form-control" id="desdeEmpaque" value="<?php echo $date ?>">
+                                        </div>
+                                        <div class="form-group col">
+                                            <label for="">Fecha final:</label>
+                                            <input type="date" class="form-control" id="hastaEmpaque" value="<?php echo $date ?>">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row m-3" id="semanaEmpaque" style="display: none;">
+                                        <div class="form-group col">
+                                            <label for="">Semana:</label>
+                                            <input type="week" class="form-control" id="semanaModuloEmpaque" value="<?php echo $semana ?>">
+                                        </div>
+                                    </div>
+
+
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
+                                            Rendimiento empaque
+                                            <a href="javascript:reporte('ctrlRendimientoEmpaque','desdeEmpaque','hastaEmpaque','selectOptionEmpaque','semanaModuloEmpaque');" type="button" class="btn text-primary"> <i class="fas fa-download"></i></a>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
+                                            Rendimiento postcosecha
+                                            <a href="javascript:reporte('ctrlRendimientoEmpaquePost','desdeEmpaque','hastaEmpaque','selectOptionEmpaque','semanaModuloEmpaque');" type="button" class="btn text-primary"> <i class="fas fa-download"></i></a>
+                                        </li>
+                                    </ul>
 
                                 </div>
                             </div>
@@ -180,11 +369,56 @@ $semana = "$year-W$week";
                                 <div class="card-header" id="heading2">
                                     <h5 class="mb-0">
                                         <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#tarjeta2" aria-expanded="false" aria-controls="tarjeta2">
-                                            <i class="fas fa-flag pr-1"></i>Reporte producto final
+                                            <i class="fas fa-flag pr-1"></i>Reportes generales
                                         </button>
                                     </h5>
                                 </div>
                                 <div id="tarjeta2" class="collapse" aria-labelledby="heading2" data-parent="#accordion2">
+
+                                    <div class="form-row m-3">
+                                        <div class="form-group col">
+                                            <label for="nombre">Tipo de reporte:</label>
+                                            <select class="form-control" id="selectOptionGeneral">
+                                                <option disabled selected>Seleccione una opcion</option>
+                                                <option value="1">Fecha</option>
+                                                <option value="2">Semana</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row m-3" id="fechaGeneral" style="display: none;">
+                                        <div class="form-group col">
+                                            <label for="">Fecha inicial:</label>
+                                            <input type="date" class="form-control" id="desdeGeneral" value="<?php echo $date ?>">
+                                        </div>
+                                        <div class="form-group col">
+                                            <label for="">Fecha final:</label>
+                                            <input type="date" class="form-control" id="hastaGeneral" value="<?php echo $date ?>">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row m-3" id="semanaGeneral" style="display: none;">
+                                        <div class="form-group col">
+                                            <label for="">Semana:</label>
+                                            <input type="week" class="form-control" id="semanaModuloGeneral" value="<?php echo $semana ?>">
+                                        </div>
+                                    </div>
+
+
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
+                                            Rendimiento material seco
+                                            <a href="javascript:reporte('ctrlRendimientoMaterialSeco','desdeGeneral','hastaGeneral','selectOptionGeneral','semanaModuloGeneral');" type="button" class="btn text-primary"> <i class="fas fa-download"></i></a>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
+                                            Rendimiento Tinturados
+                                            <a href="javascript:reporte('ctrlRendimientoTinturados','desdeGeneral','hastaGeneral','selectOptionGeneral','semanaModuloGeneral');" type="button" class="btn text-primary"> <i class="fas fa-download"></i></a>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
+                                            Rendimiento picking
+                                            <a href="javascript:reporte('ctrlRendimientoPicking','desdeGeneral','hastaGeneral','selectOptionGeneral','semanaModuloGeneral');" type="button" class="btn text-primary"> <i class="fas fa-download"></i></a>
+                                        </li>
+                                    </ul>
 
 
                                 </div>
@@ -194,14 +428,115 @@ $semana = "$year-W$week";
                             <div class="card mb-3">
                                 <div class="card-header" id="heading3">
                                     <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#tarjeta3" aria-expanded="false" aria-controls="tarjeta3">
-                                        <i class="fas fa-flag pr-1"></i>Reportes generales
+                                        <i class="fas fa-flag pr-1"></i>Reporte tiempo muerto
                                     </button>
                                 </div>
                                 <div id="tarjeta3" class="collapse" aria-labelledby="heading3" data-parent="#accordion2">
 
+                                    <div class="form-row m-3">
+                                        <div class="form-group col">
+                                            <label for="nombre">Tipo de reporte:</label>
+                                            <select class="form-control" id="selectOptionTm">
+                                                <option disabled selected>Seleccione una opcion</option>
+                                                <option value="1">Fecha</option>
+                                                <option value="2">Semana</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row m-3" id="fechaTm" style="display: none;">
+                                        <div class="form-group col">
+                                            <label for="">Fecha inicial:</label>
+                                            <input type="date" class="form-control" id="desdeTm" value="<?php echo $date ?>">
+                                        </div>
+                                        <div class="form-group col">
+                                            <label for="">Fecha final:</label>
+                                            <input type="date" class="form-control" id="hastaTm" value="<?php echo $date ?>">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row m-3" id="semanaTm" style="display: none;">
+                                        <div class="form-group col">
+                                            <label for="">Semana:</label>
+                                            <input type="week" class="form-control" id="semanaModuloTm" value="<?php echo $semana ?>">
+                                        </div>
+                                    </div>
+
+
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
+                                            Tiempo muerto producción
+                                            <a href="javascript:reporte('ctrlTiempoProduccion','desdeTm','hastaTm','selectOptionTm','semanaModuloTm');" type="button" class="btn text-primary"> <i class="fas fa-download"></i></a>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
+                                            Tiempo muerto general
+                                            <a href="javascript:reporte('ctrlTiempoGeneral','desdeTm','hastaTm','selectOptionTm','semanaModuloTm');" type="button" class="btn text-primary"> <i class="fas fa-download"></i></a>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
+                                            Tiempo muerto empaque
+                                            <a href="javascript:reporte('ctrlTiempoEmpaque','desdeTm','hastaTm','selectOptionTm','semanaModuloTm');" type="button" class="btn text-primary"> <i class="fas fa-download"></i></a>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
+                                            Tiempo empaque operario
+                                            <a href="javascript:reporte('ctrlTiempoEmpaqueOperario','desdeTm','hastaTm','selectOptionTm','semanaModuloTm');" type="button" class="btn text-primary"> <i class="fas fa-download"></i></a>
+                                        </li>
+                                    </ul>
 
                                 </div>
                             </div>
+
+                            <div class="card mb-3">
+                                <div class="card-header" id="heading4">
+                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#tarjeta4" aria-expanded="false" aria-controls="tarjeta4">
+                                        <i class="fas fa-flag pr-1"></i>Reporte bonificaciones
+                                    </button>
+                                </div>
+                                <div id="tarjeta4" class="collapse" aria-labelledby="heading4" data-parent="#accordion2">
+
+                                    <div class="form-row m-3">
+                                        <div class="form-group col">
+                                            <label for="nombre">Tipo de reporte:</label>
+                                            <select class="form-control" id="selectOptionBonificacion">
+                                                <option disabled selected>Seleccione una opcion</option>
+                                                <option value="1">Fecha</option>
+                                                <option value="2">Semana</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row m-3" id="fechaBonificacion" style="display: none;">
+                                        <div class="form-group col">
+                                            <label for="">Fecha inicial:</label>
+                                            <input type="date" class="form-control" id="desdeBonificacion" value="<?php echo $date ?>">
+                                        </div>
+                                        <div class="form-group col">
+                                            <label for="">Fecha final:</label>
+                                            <input type="date" class="form-control" id="hastaBonificacion" value="<?php echo $date ?>">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row m-3" id="semanaBonificacion" style="display: none;">
+                                        <div class="form-group col">
+                                            <label for="">Semana:</label>
+                                            <input type="week" class="form-control" id="semanaModuloBonificacion" value="<?php echo $semana ?>">
+                                        </div>
+                                    </div>
+
+
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
+                                            Tiempo muerto producción
+                                            <a href="javascript:reporte('ctrlTiempoProduccion','desdeBonificacion','hastaBonificacion','selectOptionBonificacion','semanaModuloBonificacion');" type="button" class="btn text-primary"> <i class="fas fa-download"></i></a>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
+                                            Tiempo muerto general
+                                            <a href="javascript:reporte('ctrlTiempoGeneral','desdeBonificacion','hastaBonificacion','selectOptionBonificacion','semanaModuloBonificacion');" type="button" class="btn text-primary"> <i class="fas fa-download"></i></a>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </div>
+
                         </div>
                         <!--Fin de collapse-->
 

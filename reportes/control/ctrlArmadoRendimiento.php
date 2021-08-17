@@ -26,6 +26,7 @@ $tableStyle = [
 $report = new Reporte();
 $spreadsheet = new Spreadsheet();
 
+//Formateamos la fecha
 if (strlen($_GET['desde']) > 0 and strlen($_GET['hasta']) > 0 and strlen($_GET['selectOption']) > 0 and strlen($_GET['semanaReport']) > 0) {
     $desde = $_GET['desde'];
     $hasta = $_GET['hasta'];
@@ -37,12 +38,11 @@ if (strlen($_GET['desde']) > 0 and strlen($_GET['hasta']) > 0 and strlen($_GET['
 }
 
 $reporte = $spreadsheet->getActiveSheet();
-
-$reporte->setTitle("Reporte Armado");
-
+$reporte->setTitle("Rendimiento Armado");
 
 //Posicion del titulo
-$reporte->setCellValue('A1', 'Rendimientos descendente');
+$reporte->setCellValue('A1', 'Rendimiento de armado');
+
 
 if ($selectedOption === "1") {
     $reporte->setCellValue('D1', 'Fecha:');
@@ -52,7 +52,6 @@ if ($selectedOption === "1") {
     } else {
         $reporte->setCellValue('E1',  $verDesde . " Hasta: " .  $verHasta);
     }
-
 } else {
     $reporte->setCellValue('D1', 'Semana:');
     $reporte->setCellValue('E1',  $Week);
@@ -76,14 +75,14 @@ $reporte->setCellValue('D2', 'Rendimiento');
 $spreadsheet->getActiveSheet()->getColumnDimension("A")->setWidth(15);
 $spreadsheet->getActiveSheet()->getColumnDimension("B")->setWidth(15);
 $spreadsheet->getActiveSheet()->getColumnDimension("C")->setWidth(30);
-$spreadsheet->getActiveSheet()->getColumnDimension("D")->setWidth(27);
+$spreadsheet->getActiveSheet()->getColumnDimension("D")->setWidth(20);
 $spreadsheet->getActiveSheet()->getColumnDimension("E")->setWidth(27);
 
 
 //Estilo negrilla, tamaño de letra, y fila
 $spreadsheet->getActiveSheet()->getStyle('A2:E2')->getFont()->setSize(12);
 $spreadsheet->getActiveSheet()->getStyle('A1:E1')->getFont()->setBold(true);
-$spreadsheet->getActiveSheet()->getStyle('A2:D2')->getFont()->setBold(true);
+$spreadsheet->getActiveSheet()->getStyle('A2:E2')->getFont()->setBold(true);
 $spreadsheet->getActiveSheet()->getRowDimension("2")->setRowHeight(30);
 
 //Aplicamos nuestros colores del arreglo
@@ -94,9 +93,9 @@ $count = 3;
 $labor = 1;
 
 if ($selectedOption === "1") {
-    $Reporte = $report->produccionMayorMenor($labor, $desde, $hasta);
+    $Reporte = $report->rendimientosArmado($labor, $desde, $hasta);
 } else {
-    $Reporte = $report->produccionMayorMenorSemana($labor, $Week);
+    $Reporte = $report->RendimientosSemana($labor, $Week);
 }
 
 if ($Reporte != null) {
@@ -119,9 +118,8 @@ $spreadsheet->getActiveSheet()->setAutoFilter("A" . $firstRow . ":D" . $lasRow);
 
 
 
-
 header('Content-Type: application/vnd.ms-excel');
-header('Content-Disposition: attachment;filename="armado_rendimiento__' . $desde . '.xls"');
+header('Content-Disposition: attachment;filename="rendimientos_armado_' . $desde . '.xls"');
 header('Cache-Control: max-age=0');
 
 $writer = IOFactory::createWriter($spreadsheet, 'Xls');

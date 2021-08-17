@@ -8,6 +8,7 @@ $semana = date('Y\-\WW');
 
 <head>
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" charset=UTF-8>
+    <link rel="shortcut icon" href="img/isabelitaLogo.jpg">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

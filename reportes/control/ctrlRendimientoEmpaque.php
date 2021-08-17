@@ -38,11 +38,11 @@ if (strlen($_GET['desde']) > 0 and strlen($_GET['hasta']) > 0 and strlen($_GET['
 
 $reporte = $spreadsheet->getActiveSheet();
 
-$reporte->setTitle("Reporte Armado");
+$reporte->setTitle("Rendimiento empaque");
 
 
 //Posicion del titulo
-$reporte->setCellValue('A1', 'Rendimientos descendente');
+$reporte->setCellValue('A1', 'Rendimiento empaque');
 
 if ($selectedOption === "1") {
     $reporte->setCellValue('D1', 'Fecha:');
@@ -52,7 +52,6 @@ if ($selectedOption === "1") {
     } else {
         $reporte->setCellValue('E1',  $verDesde . " Hasta: " .  $verHasta);
     }
-
 } else {
     $reporte->setCellValue('D1', 'Semana:');
     $reporte->setCellValue('E1',  $Week);
@@ -66,24 +65,25 @@ $spreadsheet->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(Al
 $spreadsheet->getActiveSheet()->getRowDimension("1")->setRowHeight(30);
 
 //Campos de la cabecera
-$reporte->setCellValue('A2', 'Labor');
-$reporte->setCellValue('B2', 'Codigo');
-$reporte->setCellValue('C2', 'Operario');
+$reporte->setCellValue('A2', 'Posición');
+$reporte->setCellValue('B2', 'Labor');
+$reporte->setCellValue('C2', 'Nombre');
 $reporte->setCellValue('D2', 'Rendimiento');
 
 
+
+
 //Tamaño de las columnas 
-$spreadsheet->getActiveSheet()->getColumnDimension("A")->setWidth(15);
+$spreadsheet->getActiveSheet()->getColumnDimension("A")->setWidth(20);
 $spreadsheet->getActiveSheet()->getColumnDimension("B")->setWidth(15);
 $spreadsheet->getActiveSheet()->getColumnDimension("C")->setWidth(30);
-$spreadsheet->getActiveSheet()->getColumnDimension("D")->setWidth(27);
+$spreadsheet->getActiveSheet()->getColumnDimension("D")->setWidth(20);
 $spreadsheet->getActiveSheet()->getColumnDimension("E")->setWidth(27);
-
 
 //Estilo negrilla, tamaño de letra, y fila
 $spreadsheet->getActiveSheet()->getStyle('A2:E2')->getFont()->setSize(12);
 $spreadsheet->getActiveSheet()->getStyle('A1:E1')->getFont()->setBold(true);
-$spreadsheet->getActiveSheet()->getStyle('A2:D2')->getFont()->setBold(true);
+$spreadsheet->getActiveSheet()->getStyle('A2:E2')->getFont()->setBold(true);
 $spreadsheet->getActiveSheet()->getRowDimension("2")->setRowHeight(30);
 
 //Aplicamos nuestros colores del arreglo
@@ -91,20 +91,23 @@ $spreadsheet->getActiveSheet()->getStyle('A1:E1')->applyFromArray($tableStyle);
 $spreadsheet->getActiveSheet()->getStyle('A2:E2')->applyFromArray($tableStyle);
 
 $count = 3;
-$labor = 1;
+
+//En la consulta va a traer todo las labores que sean diferentes a 5
+$id = 5;
 
 if ($selectedOption === "1") {
-    $Reporte = $report->produccionMayorMenor($labor, $desde, $hasta);
+    $Reporte = $report->moduloEmpaqueFecha($id,$desde, $hasta);
 } else {
-    $Reporte = $report->produccionMayorMenorSemana($labor, $Week);
+    $Reporte = $report->moduloEmpaqueSemana($id,$Week);
 }
 
 if ($Reporte != null) {
     foreach ($Reporte as $rows) {
-        $reporte->setCellValue('A' . $count, $rows['laborArmado']);
-        $reporte->setCellValue('B' . $count, $rows['operario']);
+        $reporte->setCellValue('A' . $count, $rows['posicion']);
+        $reporte->setCellValue('B' . $count, $rows['labor']);
         $reporte->setCellValue('C' . $count, $rows['nombre']);
         $reporte->setCellValue('D' . $count, $rows['rendimiento']);
+
         $count++;
     }
 } else {
@@ -121,7 +124,7 @@ $spreadsheet->getActiveSheet()->setAutoFilter("A" . $firstRow . ":D" . $lasRow);
 
 
 header('Content-Type: application/vnd.ms-excel');
-header('Content-Disposition: attachment;filename="armado_rendimiento__' . $desde . '.xls"');
+header('Content-Disposition: attachment;filename="rendimientoEmpaque_' . $desde . '.xls"');
 header('Cache-Control: max-age=0');
 
 $writer = IOFactory::createWriter($spreadsheet, 'Xls');

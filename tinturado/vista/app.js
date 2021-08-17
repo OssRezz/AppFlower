@@ -65,9 +65,7 @@ $(document).ready(function () {
         const tallos = $("#tallos").val();
         $.post('../control/ctrlIngresarTinturados.php', {
             operario: operario,
-            labor: labor,
             fecha: fecha,
-            semana: semana,
             horas: horas,
             tallos: tallos
         }, (responseText) => {

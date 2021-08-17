@@ -409,10 +409,10 @@ class Modal
         echo                        "<label for='posicionEmpaque'>Posicion</label>";
         echo                        "<select name='posicionEmpaque' id='posicionEmpaque' class='form-control'>";
         echo                        "<option value='$posicion' selected>$posicion</option>";
-        echo                        "<option value='Celula-1'>Célula-1</option>";
-        echo                        "<option value='Celula-2'>Celula-2</option>";
-        echo                        "<option value='Celula-3'>Celula-3</option>";
-        echo                        "<option value='Celula-4'>Celula-4</option>";
+        echo                        "<option value='Célula 1'>Célula 1</option>";
+        echo                        "<option value='Célula 2'>Célula 2</option>";
+        echo                        "<option value='Célula 3'>Célula 3</option>";
+        echo                        "<option value='Célula 4'>Célula 4</option>";
         echo                        "<option value='Postcosecha'>Postcosecha</option>";
         echo                        "</select>";
         echo                    "</div>";
@@ -777,10 +777,7 @@ class Modal
         echo                        "<label for='celulaTmEmpaque'>Posicion</label>";
         echo                        "<select name='celulaTmEmpaque' id='celulaTmEmpaque' class='form-control'>";
         echo                        "<option value='$celula' selected>$celula</option>";
-        echo                        "<option value='Celula 1'>Célula 1</option>";
-        echo                        "<option value='Celula 2'>Celula 2</option>";
-        echo                        "<option value='Celula 3'>Celula 3</option>";
-        echo                        "<option value='Celula 4'>Celula 4</option>";
+        echo                        "<option value='Empaque'>Empaque</option>";
         echo                        "<option value='Postcosecha'>Postcosecha</option>";
         echo                        "</select>";
         echo                    "</div>";
@@ -791,8 +788,7 @@ class Modal
 
         echo                    "<div class='form-group col-sm-12 col-md-6 mb-4'>";
         echo                                "<label for='minutosTmEmpaque'>Minutos muertos</label>";
-        $MinutosDecimal = round(($minutos * 60), 0);
-        echo                                "<input type='number' class='form-control' id='minutosTmEmpaque' value='$MinutosDecimal'>";
+        echo                                "<input type='number' class='form-control' id='minutosTmEmpaque' value='$minutos'>";
         echo                    "</div>";
 
         echo                    "<div class='form-group col-sm-12 col-md-12 d-flex justify-content-center mb-3'>";

@@ -92,7 +92,7 @@ $date = date('Y-m-d');
                                     <div class="form-row">
                                         <div class="form-group col-sm-12 col-md-12">
                                             <label for="operario">Codigo</label>
-                                            <input type="text" class="form-control" name="operario" id="operario" placeholder="Ingrese el codigo del operario">
+                                            <input type="number" class="form-control" name="operario" id="operario" placeholder="Ingrese el codigo del operario">
                                         </div>
                                     </div>
                                     <div class="form-row">

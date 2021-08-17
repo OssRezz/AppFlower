@@ -94,10 +94,7 @@ $date = date('Y-m-d');
                                         <div class="form-group col-sm-12 col-md-12">
                                             <label for="celula">Posicion</label>
                                             <select name="celula" id="celula" class="form-control">
-                                                <option value="Celula 1" selected>Celula 1</option>
-                                                <option value="Celula 2">Celula 2</option>
-                                                <option value="Celula 3">Celula 3</option>
-                                                <option value="Celula 4">Celula 4</option>
+                                                <option value="Empaque" selected>Empaque</option>
                                                 <option value="Postcosecha">Postcosecha</option>
                                             </select>
                                         </div>
@@ -188,10 +185,7 @@ $date = date('Y-m-d');
                                                             <li class="list-group-item lp"><b>Nombre </b>: <?php echo $tmEmpaque['nombre'] ?></li>
                                                             <li class="list-group-item lp"><b>Fecha </b>: <?php echo $tmEmpaque['fecha'] ?></li>
                                                             <li class="list-group-item lp"><b>Semana </b>: <?php echo $tmEmpaque['Semana'] ?></li>
-                                                            <?php
-                                                            $minutosEnHoras = bcmul($tmEmpaque['minutos'], 60, 0);
-                                                            ?>
-                                                            <li class="list-group-item lp"><b>Minutos </b>: <?php echo $minutosEnHoras ?></li>
+                                                            <li class="list-group-item lp"><b>Minutos </b>: <?php echo $tmEmpaque['minutos'] ?></li>
                                                             <li class="list-group-item lp"><b>Horas </b>: <?php echo $tmEmpaque['horas'] ?></li>
                                                             <li class="list-group-item lp"><b>Causa </b>: <?php echo $tmEmpaque['causa'] ?></li>
                                                         </ul>

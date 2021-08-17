@@ -26,23 +26,39 @@ $tableStyle = [
 $report = new Reporte();
 $spreadsheet = new Spreadsheet();
 
-//Formateamos la fecha
-if (strlen($_GET['desde']) > 0 and strlen($_GET['hasta']) > 0) {
+if (strlen($_GET['desde']) > 0 and strlen($_GET['hasta']) > 0 and strlen($_GET['selectOption']) > 0 and strlen($_GET['semanaReport']) > 0) {
     $desde = $_GET['desde'];
     $hasta = $_GET['hasta'];
+    $selectedOption = $_GET['selectOption'];
+    $Week = $_GET['semanaReport'];
 
     $verDesde = date('d/m/Y', strtotime($desde));
     $verHasta = date('d/m/Y', strtotime($hasta));
 }
 
-
 $reporte = $spreadsheet->getActiveSheet();
-$reporte->setTitle("Reporte Armado");
+
+$reporte->setTitle("Armado tallos");
+
 
 //Posicion del titulo
-$reporte->setCellValue('A1', 'Promedio de armado');
-$reporte->setCellValue('D1', 'fecha:');
-$reporte->setCellValue('E1',  $verDesde);
+$reporte->setCellValue('A1', 'Armado tallo. tallos descendente');
+
+if ($selectedOption === "1") {
+    $reporte->setCellValue('D1', 'Fecha:');
+
+    if ($verDesde === $verHasta) {
+        $reporte->setCellValue('E1',  $verDesde);
+    } else {
+        $reporte->setCellValue('E1',  $verDesde . " Hasta: " .  $verHasta);
+    }
+
+} else {
+    $reporte->setCellValue('D1', 'Semana:');
+    $reporte->setCellValue('E1',  $Week);
+}
+
+
 
 //Estilo del titulo
 $spreadsheet->getActiveSheet()->mergeCells("A1:C1");
@@ -52,24 +68,24 @@ $spreadsheet->getActiveSheet()->getRowDimension("1")->setRowHeight(30);
 
 //Campos de la cabecera
 $reporte->setCellValue('A2', 'Labor');
-$reporte->setCellValue('B2', 'Nombre');
-$reporte->setCellValue('C2', 'Tiempo');
+$reporte->setCellValue('B2', 'Codigo');
+$reporte->setCellValue('C2', 'Operario');
 $reporte->setCellValue('D2', 'Tallos');
-$reporte->setCellValue('E2', 'Promedio');
 
 
 //Tamaño de las columnas 
-$spreadsheet->getActiveSheet()->getColumnDimension("A")->setWidth(20);
-$spreadsheet->getActiveSheet()->getColumnDimension("B")->setWidth(30);
-$spreadsheet->getActiveSheet()->getColumnDimension("C")->setWidth(15);
-$spreadsheet->getActiveSheet()->getColumnDimension("D")->setWidth(10);
-$spreadsheet->getActiveSheet()->getColumnDimension("E")->setWidth(15);
+$spreadsheet->getActiveSheet()->getColumnDimension("A")->setWidth(18);
+$spreadsheet->getActiveSheet()->getColumnDimension("B")->setWidth(15);
+$spreadsheet->getActiveSheet()->getColumnDimension("C")->setWidth(30);
+$spreadsheet->getActiveSheet()->getColumnDimension("D")->setWidth(27);
+$spreadsheet->getActiveSheet()->getColumnDimension("E")->setWidth(27);
+
 
 
 //Estilo negrilla, tamaño de letra, y fila
 $spreadsheet->getActiveSheet()->getStyle('A2:E2')->getFont()->setSize(12);
 $spreadsheet->getActiveSheet()->getStyle('A1:E1')->getFont()->setBold(true);
-$spreadsheet->getActiveSheet()->getStyle('A2:E2')->getFont()->setBold(true);
+$spreadsheet->getActiveSheet()->getStyle('A2:D2')->getFont()->setBold(true);
 $spreadsheet->getActiveSheet()->getRowDimension("2")->setRowHeight(30);
 
 //Aplicamos nuestros colores del arreglo
@@ -77,32 +93,39 @@ $spreadsheet->getActiveSheet()->getStyle('A1:E1')->applyFromArray($tableStyle);
 $spreadsheet->getActiveSheet()->getStyle('A2:E2')->applyFromArray($tableStyle);
 
 $count = 3;
-$id = 1;
-$Reporte = $report->ProduccionPromedio($id,$desde, $hasta);
+$labor = 3;
+
+if ($selectedOption === "1") {
+    $Reporte = $report->produccionTallosMenorMayor($labor,$desde, $hasta);
+} else {
+    $Reporte = $report->produccionTallosMenorMayorSemana($labor,$Week);
+}
+
 if ($Reporte != null) {
     foreach ($Reporte as $rows) {
-        $reporte->setCellValue('A' . $count, $rows['Labor']);
-        $reporte->setCellValue('B' . $count, $rows['nombre']);
-        $reporte->setCellValue('C' . $count, $rows['hora']);
-        $reporte->setCellValue('D' . $count, $rows['tallos']);
-        $reporte->setCellValue('E' . $count, $rows['Promedio']);
+        $reporte->setCellValue('A' . $count, $rows['laborArmado']);
+        $reporte->setCellValue('B' . $count, $rows['operario']);
+        $reporte->setCellValue('C' . $count, $rows['nombre']);
+        $reporte->setCellValue('D' . $count, $rows['SumTallos']);
         $count++;
     }
 } else {
-    $reporte->setCellValue('A' . $count+1, "No hay registros en las fechas seleccionadas");
+    $reporte->setCellValue('A' . $count + 1, "No hay registros en las fechas seleccionadas");
 }
 
 //autofilter
 //define first row and last row
-$firstRow=2;
-$lasRow= $count-1;
-$spreadsheet->getActiveSheet()->setAutoFilter("A".$firstRow.":E".$lasRow);
+$firstRow = 2;
+$lasRow = $count - 1;
+$spreadsheet->getActiveSheet()->setAutoFilter("A".$firstRow.":D".$lasRow);
+
 
 
 
 header('Content-Type: application/vnd.ms-excel');
-header('Content-Disposition: attachment;filename="reporte_armado_promedio.xls"');
+header('Content-Disposition: attachment;filename="tallo_tallos_'.$desde.'.xls"');
 header('Cache-Control: max-age=0');
 
 $writer = IOFactory::createWriter($spreadsheet, 'Xls');
 $writer->save('php://output');
+exit();
