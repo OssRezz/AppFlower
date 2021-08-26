@@ -525,11 +525,11 @@ $semana = "$year-W$week";
 
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
-                                            Tiempo muerto producción
-                                            <a href="javascript:reporte('ctrlTiempoProduccion','desdeBonificacion','hastaBonificacion','selectOptionBonificacion','semanaModuloBonificacion');" type="button" class="btn text-primary"> <i class="fas fa-download"></i></a>
+                                            Bonificación produccion
+                                            <a href="javascript:reporte('ctrlBonificacionProduccion','desdeBonificacion','hastaBonificacion','selectOptionBonificacion','semanaModuloBonificacion');" type="button" class="btn text-primary"> <i class="fas fa-download"></i></a>
                                         </li>
                                         <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
-                                            Tiempo muerto general
+                                            Bonificación Empaque
                                             <a href="javascript:reporte('ctrlTiempoGeneral','desdeBonificacion','hastaBonificacion','selectOptionBonificacion','semanaModuloBonificacion');" type="button" class="btn text-primary"> <i class="fas fa-download"></i></a>
                                         </li>
                                     </ul>
