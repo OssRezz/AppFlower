@@ -18,7 +18,7 @@ class Modal
         echo                    "</div>";
         echo              "</div>";
         echo            "<div class='modal-body d-flex justify-content-center'>";
-        echo                "<img  src='../img/flower.gif' style='width: 80%'>";
+        echo                "<img  src='img/flower.gif' style='width: 80%'>";
         echo            "</div>";
         echo            "<div class='modal-body'>";
         echo            "<div class='form-group d-flex justify-content-center'>";

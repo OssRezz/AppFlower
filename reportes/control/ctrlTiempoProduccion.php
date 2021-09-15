@@ -52,7 +52,6 @@ if ($selectedOption === "1") {
     } else {
         $reporte->setCellValue('E1',  $verDesde . " Hasta: " .  $verHasta);
         $spreadsheet->getActiveSheet()->mergeCells("E1:F1");
-
     }
 } else {
     $reporte->setCellValue('D1', 'Semana:');
@@ -108,7 +107,7 @@ if ($Reporte != null) {
         $count++;
     }
 } else {
-    $reporte->setCellValue('A' . $count + 1, "No hay registros en las fechas seleccionadas");
+    $reporte->setCellValue('A4', "No hay registros en las fechas seleccionadas");
 }
 
 //autofilter
