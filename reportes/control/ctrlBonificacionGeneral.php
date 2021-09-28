@@ -38,11 +38,11 @@ if (strlen($_GET['desde']) > 0 and strlen($_GET['hasta']) > 0 and strlen($_GET['
 
 $reporte = $spreadsheet->getActiveSheet();
 
-$reporte->setTitle("Bonificación producción");
+$reporte->setTitle("Bonificación general");
 
 
 //Posicion del titulo
-$reporte->setCellValue('A1', 'Bonificaciones producción');
+$reporte->setCellValue('A1', 'Bonificaciones general');
 
 if ($selectedOption === "1") {
     $reporte->setCellValue('D1', 'Fecha:');
@@ -52,7 +52,6 @@ if ($selectedOption === "1") {
     } else {
         $reporte->setCellValue('E1',  $verDesde . " Hasta: " .  $verHasta);
         $spreadsheet->getActiveSheet()->mergeCells("E1:F1");
-
     }
 } else {
     $reporte->setCellValue('D1', 'Semana:');
@@ -68,17 +67,17 @@ $spreadsheet->getActiveSheet()->getRowDimension("1")->setRowHeight(30);
 
 //Campos de la cabecera
 $reporte->setCellValue('A2', 'Labor');
-$reporte->setCellValue('B2', 'Codigo');
-$reporte->setCellValue('C2', 'Operario');
-$reporte->setCellValue('D2', 'Tallos');
+$reporte->setCellValue('B2', 'Operario');
+$reporte->setCellValue('C2', 'Nombre');
+$reporte->setCellValue('D2', 'Rendimiento');
 $reporte->setCellValue('E2', 'Bonificación');
 
 //Tamaño de las columnas 
 $spreadsheet->getActiveSheet()->getColumnDimension("A")->setWidth(20);
-$spreadsheet->getActiveSheet()->getColumnDimension("B")->setWidth(20);
+$spreadsheet->getActiveSheet()->getColumnDimension("B")->setWidth(15);
 $spreadsheet->getActiveSheet()->getColumnDimension("C")->setWidth(30);
 $spreadsheet->getActiveSheet()->getColumnDimension("D")->setWidth(15);
-$spreadsheet->getActiveSheet()->getColumnDimension("E")->setWidth(25);
+$spreadsheet->getActiveSheet()->getColumnDimension("E")->setWidth(20);
 
 //Estilo negrilla, tamaño de letra, y fila
 $spreadsheet->getActiveSheet()->getStyle('A2:F2')->getFont()->setSize(12);
@@ -93,18 +92,18 @@ $spreadsheet->getActiveSheet()->getStyle('A2:F2')->applyFromArray($tableStyle);
 $count = 3;
 
 if ($selectedOption === "1") {
-    $Reporte = $report->bonificacionProduccionFecha($desde, $hasta);
+    $Reporte = $report->bonificacionEmpaqueFecha($desde, $hasta);
 } else {
-    $Reporte = $report->bonificacionProduccionSemana($Week);
+    $Reporte = $report->bonificacionEmpaqueSemana($Week);
 }
 
 if ($Reporte != null) {
     foreach ($Reporte as $rows) {
-        $reporte->setCellValue('A' . $count, $rows['Labor']);
+        $reporte->setCellValue('A' . $count, $rows['labor']);
         $reporte->setCellValue('B' . $count, $rows['operario']);
         $reporte->setCellValue('C' . $count, $rows['nombre']);
-        $reporte->setCellValue('D' . $count, $rows['tallosBonificacion']);
-        $reporte->setCellValue('E' . $count, $rows['valorBonifi']);
+        $reporte->setCellValue('D' . $count, $rows['rendimiento']);
+        $reporte->setCellValue('E' . $count, $rows['valor']);
         $count++;
     }
 } else {
@@ -117,15 +116,14 @@ $firstRow = 2;
 $lasRow = $count - 1;
 $spreadsheet->getActiveSheet()->setAutoFilter("A" . $firstRow . ":E" . $lasRow);
 $spreadsheet->getActiveSheet()->getStyle('E')->getNumberFormat()->setFormatCode('$#,##0;$#,##0');
-    
+
 
 
 
 header('Content-Type: application/vnd.ms-excel');
-header('Content-Disposition: attachment;filename="bonificacion-Produccion' . $desde . '.xls"');
+header('Content-Disposition: attachment;filename="bonificacion-Empaque' . $desde . '.xls"');
 header('Cache-Control: max-age=0');
 
 $writer = IOFactory::createWriter($spreadsheet, 'Xls');
 $writer->save('php://output');
 exit();
-

@@ -241,13 +241,13 @@ $semana = date('Y\-\WW');
                                                             <li class="list-group-item lp"><b>Tiempo </b>: <?php echo $listProduccion['hora'] ?></li>
                                                             <li class="list-group-item lp"><b>Tallos </b>: <?php echo $listProduccion['tallos'] ?></li>
                                                             <li class="list-group-item lp"><b>Promedio </b>: <?php echo $listProduccion['Promedio'] ?></li>
-                                                            <li class="list-group-item lp"><b>Recetas </b>: <?php
-                                                                                                            if ($listProduccion['labor'] != "1") {
-                                                                                                                echo "N/A";
-                                                                                                            } else {
-                                                                                                                echo $listProduccion['recetas'];
-                                                                                                            }
-                                                                                                            ?>
+                                                            <li class="list-group-item lp" style="word-wrap: break-word;"><b>Recetas </b>: <?php
+                                                                                                                                            if ($listProduccion['labor'] != "1") {
+                                                                                                                                                echo "N/A";
+                                                                                                                                            } else {
+                                                                                                                                                echo $listProduccion['recetas'];
+                                                                                                                                            }
+                                                                                                                                            ?>
                                                             </li>
                                                             <li class="list-group-item lp"><b>Numero de recetas </b>: <?php
                                                                                                                         $recetas = $listProduccion['recetas'];

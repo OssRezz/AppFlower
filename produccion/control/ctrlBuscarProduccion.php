@@ -75,7 +75,7 @@ if ($accion == "btn-buscar-produccion" && empty($codigo) != 1) {
                 if ($labor != "1") {
                     echo                      "<li class='list-group-item lp'><b>Recetas </b>: N/A</li>";
                 } else {
-                    echo                      "<li class='list-group-item lp'><b>Recetas </b>: $recetas</li>";
+                    echo                      "<li class='list-group-item lp' style='word-wrap: break-word;'><b>Recetas </b>: $recetas</li>";
                 }
                 if ($labor != "1") {
                     echo                      "<li class='list-group-item lp'><b>Numero de recetas </b>:  N/A</li>";
@@ -99,5 +99,3 @@ if ($accion == "btn-buscar-produccion" && empty($codigo) != 1) {
 } else {
     $Modal->modalInfo("primary", "Ingresa el codigo o nombre del operario");
 }
-
-?>

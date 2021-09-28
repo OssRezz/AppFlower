@@ -169,7 +169,48 @@ class Reporte extends conexion
         }
         return $listaProduccion;
     }
+
+
+    //reporte de produccion por fecha, (Reporte general)
+    public function generalProduccionFecha($id, $desde, $hasta)
+    {
+        $generalProduccionFecha = null;
+        $statement = $this->db->prepare("SELECT P.fecha,CONCAT(L.labor, ' ', P.posicion) AS 'laborArmado',P.operario,O.nombre, ROUND(P.tallos/P.hora,0) AS 'rendimiento', P.recetas FROM `tbl_produccion` as P
+        INNER JOIN tbl_operarios AS O ON O.id_operario=P.operario
+        INNER JOIN labor_produccion AS L ON L.id_labor=P.labor  
+        where P.labor = :id AND fecha BETWEEN :desde AND :hasta
+        ORDER BY `fecha` DESC");
+        $statement->bindParam(':id', $id);
+        $statement->bindParam(':desde', $desde);
+        $statement->bindParam(':hasta', $hasta);
+        $statement->execute();
+        while ($consulta = $statement->fetch()) {
+            $generalProduccionFecha[] = $consulta;
+        }
+        return $generalProduccionFecha;
+    }
+
+    //reporte de produccion por semana, (Reporte general)
+    public function generalProduccionSemana($id, $semana)
+    {
+        $generalProduccionSemana = null;
+        $statement = $this->db->prepare("SELECT P.fecha,CONCAT(L.labor, ' ', P.posicion) AS 'laborArmado',P.operario,O.nombre, ROUND(P.tallos/P.hora,0) AS 'rendimiento', P.recetas FROM `tbl_produccion` as P
+        INNER JOIN tbl_operarios AS O ON O.id_operario=P.operario
+        INNER JOIN labor_produccion AS L ON L.id_labor=P.labor  
+        where P.labor = :id AND semana= :semana
+        ORDER BY `laborArmado` DESC");
+        $statement->bindParam(':id', $id);
+        $statement->bindParam(':semana', $semana);
+        $statement->execute();
+        while ($consulta = $statement->fetch()) {
+            $generalProduccionSemana[] = $consulta;
+        }
+        return $generalProduccionSemana;
+    }
+
     //Fin de modulo producción 
+
+
 
 
     //Modulo
@@ -550,38 +591,10 @@ class Reporte extends conexion
 
 
 
-
-
-    // public function moduloEmpaqueSemana($id, $semana)
-    // {
-    //     $listaProduccion = null;
-    //     $statement = $this->db->prepare("SELECT E.fecha, week(E.fecha) as 'week',E.posicion,L.labor,E.operario,O.nombre,E.hora,E.cajas, ROUND(E.cajas/E.hora,0) AS 'rendimiento' FROM `tbl_empaque` as E
-    //     INNER JOIN tbl_operarios AS O ON O.id_operario=E.operario
-    //     INNER JOIN labor_empaque AS L ON L.id_labor=E.labor
-    //     where P.labor = :id AND semana= :semana
-    //     ORDER by (posicion) ASC");
-    //     $statement->bindParam(':id', $id);
-    //     $statement->bindParam(':semana', $semana);
-    //     $statement->execute();
-    //     while ($consulta = $statement->fetch()) {
-    //         $listaProduccion[] = $consulta;
-    //     }
-    //     return $listaProduccion;
-    // }
-
-
-    //Query de tm
-    // SELECT TP.operario,O.nombre, CONCAT(TP.labor,' ',TP.posicion) AS 'laborTP', TP.posicion, C.causa, TP.fecha, TP.semana, SUM(TP.tiempo) AS 'tiempo'  FROM tmproduccion as TP 
-    // INNER JOIN tbl_operarios AS O ON O.id_operario=TP.operario
-    // INNER JOIN causa_produccion AS C on C.id_causa=TP.causa
-
-
-
-
     //bonificacion produccion
     public function bonificacionProduccionFecha($desde, $hasta)
     {
-        $listaProduccion = null;
+        $bonificacionProduccionFecha = null;
         $statement = $this->db->prepare("SELECT CONCAT(L.labor, ' ', P.posicion) AS 'Labor',P.operario,O.nombre,SUM((ROUND(P.tallos/P.hora,0) - L.rendimiento)) AS 'tallosBonificacion', SUM(((L.bonificacion * (ROUND(P.tallos/P.hora,0)-L.rendimiento))*P.hora)) AS 'valorBonifi' FROM `tbl_produccion` as P
         INNER JOIN tbl_operarios AS O ON O.id_operario=P.operario
         INNER JOIN labor_produccion AS L ON L.id_labor=P.labor 
@@ -592,14 +605,14 @@ class Reporte extends conexion
         $statement->bindParam(':hasta', $hasta);
         $statement->execute();
         while ($consulta = $statement->fetch()) {
-            $listaProduccion[] = $consulta;
+            $bonificacionProduccionFecha[] = $consulta;
         }
-        return $listaProduccion;
+        return $bonificacionProduccionFecha;
     }
     //bonificacion produccion
     public function bonificacionProduccionSemana($semana)
     {
-        $ListaEmpaque = null;
+        $bonificacionProduccionSemana = null;
         $statement = $this->db->prepare("SELECT CONCAT(L.labor, ' ', P.posicion) AS 'Labor',P.operario,O.nombre,SUM((ROUND(P.tallos/P.hora,0) - L.rendimiento)) AS 'tallosBonificacion', SUM(((L.bonificacion * (ROUND(P.tallos/P.hora,0)-L.rendimiento))*P.hora)) AS 'valorBonifi' FROM `tbl_produccion` as P
         INNER JOIN tbl_operarios AS O ON O.id_operario=P.operario
         INNER JOIN labor_produccion AS L ON L.id_labor=P.labor 
@@ -609,10 +622,45 @@ class Reporte extends conexion
         $statement->bindParam(':semana', $semana);
         $statement->execute();
         while ($consulta = $statement->fetch()) {
-            $ListaEmpaque[] = $consulta;
+            $bonificacionProduccionSemana[] = $consulta;
         }
-        return $ListaEmpaque;
+        return $bonificacionProduccionSemana;
     }
 
 
+    //bonificacion Empaque
+    public function bonificacionEmpaqueFecha($desde, $hasta)
+    {
+        $bonificacionEmpaqueFecha = null;
+        $statement = $this->db->prepare("SELECT E.operario,L.labor,O.nombre, ROUND(SUM((E.cajas/E.hora) - L.rendimiento),0) AS 'rendimiento',SUM(L.bonificacion * (ROUND((E.cajas/E.hora),0) - L.rendimiento) * E.hora) AS 'valor' FROM `tbl_empaque` as E
+        INNER JOIN tbl_operarios AS O ON O.id_operario=E.operario
+        INNER JOIN labor_empaque AS L ON L.id_labor=E.labor
+        WHERE ROUND(E.cajas/E.hora,0) > L.rendimiento AND L.bonificacion > 0  AND fecha BETWEEN :desde AND :hasta
+        GROUP BY E.operario
+        ORDER by (E.posicion) ASC");
+        $statement->bindParam(':desde', $desde);
+        $statement->bindParam(':hasta', $hasta);
+        $statement->execute();
+        while ($consulta = $statement->fetch()) {
+            $bonificacionEmpaqueFecha[] = $consulta;
+        }
+        return $bonificacionEmpaqueFecha;
+    }
+    //bonificacion Empaque
+    public function bonificacionEmpaqueSemana($semana)
+    {
+        $bonificacionEmpaqueSemana = null;
+        $statement = $this->db->prepare("SELECT E.operario,L.labor,O.nombre, ROUND(SUM((E.cajas/E.hora) - L.rendimiento),0) AS 'rendimiento',SUM(L.bonificacion * (ROUND((E.cajas/E.hora),0) - L.rendimiento) * E.hora) AS 'valor' FROM `tbl_empaque` as E
+        INNER JOIN tbl_operarios AS O ON O.id_operario=E.operario
+        INNER JOIN labor_empaque AS L ON L.id_labor=E.labor
+        WHERE ROUND(E.cajas/E.hora,0) > L.rendimiento AND L.bonificacion > 0  AND semana= :semana
+        GROUP BY E.operario
+        ORDER by (E.posicion) ASC");
+        $statement->bindParam(':semana', $semana);
+        $statement->execute();
+        while ($consulta = $statement->fetch()) {
+            $bonificacionEmpaqueSemana[] = $consulta;
+        }
+        return $bonificacionEmpaqueSemana;
+    }
 }

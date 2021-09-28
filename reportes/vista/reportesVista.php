@@ -115,10 +115,10 @@ $semana = "$year-W$week";
                                             Tallos mayor a menor
                                             <a href="javascript:reporte('ctrlArmadoMenorMayorTallos','desdeArmado','hastaAmardo','selectOption','semana');" type="button" class="btn text-primary"> <i class="fas fa-download"></i></a>
                                         </li>
-                                        <!-- <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
-                                            Bonificación armado
-                                            <a href="javascript:reporte('ctrlBonificacionProduccion','desde','hasta');" type="button" class="btn text-primary"> <i class="fas fa-download"></i></a>
-                                        </li> -->
+                                        <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
+                                            Reporte armado
+                                            <a href="javascript:reporte('ctrlProduccionGeneral','desdeArmado','hastaAmardo','selectOption','semana');" type="button" class="btn text-primary"> <i class="fas fa-download"></i></a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -525,12 +525,12 @@ $semana = "$year-W$week";
 
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
-                                            Bonificación produccion
+                                            Bonificación producción
                                             <a href="javascript:reporte('ctrlBonificacionProduccion','desdeBonificacion','hastaBonificacion','selectOptionBonificacion','semanaModuloBonificacion');" type="button" class="btn text-primary"> <i class="fas fa-download"></i></a>
                                         </li>
                                         <li class="list-group-item d-flex justify-content-between align-items-center  py-1">
-                                            Bonificación Empaque
-                                            <a href="javascript:reporte('ctrlTiempoGeneral','desdeBonificacion','hastaBonificacion','selectOptionBonificacion','semanaModuloBonificacion');" type="button" class="btn text-primary"> <i class="fas fa-download"></i></a>
+                                            Bonificación empaque
+                                            <a href="javascript:reporte('ctrlBonificacionEmpaque','desdeBonificacion','hastaBonificacion','selectOptionBonificacion','semanaModuloBonificacion');" type="button" class="btn text-primary"> <i class="fas fa-download"></i></a>
                                         </li>
                                     </ul>
 

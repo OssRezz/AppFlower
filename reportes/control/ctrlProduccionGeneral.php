@@ -26,6 +26,7 @@ $tableStyle = [
 $report = new Reporte();
 $spreadsheet = new Spreadsheet();
 
+//Formateamos la fecha
 if (strlen($_GET['desde']) > 0 and strlen($_GET['hasta']) > 0 and strlen($_GET['selectOption']) > 0 and strlen($_GET['semanaReport']) > 0) {
     $desde = $_GET['desde'];
     $hasta = $_GET['hasta'];
@@ -37,12 +38,11 @@ if (strlen($_GET['desde']) > 0 and strlen($_GET['hasta']) > 0 and strlen($_GET['
 }
 
 $reporte = $spreadsheet->getActiveSheet();
-
-$reporte->setTitle("Bonificación producción");
-
+$reporte->setTitle("Recetas armado");
 
 //Posicion del titulo
-$reporte->setCellValue('A1', 'Bonificaciones producción');
+$reporte->setCellValue('A1', 'Recetas armado');
+
 
 if ($selectedOption === "1") {
     $reporte->setCellValue('D1', 'Fecha:');
@@ -51,8 +51,6 @@ if ($selectedOption === "1") {
         $reporte->setCellValue('E1',  $verDesde);
     } else {
         $reporte->setCellValue('E1',  $verDesde . " Hasta: " .  $verHasta);
-        $spreadsheet->getActiveSheet()->mergeCells("E1:F1");
-
     }
 } else {
     $reporte->setCellValue('D1', 'Semana:');
@@ -67,18 +65,21 @@ $spreadsheet->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(Al
 $spreadsheet->getActiveSheet()->getRowDimension("1")->setRowHeight(30);
 
 //Campos de la cabecera
-$reporte->setCellValue('A2', 'Labor');
-$reporte->setCellValue('B2', 'Codigo');
-$reporte->setCellValue('C2', 'Operario');
-$reporte->setCellValue('D2', 'Tallos');
-$reporte->setCellValue('E2', 'Bonificación');
+$reporte->setCellValue('A2', 'Fecha');
+$reporte->setCellValue('B2', 'Labor');
+$reporte->setCellValue('C2', 'codigo');
+$reporte->setCellValue('D2', 'Operario');
+$reporte->setCellValue('E2', 'Rendimiento');
+$reporte->setCellValue('F2', 'Nº recetas');
 
 //Tamaño de las columnas 
-$spreadsheet->getActiveSheet()->getColumnDimension("A")->setWidth(20);
+$spreadsheet->getActiveSheet()->getColumnDimension("A")->setWidth(15);
 $spreadsheet->getActiveSheet()->getColumnDimension("B")->setWidth(20);
-$spreadsheet->getActiveSheet()->getColumnDimension("C")->setWidth(30);
-$spreadsheet->getActiveSheet()->getColumnDimension("D")->setWidth(15);
-$spreadsheet->getActiveSheet()->getColumnDimension("E")->setWidth(25);
+$spreadsheet->getActiveSheet()->getColumnDimension("C")->setWidth(15);
+$spreadsheet->getActiveSheet()->getColumnDimension("D")->setWidth(30);
+$spreadsheet->getActiveSheet()->getColumnDimension("E")->setWidth(27);
+$spreadsheet->getActiveSheet()->getColumnDimension("F")->setWidth(15);
+
 
 //Estilo negrilla, tamaño de letra, y fila
 $spreadsheet->getActiveSheet()->getStyle('A2:F2')->getFont()->setSize(12);
@@ -91,20 +92,29 @@ $spreadsheet->getActiveSheet()->getStyle('A1:F1')->applyFromArray($tableStyle);
 $spreadsheet->getActiveSheet()->getStyle('A2:F2')->applyFromArray($tableStyle);
 
 $count = 3;
+$labor = 1;
 
 if ($selectedOption === "1") {
-    $Reporte = $report->bonificacionProduccionFecha($desde, $hasta);
+    $Reporte = $report->generalProduccionFecha($labor, $desde, $hasta);
 } else {
-    $Reporte = $report->bonificacionProduccionSemana($Week);
+    $Reporte = $report->generalProduccionSemana($labor, $Week);
 }
 
 if ($Reporte != null) {
     foreach ($Reporte as $rows) {
-        $reporte->setCellValue('A' . $count, $rows['Labor']);
-        $reporte->setCellValue('B' . $count, $rows['operario']);
-        $reporte->setCellValue('C' . $count, $rows['nombre']);
-        $reporte->setCellValue('D' . $count, $rows['tallosBonificacion']);
-        $reporte->setCellValue('E' . $count, $rows['valorBonifi']);
+        $reporte->setCellValue('A' . $count, $rows['fecha']);
+        $reporte->setCellValue('B' . $count, $rows['laborArmado']);
+        $reporte->setCellValue('C' . $count, $rows['operario']);
+        $reporte->setCellValue('D' . $count, $rows['nombre']);
+        $reporte->setCellValue('E' . $count, $rows['rendimiento']);
+
+        $recetas =  $rows['recetas'];
+        $Separador = str_replace("+", ',', $recetas);
+        $numeroRecetas = preg_split("/\,/", $Separador);
+        $numeroRecetas = count($numeroRecetas);
+
+        $reporte->setCellValue('F' . $count, $numeroRecetas);
+
         $count++;
     }
 } else {
@@ -115,17 +125,14 @@ if ($Reporte != null) {
 //define first row and last row
 $firstRow = 2;
 $lasRow = $count - 1;
-$spreadsheet->getActiveSheet()->setAutoFilter("A" . $firstRow . ":E" . $lasRow);
-$spreadsheet->getActiveSheet()->getStyle('E')->getNumberFormat()->setFormatCode('$#,##0;$#,##0');
-    
+$spreadsheet->getActiveSheet()->setAutoFilter("A" . $firstRow . ":F" . $lasRow);
 
 
 
 header('Content-Type: application/vnd.ms-excel');
-header('Content-Disposition: attachment;filename="bonificacion-Produccion' . $desde . '.xls"');
+header('Content-Disposition: attachment;filename="rendimientos_armado_' . $desde . '.xls"');
 header('Cache-Control: max-age=0');
 
 $writer = IOFactory::createWriter($spreadsheet, 'Xls');
 $writer->save('php://output');
 exit();
-
