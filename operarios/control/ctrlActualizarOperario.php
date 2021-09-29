@@ -33,5 +33,3 @@ try {
 } catch (PDOException $e) {
     $Modal->modalInfo("danger", "El operario no se puede modificar");
 }
-
-?>

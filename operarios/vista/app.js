@@ -98,11 +98,13 @@ $(document).ready(function () {
             var idOperario = $('#idOperario').val();
             var id = $('#id').val();
             var nombreOperario = $('#nombreOperario').val();
+            var cedulaOperario = $('#cedulaOperario').val();
             $.post('../control/ctrlActualizarOperario.php', {
                 accion: accion,
                 id: id,
                 idOperario: idOperario,
-                nombreOperario: nombreOperario
+                nombreOperario: nombreOperario,
+                cedulaOperario: cedulaOperario
             }, function (responseText) {
                 $('#respuesta').html(responseText);
             });

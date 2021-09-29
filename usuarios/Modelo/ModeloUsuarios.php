@@ -10,16 +10,17 @@ class Usuarios extends Conexion
         $this->db = parent::__construct();
     }
 
-    public function listaPerfil(){
+    public function listaPerfil()
+    {
         $ListaPerfil = null;
         $statement = $this->db->prepare("SELECT * FROM tbl_perfil");
         $statement->execute();
-        while($consulta = $statement->fetch()){
+        while ($consulta = $statement->fetch()) {
             $ListaPerfil[] = $consulta;
         }
         return $ListaPerfil;
     }
-    
+
     public function insertarUsuario($Correo, $Nombre, $Password, $Perfil)
     {
         $statement = $this->db->prepare("INSERT INTO tbl_usuario(correo,nombre,password,perfil) VALUES (:Correo,:Nombre,:Password,:Perfil)");
@@ -34,7 +35,7 @@ class Usuarios extends Conexion
         }
     }
 
-    public function actualizarUsuario($id,$Correo, $Nombre, $Password, $Perfil)
+    public function actualizarUsuario($id, $Correo, $Nombre, $Password, $Perfil)
     {
         $statement = $this->db->prepare("UPDATE `tbl_usuario` SET `correo`=:id,`nombre`=:nombre,`password`=:password,`perfil`=:perfil WHERE correo= :correo");
         $statement->bindParam(':id', $id);
@@ -55,11 +56,11 @@ class Usuarios extends Conexion
         $listUser = null;
         $statement = $this->db->prepare("DELETE FROM `tbl_usuario` WHERE correo= :correo");
         $statement->bindParam(':correo', $correo);
-        $statement->execute();
-        while ($consulta = $statement->fetch()) {
-            $listUser[] = $consulta;
+        if ($statement->execute()) {
+            return true;
+        } else {
+            return false;
         }
-        return $listUser;
     }
 
     //Lista con todos los usuarios, Y un contador por cada usuario
@@ -101,5 +102,3 @@ class Usuarios extends Conexion
         return $listUser;
     }
 }
-
-?>

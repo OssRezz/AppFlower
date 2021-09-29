@@ -118,7 +118,6 @@ class Modal
         echo    "</div>";
         echo "</div>";
         echo "<script>$('#modal-login').modal('show')</script>";
-        echo "<script>$('#btn-delete-usuario').click(function(){location.reload()})</script>";
         echo "<script>$('#regresar').click(function(){location.reload()});</script>";
         echo "<script>$('#cerrar').click(function(){location.reload()});</script>";
     }
@@ -150,7 +149,6 @@ class Modal
         echo    "</div>";
         echo "</div>";
         echo "<script>$('#modal-login').modal('show')</script>";
-        echo "<script>$('#btn-delete-operario').click(function(){location.href='operariosVista.php'})</script>";
         echo "<script>$('#regresar').click(function(){location.reload()});</script>";
         echo "<script>$('#cerrar').click(function(){location.reload()});</script>";
     }
@@ -237,7 +235,7 @@ class Modal
         echo "<script>$('#modal-login').modal('show')</script>";
     }
 
-    public function modalActualizarOperario($codigo,$cedula, $nombre)
+    public function modalActualizarOperario($codigo, $cedula, $nombre)
     {
         echo "<div class='modal fade' id='modal-login' tabindex='-1' style='display: block;' data-keyboard='false' data-backdrop='static'>";
         echo    "<div class='modal-dialog modal-dialog-centered'>";
@@ -252,11 +250,11 @@ class Modal
         echo                    "<div class='form-group col-sm-12 col-md-12'>";
         echo                        "<label for='idOperario'>Codigo</label>";
         echo                        "<input type='hidden' class='form-control hidden' id='id' value='$codigo'>";
-        echo                        "<input type='email' class='form-control' id='idOperario' value='$codigo'>";
+        echo                        "<input type='number' class='form-control' id='idOperario' value='$codigo'>";
         echo                    "</div>";
         echo                    "<div class='form-group col-sm-12 col-md-12'>";
-        echo                        "<label for='cedula'>Cédula</label>";
-        echo                        "<input type='cedula' class='form-control' id='cedulaOperario' value='$cedula'>";
+        echo                        "<label for='cedulaOperario'>Cédula</label>";
+        echo                        "<input type='number' class='form-control' id='cedulaOperario' value='$cedula'>";
         echo                    "</div>";
         echo                    "<div class='form-group col-sm-12 col-md-12 mb-5'>";
         echo                        "<label for='nombreOperario'>Nombre</label>";
