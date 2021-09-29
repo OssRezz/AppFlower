@@ -23,9 +23,9 @@ class Paginacion
 
 
         if ($cur_page <= 1) {
-            echo "<a class='btn btn-outline-primary btn-sm' href='#'>Anterior</a></li>";
+            echo "<a class='btn btn-outline-primary btn-sm' href='#'><</a></li>";
         } else {
-            echo "<a class='btn btn-outline-primary btn-sm' href='$base_url?page=$anterior'>Anterior</a></li>";
+            echo "<a class='btn btn-outline-primary btn-sm' href='$base_url?page=$anterior'><</a></li>";
         }
 
         for ($i = 1; $i <= $number_of_pages; $i++) {
@@ -58,9 +58,9 @@ class Paginacion
         }
 
         if ($cur_page >= $number_of_pages) {
-            echo "<a class='btn btn-outline-primary btn-sm' href='#'>Siguiente</a>";
+            echo "<a class='btn btn-outline-primary btn-sm' href='#'>></a>";
         } else {
-            echo "<a class='btn btn-outline-primary btn-sm' href='$base_url?page=$siguiente'>Siguiente</a>";
+            echo "<a class='btn btn-outline-primary btn-sm' href='$base_url?page=$siguiente'>></a>";
         }
 
         echo      "</ul>";
