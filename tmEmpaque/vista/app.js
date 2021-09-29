@@ -1,16 +1,19 @@
-$(document).ready(function () {
+$(document).ready(function (e) {
     const perfil = $("#perfil").val();
     const title = $(document).attr('title');
     const limit = $("#limit").val();
     const pagina = $("#pagina").val();
 
-
+    const spinner = document.querySelector('#spinner');
+    spinner.style.display = 'flex';
     $.post('../../roles/control/ctrlMenuLateral.php', {
         perfil: perfil,
         title: title
     }, function (responseText) {
         $('#respuesta-menu').html(responseText);
+        spinner.style.display = 'none';
     });
+
 
     //Carga la paginación de la vista de tiempo muerto empaque
     $.post('../control/ctrlPaginacion.php', {

@@ -4,11 +4,14 @@ $(document).ready(function () {
     const limit = $("#limit").val();
     const pagina = $("#pagina").val();
 
+    const spinner = document.querySelector('#spinner');
+    spinner.style.display = 'flex';
     $.post('../../roles/control/ctrlMenuLateral.php', {
         perfil: perfil,
         title: title
     }, function (responseText) {
         $('#respuesta-menu').html(responseText);
+        spinner.style.display = 'none';
     });
 
     //Carga la paginación de la vista de operarios
@@ -77,7 +80,7 @@ $(document).ready(function () {
     });
 
     //Boton actualizar usuario
-    $(document).click( (e) => {
+    $(document).click((e) => {
         const accion = e.target.id;
         if (e.target.id === "btn-update-empaque") {
             const idEmpaque = $('#idEmpaque').val();
@@ -96,14 +99,14 @@ $(document).ready(function () {
                 laborEmpaque: laborEmpaque,
                 cajasEmpaque: cajasEmpaque,
                 horaEmpaque: horaEmpaque
-            },  (responseText) => {
+            }, (responseText) => {
                 $('#respuesta').html(responseText);
             });
         }
     });
 
     //Responde la modal con la información de la produccion
-    $(document).click( (e) => {
+    $(document).click((e) => {
         const accion = e.target.id;
         if (accion === "btn-buscar-empaque") {
             const idEmpaque = $('#buscarEmpaque').val();

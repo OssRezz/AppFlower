@@ -4,12 +4,14 @@ $(document).ready(function () {
     var limit = $("#limit").val();
     var pagina = $("#pagina").val();
 
-    //Carga el menu lateral deacuerdo al usuario
+    const spinner = document.querySelector('#spinner');
+    spinner.style.display = 'flex';
     $.post('../../roles/control/ctrlMenuLateral.php', {
         perfil: perfil,
         title: title
     }, function (responseText) {
         $('#respuesta-menu').html(responseText);
+        spinner.style.display = 'none';
     });
 
     //Carga la paginación de la vista de operarios
@@ -136,7 +138,7 @@ $(document).ready(function () {
     });
 
 
-    
+
     $('#import_excel_form').on('submit', function (event) {
         event.preventDefault();
         $.ajax({

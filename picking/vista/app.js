@@ -5,11 +5,14 @@ $(document).ready(function () {
     const pagina = $("#pagina").val();
 
     //Carga el menu lateral, dependiendo del rol del usuario
+    const spinner = document.querySelector('#spinner');
+    spinner.style.display = 'flex';
     $.post('../../roles/control/ctrlMenuLateral.php', {
         perfil: perfil,
         title: title
-    }, (responseText) => {
+    }, function (responseText) {
         $('#respuesta-menu').html(responseText);
+        spinner.style.display = 'none';
     });
 
     //Carga la paginación de la vista de picking
@@ -88,26 +91,26 @@ $(document).ready(function () {
         }
     });
 
-        //Boton actualizar Picking
-        $(document).click((e) => {
-            const accion = e.target.id;
-            if (e.target.id === "btn-update-picking") {
-                const idPicking = $('#idPicking').val();
-                const operarioPicking = $('#operarioPicking').val();
-                const fechaPicking = $('#fechaPicking').val();
-                const tallosPicking = $('#tallosPicking').val();
-                const horasPicking = $('#horasPicking').val();
-                $.post('../control/ctrlActualizarPicking.php', {
-                    accion: accion,
-                    idPicking: idPicking,
-                    operarioPicking: operarioPicking,
-                    fechaPicking: fechaPicking,
-                    tallosPicking: tallosPicking,
-                    horasPicking: horasPicking
-                }, (responseText) => {
-                    $('#respuesta').html(responseText);
-                });
-            }
-        });
+    //Boton actualizar Picking
+    $(document).click((e) => {
+        const accion = e.target.id;
+        if (e.target.id === "btn-update-picking") {
+            const idPicking = $('#idPicking').val();
+            const operarioPicking = $('#operarioPicking').val();
+            const fechaPicking = $('#fechaPicking').val();
+            const tallosPicking = $('#tallosPicking').val();
+            const horasPicking = $('#horasPicking').val();
+            $.post('../control/ctrlActualizarPicking.php', {
+                accion: accion,
+                idPicking: idPicking,
+                operarioPicking: operarioPicking,
+                fechaPicking: fechaPicking,
+                tallosPicking: tallosPicking,
+                horasPicking: horasPicking
+            }, (responseText) => {
+                $('#respuesta').html(responseText);
+            });
+        }
+    });
 
 });

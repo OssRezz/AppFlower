@@ -18,6 +18,7 @@ $user->session();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <script src="app.js"></script>
     <link rel="stylesheet" href="../../css/style.css">
     <title>Usuarios</title>
@@ -33,7 +34,18 @@ $user->session();
                 <div class="col" style="height: 20px;"></div>
 
                 <!--Esto nos carga el menu lateral del usuario en base al rol que de la sesion-->
-                <div id="respuesta-menu"></div>
+                <div id="respuesta-menu">
+
+                    <div id="spinner">
+                        <div class="spinner  animate__animated animate__fadeIn">
+                            <div class="rect1"></div>
+                            <div class="rect2"></div>
+                            <div class="rect3"></div>
+                            <div class="rect4"></div>
+                            <div class="rect5"></div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
 
@@ -43,7 +55,7 @@ $user->session();
 
                     <nav class="navbar navbar-light w-100 pl-1">
                         <div class="navbar-brand">
-                        <button type="button" id="hamburguer-menu" class="btn text-dark"><i class="far fa-bars fa-lg"></i></button>
+                            <button type="button" id="hamburguer-menu" class="btn text-dark"><i class="far fa-bars fa-lg"></i></button>
                             <?php echo $user->getUsername(); ?>
                             <input type="hidden" name="perfil" id="perfil" value="<?= $_SESSION['perfil'] ?>"></input>
                             <input type="hidden" name="perfil" id="limit" value="<?= $limit = isset($_SESSION['records-limit']) ? $_SESSION['records-limit'] : 10; ?>"></input>

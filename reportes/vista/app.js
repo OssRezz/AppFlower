@@ -1,11 +1,15 @@
 $(document).ready(function () {
     const perfil = $("#perfil").val();
     const title = $(document).attr('title');
+    
+    const spinner = document.querySelector('#spinner');
+    spinner.style.display = 'flex';
     $.post('../../roles/control/ctrlMenuLateral.php', {
         perfil: perfil,
         title: title
     }, function (responseText) {
         $('#respuesta-menu').html(responseText);
+        spinner.style.display = 'none';
     });
 
     //Modal Para salir de la sesión ctrlModalOut

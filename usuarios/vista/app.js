@@ -7,11 +7,14 @@ $(document).ready(function () {
     var pagina = $("#pagina").val();
 
     //carga el menu lateral de la vista de usuarios
+    const spinner = document.querySelector('#spinner');
+    spinner.style.display = 'flex';
     $.post('../../roles/control/ctrlMenuLateral.php', {
         perfil: perfil,
         title: title
     }, function (responseText) {
         $('#respuesta-menu').html(responseText);
+        spinner.style.display = 'none';
     });
 
     //Carga la paginación de la vista de usuarios
