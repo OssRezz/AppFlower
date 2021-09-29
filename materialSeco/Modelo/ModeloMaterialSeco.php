@@ -33,7 +33,7 @@ class materialSeco extends Conexion
     public function listaMaterialLimit($paginationStart, $limit)
     {
         $listaMaterial = null;
-        $statement = $this->db->prepare("SELECT M.id_seco, M.operario, M.labor as 'id_labor', L.labor, M.fecha, O.nombre, Week(fecha) AS 'Semana', M.hora, L.promedio, M.cantidad, ROUND(M.cantidad/M.hora,0) AS 'Promedio' FROM `tbl_materialSeco` as M INNER JOIN tbl_operarios AS O ON O.id_operario=M.operario INNER JOIN labor_material AS L ON L.id_labor=M.labor ORDER BY id_seco desc LIMIT $paginationStart, $limit");
+        $statement = $this->db->prepare("SELECT M.id_seco, M.operario, M.labor as 'id_labor', L.labor, M.fecha, O.nombre, Week(fecha) AS 'Semana', M.hora, L.promedio, M.cantidad, ROUND(M.cantidad/M.hora,0) AS 'Promedio' FROM `tbl_materialseco` as M INNER JOIN tbl_operarios AS O ON O.id_operario=M.operario INNER JOIN labor_material AS L ON L.id_labor=M.labor ORDER BY id_seco desc LIMIT $paginationStart, $limit");
         $statement->execute();
         while ($consulta = $statement->fetch()) {
             $listaMaterial[] = $consulta;
